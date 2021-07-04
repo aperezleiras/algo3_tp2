@@ -8,7 +8,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 * **Pérez Leiras Agustín** - [aperezleiras](https://github.com/aperezleiras)
 * **Martin Pablo** - [PMartn](https://github.com/PMartn)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
+* **Franco Daniel Capra** - [cafrada1](https://github.com/cafrada1)
 * **Integrante 4** - [integrante4](https://github.com/integrante4)
 
 Corrector: **{Corrector}**

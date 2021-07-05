@@ -4,14 +4,14 @@
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo 4
 
 * **Pérez Leiras Agustín** - [aperezleiras](https://github.com/aperezleiras)
 * **Martin Pablo** - [PMartn](https://github.com/PMartn)
 * **Franco Daniel Capra** - [cafrada1](https://github.com/cafrada1)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Ariadna Cattaneo** - [arucattaneo](https://github.com/arucattaneo)
 
-Corrector: **{Corrector}**
+Corrector: **Seba - Nico**
 
 ## Aplicación
 

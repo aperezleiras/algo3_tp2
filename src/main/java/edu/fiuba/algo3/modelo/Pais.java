@@ -4,18 +4,30 @@ import java.util.ArrayList;
 
 public class Pais {
 
-    Ejercitos ejercitos = new Ejercitos();
-    ArrayList limitrofes = new ArrayList();
+    String nombre;
+    Ejercitos ejercitos;
+    ArrayList<Pais> limitrofes;
 
-    Pais(){
+    Pais (String unNombre) {
+        nombre = unNombre;
+        limitrofes = new ArrayList<>();
+        ejercitos = new Ejercitos();
+    }
+
+    public Ejercitos getEjercitos() {
+        return ejercitos;
+    }
+
+    public void agregarLimitrofe(Pais unPais) {
+        limitrofes.add(unPais);
     }
 
     public void colocarEjercitos(int cantidad) {
         ejercitos.agregarEjercitos(cantidad);
     }
 
-    public void atacarA(Pais paisDestino, int cantidad) {
-
+    public boolean cantidadEjercitosSuperiorA(int unaCantidad) {
+        return (ejercitos.cantidadEjercitosSuperiorA(unaCantidad));
     }
 
     public boolean esLimitrofeCon(Pais unPais) {
@@ -25,5 +37,10 @@ public class Pais {
     public void transferirEjercitosA(Pais paisDestino, int cantidad) {
         ejercitos.transferirEjercitos(paisDestino, cantidad);
     }
+
+    public void asignarJugador(Jugador unJugador) {
+        ejercitos.asignarJugador(unJugador);
+    }
+
 }
 

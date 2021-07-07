@@ -1,12 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 public class Juego {
     Jugador jugador1 = new Jugador(1);
     Jugador jugador2 = new Jugador(2);
 
-    Pais argentina = new Pais("Argentina");
-    Pais brasil = new Pais("Brasil");
-
+    Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+    Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
 
     Juego(){
         /* Setup básico de un juego con 2 jugadores y 2 países */

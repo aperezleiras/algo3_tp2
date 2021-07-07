@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EjercitosTest {
@@ -38,7 +40,7 @@ public class EjercitosTest {
     // Eventualmente crear excepción para esto
     public void alIntentarTransferirDosEjercitosAOtroPaisTeniendoUnSoloEjercitoNoSeTransfiere() {
         Ejercitos ejercitos = new Ejercitos();
-        Pais unPais = new Pais("Argentina");
+        Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
 
         ejercitos.transferirEjercitos(unPais, 2);
 
@@ -50,7 +52,7 @@ public class EjercitosTest {
     // Eventualmente crear excepción para esto
     public void alIntentarTransferirDosEjercitosAOtroPaisTeniendoDosEjercitoNoSeTransfiere() {
         Ejercitos ejercitos = new Ejercitos();
-        Pais unPais = new Pais("Argentina");
+        Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
 
         ejercitos.agregarEjercitos(1);
         ejercitos.transferirEjercitos(unPais, 2);
@@ -63,7 +65,7 @@ public class EjercitosTest {
     // Eventualmente crear excepción para esto
     public void alIntentarTransferirTresEjercitosAOtroPaisTeniendoDosEjercitoSeTransfierenSatisfactoriamente() {
         Ejercitos ejercitos = new Ejercitos();
-        Pais unPais = new Pais("Argentina");
+        Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
 
         ejercitos.agregarEjercitos(2);
         ejercitos.transferirEjercitos(unPais, 2);

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Jugador {
 
@@ -14,6 +15,7 @@ public class Jugador {
     public void colocarEjercitos(int cantidad, Pais unPais) {
         if (paisMePertenece(unPais)) unPais.colocarEjercitos(cantidad);
     }
+
 
     public boolean paisMePertenece(Pais unPais) {
         return (paises.contains(unPais));
@@ -30,6 +32,10 @@ public class Jugador {
     public void asignarPais(Pais unPais) {
         unPais.asignarJugador(this);
         paises.add(unPais);
+    }
+
+    public int obtenerCantidadPaises() {
+        return paises.size();
     }
 }
 

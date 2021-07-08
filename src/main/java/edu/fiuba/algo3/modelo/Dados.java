@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
-public class Dados {
+public class Dados { //todo: cambiar a clase estatica
     Random rand = new Random();
     ArrayList dados = new ArrayList();
 

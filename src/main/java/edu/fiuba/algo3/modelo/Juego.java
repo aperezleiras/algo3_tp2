@@ -1,23 +1,27 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Juego {
-    Jugador jugador1 = new Jugador(1);
-    Jugador jugador2 = new Jugador(2);
+    private final List<Jugador> jugadores;
 
-    Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
-    Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
-
-    Juego(){
-        /* Setup básico de un juego con 2 jugadores y 2 países */
-        jugador1.asignarPais(argentina);
-        jugador2.asignarPais(brasil);
-        argentina.agregarLimitrofe(brasil);
-        brasil.agregarLimitrofe(argentina);
-
-        jugador1.colocarEjercitos(3, argentina);
-        jugador2.colocarEjercitos(2, brasil);
+    public Juego(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
 
+    void asignarPaises(List<Pais> paises) {
+        jugadores.forEach(j -> paises.forEach(j::asignarPais));
+    }
+
+    void asignarEjercitos(int jugadorId, Pais pais) {
+        Jugador jugador = jugadores.get(jugadorId);
+        int cantidadEjercitos = obtenerCantidadEjercitos(jugadorId); //Aca podriamos acumular las otras cantidades calculadas
+        jugador.colocarEjercitos(cantidadEjercitos, pais);
+    }
+
+    int obtenerCantidadEjercitos(int jugadorId) {
+        Jugador jugador = jugadores.get(jugadorId);
+        int cantidadEjercitos = jugador.obtenerCantidadPaises();
+        return cantidadEjercitos/2;
+    }
 }

@@ -15,25 +15,33 @@ public class Pais { //todo: crear interfaz de pais
         this.ejercitos = ejercitos;
     }
 
-    public Ejercitos getEjercitos() {
-        return ejercitos;
-    }
-
     public void agregarLimitrofe(Pais pais) {
         limitrofes.add(pais);
-    }
-
-    public void colocarEjercitos(int cantidad) {
-        ejercitos.agregarEjercitos(cantidad);
-    } //todo: validar que no quede en numeros negativos y conquista
-
-    public boolean cantidadEjercitosSuperiorA(int cantidad) {
-        return ejercitos.cantidadEjercitosSuperiorA(cantidad);
     }
 
     public boolean esLimitrofeCon(Pais pais) {
         return limitrofes.contains(pais);
     }
+
+    public Ejercitos getEjercitos() {
+        return ejercitos;
+    }
+
+    public boolean noTieneEjercitos() {
+        return ejercitos.noQuedanEjercitos();
+    }
+
+    public boolean cantidadEjercitosSuperiorA(int cantidad) {
+        return ejercitos.cantidadEjercitosSuperiorA(cantidad);
+    }
+
+    public void agregarEjercitos(int cantidad) {
+        ejercitos.agregarEjercitos(cantidad);
+    }
+
+    public void quitarEjercitos(int cantidad) {
+        ejercitos.quitarEjercitos(cantidad);
+    } //todo: validar que no quede en numeros negativos y conquista
 
     public void transferirEjercitosA(Pais paisDestino, int cantidad) {
         ejercitos.transferirEjercitos(paisDestino, cantidad);
@@ -43,8 +51,12 @@ public class Pais { //todo: crear interfaz de pais
         ejercitos.asignarJugador(jugador);
     }
 
-    public List<Integer> obtenerDadosAtacante() { return null; } //todo: implementar
-    public List<Integer> obtenerDadosDefensor() { return null; } //todo: implementar
+    public void conquistar(Pais unPais) {
+        ejercitos.conquistarA(unPais);
+    }
+
+    public Dados obtenerDadosAtacante() { return (ejercitos.calcularDadosAtacante()); }
+    public Dados obtenerDadosDefensor() { return (ejercitos.calcularDadosDefensor()); }
 
 }
 

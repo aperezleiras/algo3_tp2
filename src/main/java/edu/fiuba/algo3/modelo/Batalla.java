@@ -4,17 +4,20 @@ import java.util.List;
 
 public class Batalla {
     public static void realizarAtaque(Pais atacante, Pais defensor) {
-        List<Integer> dadosAtacante = atacante.obtenerDadosAtacante();
-        List<Integer> dadosDefensor = defensor.obtenerDadosDefensor();
+        Dados dadosAtacante = atacante.obtenerDadosAtacante();
+        Dados dadosDefensor = defensor.obtenerDadosDefensor();
 
-        int cantidadDados = Math.min(dadosAtacante.size(), dadosDefensor.size());
+        int cantidadDados = Math.min(dadosAtacante.cantidad(), dadosDefensor.cantidad());
 
         for (int i = 0; i < cantidadDados; i++) {
             if (dadosAtacante.get(i) > dadosDefensor.get(i))
-                defensor.colocarEjercitos(-1);  //todo: validar que no quede en numeros negativos, conquista y pueda atacar segun cantidad
+                defensor.quitarEjercitos(1);  //todo: validar que no quede en numeros negativos, conquista y pueda atacar segun cantidad
             else
-                atacante.colocarEjercitos(-1);
+                atacante.quitarEjercitos(1);
         }
+
+        if (defensor.noTieneEjercitos())
+            atacante.conquistar(defensor);
     }
 }
 

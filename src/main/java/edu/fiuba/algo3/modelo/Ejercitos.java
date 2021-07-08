@@ -1,11 +1,15 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.List;
+
 public class Ejercitos {
 
-    int cantidad = 1;
+    int cantidad;
     Jugador jugador;
 
-    Ejercitos() {}
+    Ejercitos() {
+        cantidad = 1;
+    }
 
     public int getCantidad() {
         return cantidad;
@@ -15,19 +19,16 @@ public class Ejercitos {
         return (cantidad == 0);
     }
 
-    public void agregarEjercitos(int unaCantidad) {
-        cantidad += unaCantidad;
-    }
-
-    public void transferirEjercitos(Pais paisDestino, int unaCantidad) {
-        if (cantidad > unaCantidad) {
-            quitarEjercitos(unaCantidad);
-            paisDestino.colocarEjercitos(unaCantidad);
-        }
-    }
-
     public boolean cantidadEjercitosSuperiorA(int unaCantidad) {
         return (cantidad > unaCantidad);
+    }
+
+    public void asignarJugador(Jugador unJugador) {
+        jugador = unJugador;
+    }
+
+    public void agregarEjercitos(int unaCantidad) {
+        cantidad += unaCantidad;
     }
 
     public void quitarEjercitos(int unaCantidad) {
@@ -35,23 +36,26 @@ public class Ejercitos {
             cantidad -= unaCantidad;
     }
 
-    public Dados calcularDados() {
-        int cantidad_dados;
-        if (cantidad > 3) cantidad_dados = 3;
-        else cantidad_dados = cantidad-1;
-        return (new Dados(cantidad_dados));
+    public void transferirEjercitos(Pais paisDestino, int unaCantidad) {
+        if (cantidad > unaCantidad) {
+            quitarEjercitos(unaCantidad);
+            paisDestino.agregarEjercitos(unaCantidad);
+        }
     }
 
-    // Metodo a llamar cuando el pais defensor queda con cero ejercitos en una batalla
-    // Cambia el dueño de los ejercitos y le transfiere un ejercito
     public void conquistarA(Pais paisEnemigo) {
-        Ejercitos ejercitosEnemigos = paisEnemigo.getEjercitos();
-        ejercitosEnemigos.asignarJugador(jugador);
+        paisEnemigo.asignarJugador(jugador);
         transferirEjercitos(paisEnemigo, 1);
     }
 
-    public void asignarJugador(Jugador unJugador) {
-        jugador = unJugador;
+    public Dados calcularDadosAtacante() {
+        int cantidadDados = Math.min(3, cantidad-1);
+        return (new Dados(cantidadDados));
+    }
+
+    public Dados calcularDadosDefensor() {
+        int cantidadDados = Math.min(3, cantidad);
+        return (new Dados(cantidadDados));
     }
 }
 

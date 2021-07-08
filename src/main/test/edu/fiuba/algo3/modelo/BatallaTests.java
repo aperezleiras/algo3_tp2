@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo;
-
+/*
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class BatallaTests {
-    /*
+
     @Spy
     private Pais atacante;
     @Spy
@@ -35,5 +35,6 @@ public class BatallaTests {
 
         Batalla.realizarAtaque(atacante, defensor);
 
-    }*/
+    }
 }
+*/

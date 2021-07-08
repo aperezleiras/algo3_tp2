@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Jugador {
 
@@ -11,25 +12,29 @@ public class Jugador {
         color = unColor;
     }
 
-    public void colocarEjercitos(int cantidad, Pais unPais) {
-        if (paisMePertenece(unPais)) unPais.colocarEjercitos(cantidad);
+    public void asignarPais(Pais unPais) {
+        unPais.asignarJugador(this);
+        paises.add(unPais);
+    }
+
+    public int obtenerCantidadPaises() {
+        return paises.size();
     }
 
     public boolean paisMePertenece(Pais unPais) {
         return (paises.contains(unPais));
     }
-    /*
-    public void atacarPaisDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {
-        paisOrigen.atacarA(paisDestino, cantidad);
+
+    public void colocarEjercitos(int cantidad, Pais unPais) {
+        if (paisMePertenece(unPais)) unPais.agregarEjercitos(cantidad);
     }
-    */
+
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {
         if (paisMePertenece(paisDestino)) paisOrigen.transferirEjercitosA(paisDestino, cantidad);
     }
 
-    public void asignarPais(Pais unPais) {
-        unPais.asignarJugador(this);
-        paises.add(unPais);
+    public void atacarPaisDesde(Pais miPais, Pais paisEnemigo) {
+        Batalla.realizarAtaque(miPais, paisEnemigo);
     }
 }
 

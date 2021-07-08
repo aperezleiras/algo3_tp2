@@ -1,46 +1,62 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Pais {
+public class Pais { //todo: crear interfaz de pais
 
-    String nombre;
-    Ejercitos ejercitos;
-    ArrayList<Pais> limitrofes;
+    private final String nombre;
+    private final Ejercitos ejercitos;
+    private final List<Pais> limitrofes;
 
-    Pais (String unNombre) {
-        nombre = unNombre;
-        limitrofes = new ArrayList<>();
-        ejercitos = new Ejercitos();
+    Pais(String nombre, List<Pais> limitrofes, Ejercitos ejercitos) {
+        this.nombre = nombre;
+        this.limitrofes = limitrofes;
+        this.ejercitos = ejercitos;
+    }
+
+    public void agregarLimitrofe(Pais pais) {
+        limitrofes.add(pais);
+    }
+
+    public boolean esLimitrofeCon(Pais pais) {
+        return limitrofes.contains(pais);
     }
 
     public Ejercitos getEjercitos() {
         return ejercitos;
     }
 
-    public void agregarLimitrofe(Pais unPais) {
-        limitrofes.add(unPais);
+    public boolean noTieneEjercitos() {
+        return ejercitos.noQuedanEjercitos();
     }
 
-    public void colocarEjercitos(int cantidad) {
+    public boolean cantidadEjercitosSuperiorA(int cantidad) {
+        return ejercitos.cantidadEjercitosSuperiorA(cantidad);
+    }
+
+    public void agregarEjercitos(int cantidad) {
         ejercitos.agregarEjercitos(cantidad);
     }
 
-    public boolean cantidadEjercitosSuperiorA(int unaCantidad) {
-        return (ejercitos.cantidadEjercitosSuperiorA(unaCantidad));
-    }
-
-    public boolean esLimitrofeCon(Pais unPais) {
-        return limitrofes.contains(unPais);
-    }
+    public void quitarEjercitos(int cantidad) {
+        ejercitos.quitarEjercitos(cantidad);
+    } //todo: validar que no quede en numeros negativos y conquista
 
     public void transferirEjercitosA(Pais paisDestino, int cantidad) {
         ejercitos.transferirEjercitos(paisDestino, cantidad);
     }
 
-    public void asignarJugador(Jugador unJugador) {
-        ejercitos.asignarJugador(unJugador);
+    public void asignarJugador(Jugador jugador) {
+        ejercitos.asignarJugador(jugador);
     }
+
+    public void conquistar(Pais unPais) {
+        ejercitos.conquistarA(unPais);
+    }
+
+    public Dados obtenerDadosAtacante() { return (ejercitos.calcularDadosAtacante()); }
+    public Dados obtenerDadosDefensor() { return (ejercitos.calcularDadosDefensor()); }
 
 }
 

@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
@@ -8,7 +10,7 @@ public class JugadorTest {
     @Test
     public void alAsignarleUnPaisAUnJugadorEsePaisLePertenece() {
         Jugador jugador = new Jugador(1);
-        Pais argentina = new Pais("Argentina");
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
 
         jugador.asignarPais(argentina);
         assertTrue(jugador.paisMePertenece(argentina));
@@ -17,7 +19,7 @@ public class JugadorTest {
     @Test
     public void alColocar3EjercitosEnUnPaisQueLePerteneceSeAgreganSatisfactoriamente() {
         Jugador jugador = new Jugador(1);
-        Pais argentina = new Pais("Argentina");
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
 
         jugador.asignarPais(argentina);
         jugador.colocarEjercitos(3, argentina);
@@ -30,8 +32,8 @@ public class JugadorTest {
     // Eventualmente hacer una excepcion para esto
     public void noSePermiteTransferirEjercitosDesdeUnPaisConUnEjercito() {
         Jugador jugador = new Jugador(1);
-        Pais argentina = new Pais("Argentina");
-        Pais brasil = new Pais("Brasil");
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
 
         jugador.asignarPais(argentina);
         jugador.asignarPais(brasil);
@@ -49,8 +51,8 @@ public class JugadorTest {
     // Eventualmente hacer una excepcion para esto
     public void noSePermiteTransferirEjercitosAUnPaisQueNoLePertenece() {
         Jugador jugador = new Jugador(1);
-        Pais argentina = new Pais("Argentina");
-        Pais brasil = new Pais("Brasil");
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
 
         jugador.asignarPais(argentina);
         jugador.colocarEjercitos(3, argentina);

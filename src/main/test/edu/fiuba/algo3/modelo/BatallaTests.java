@@ -27,7 +27,7 @@ public class BatallaTests {
     private Pais defensor;
 
     @BeforeEach
-    void setUp(){
+    public void setUp(){
         dadoAtacante = Mockito.mock(Dado.class);
         dadoDefensor = Mockito.mock(Dado.class);
 
@@ -39,7 +39,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisConquistaAOtro() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
+    public void PaisConquistaAOtro() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
         //arrange
         Jugador elDibu = new Jugador(0);
         Jugador neyPasto = new Jugador(1);
@@ -60,7 +60,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisDefensorGana() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
+    public void PaisDefensorGana() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
         //arrange
         when(dadoAtacante.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(1,1));
         when(dadoDefensor.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(6,6));
@@ -76,7 +76,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisAtacanteGanaYNoConquista() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
+    public void PaisAtacanteGanaYNoConquista() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
         //arrange
         when(dadoAtacante.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(6,1));
         when(dadoDefensor.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(1,1));
@@ -91,7 +91,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisAtacanteNoLimitrofeException(){
+    public void PaisAtacanteNoLimitrofeException(){
         //arrange
         Pais atacante = new Pais("Noruega", Arrays.asList("Suecia"), new Ejercitos(3));
 
@@ -102,7 +102,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisAtacaConEjercitosInsuficientesException(){
+    public void PaisAtacaConEjercitosInsuficientesException(){
         //arrange
         Pais atacante = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
 

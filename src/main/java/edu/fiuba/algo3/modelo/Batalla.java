@@ -23,42 +23,42 @@ public class Batalla implements IBatalla{
     }
 
     @Override
-    public void realizarAtaque() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
-        if (!validarAtaque()){
-            if (!validarLimitrofes()){
-                throw new PaisNoLimitrofeException();
-            }
-            throw new CantidadEjercitosInsuficienteException();
-        }
+    public void realizarAtaque() {
+        validarAtaque();
 
         //TODO dos metodos o sacar el ultimo/primer elemento
-        List<Integer> dadosAtacante = dadoAtacante.obtenerDado(atacante);
-        List<Integer> dadosDefensor = dadoDefensor.obtenerDado(defensor);
+        List<Integer> dadosAtacante = dadoAtacante.obtenerDadoAtacante(atacante);
+        List<Integer> dadosDefensor = dadoDefensor.obtenerDadoDefensor(defensor);
 
         int cantidadDados = Math.min(dadosAtacante.size(), dadosDefensor.size());
 
         for (int i = 0; i < cantidadDados; i++) {
 
             if (dadosAtacante.get(i) > dadosDefensor.get(i))
-                defensor.quitarEjercitos(1);  //todo: validar que no quede en numeros negativos, conquista y pueda atacar segun cantidad
+                defensor.quitarEjercitos(1);
             else
                 atacante.quitarEjercitos(1);
         }
 
         if (defensor.noTieneEjercitos())
-            defensor.fueConquistadoPor(atacante);
+            atacante.conquistar(defensor);
     }
 
-    private boolean validarAtaque(){
-        return (validarLimitrofes() && validarCantidadEjercitos());
+    private void validarAtaque(){
+        validarLimitrofes();
+        validarCantidadEjercitos();
     }
 
-    private boolean validarLimitrofes(){
-        return atacante.esLimitrofeCon(defensor);
+    private void validarLimitrofes(){
+        if(!atacante.esLimitrofeCon(defensor)){
+            throw new PaisNoLimitrofeException();
+        }
     }
 
-    private boolean validarCantidadEjercitos(){
-        return atacante.cantidadEjercitosSuperiorA(1);
+    private void validarCantidadEjercitos(){
+        if (!atacante.cantidadEjercitosSuperiorA(1)){
+            throw new CantidadEjercitosInsuficienteException();
+        }
     }
 }
 

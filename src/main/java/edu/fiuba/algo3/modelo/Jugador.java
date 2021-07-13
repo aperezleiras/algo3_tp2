@@ -3,6 +3,11 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
+import edu.fiuba.algo3.exception.PaisInvalidoException;
+import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
+
+
 public class Jugador {
 
     int color;
@@ -26,15 +31,23 @@ public class Jugador {
     }
 
     public void colocarEjercitos(int cantidad, Pais unPais) {
-        if (paisMePertenece(unPais)) unPais.agregarEjercitos(cantidad);
+        if (!paisMePertenece(unPais)) throw new PaisInvalidoException();
+
+        unPais.agregarEjercitos(cantidad);
     }
 
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {
-        if (paisMePertenece(paisDestino)) paisOrigen.transferirEjercitosA(paisDestino, cantidad);
+        if (!paisMePertenece(paisOrigen) || !paisMePertenece(paisDestino)) throw new PaisInvalidoException();
+        if (!paisOrigen.esLimitrofeCon(paisDestino)) throw new PaisNoLimitrofeException();
+
+        paisOrigen.transferirEjercitos(paisDestino, cantidad);
     }
 
     public void atacarPaisDesde(Pais miPais, Pais paisEnemigo) {
-        //Batalla.realizarAtaque(miPais, paisEnemigo);
+        if (!paisMePertenece(miPais) || paisMePertenece(paisEnemigo)) throw new PaisInvalidoException();
+
+        Batalla batalla = new Batalla(miPais,paisEnemigo,new Dado(), new Dado());
+        batalla.realizarAtaque();
     }
 }
 

@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface IDado {
 
-    List<Integer> obtenerDado(Pais pais);
+    List<Integer> obtenerDadoAtacante(Pais pais);
+    List<Integer> obtenerDadoDefensor(Pais pais);
 }

@@ -1,9 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.exception.CantidadAQuitarInvalidaException;
+import edu.fiuba.algo3.exception.CantidadATransferirInvalidaException;
+
 public class Ejercitos {
 
-    int cantidad;
-
+    private int cantidad;
 
     Ejercitos(int unaCantidad) {
         cantidad = unaCantidad;
@@ -27,15 +29,14 @@ public class Ejercitos {
     }
 
     public void quitarEjercitos(int unaCantidad) {
-        if (cantidad >= unaCantidad)
-            cantidad -= unaCantidad;
+        if (unaCantidad > cantidad) throw new CantidadAQuitarInvalidaException();
+        cantidad -= unaCantidad;
     }
 
     public void transferirEjercitos(Pais paisDestino, int unaCantidad) {
-        if (cantidad > unaCantidad) {
-            quitarEjercitos(unaCantidad);
-            paisDestino.agregarEjercitos(unaCantidad);
-        }
+        if (unaCantidad >= cantidad) throw new CantidadATransferirInvalidaException();
+        quitarEjercitos(unaCantidad);
+        paisDestino.agregarEjercitos(unaCantidad);
     }
 
 }

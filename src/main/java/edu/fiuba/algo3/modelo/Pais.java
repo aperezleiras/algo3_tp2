@@ -6,7 +6,7 @@ public class Pais { //todo: crear interfaz de pais
 
     private final String nombre;
     private Ejercitos ejercitos;
-    private List<String> limitrofes;
+    private final List<String> limitrofes;
     private Jugador jugador;
 
     Pais(String nombre, List<String> limitrofes, Ejercitos ejercitos) {
@@ -19,16 +19,18 @@ public class Pais { //todo: crear interfaz de pais
         limitrofes.add(pais);
     }
 
+    public int cantidadEjercitos() {
+        return ejercitos.getCantidad();
+    }
 
     //TODO esto o getter?
     public boolean esLimitrofeCon(Pais pais) {
-        return pais.esLimitrofeCon(nombre);
+        return limitrofes.contains(pais.getNombre());
     }
 
-    public boolean esLimitrofeCon(String pais) {
-        return limitrofes.contains(pais);
+    public String getNombre() {
+        return nombre;
     }
-
 
     public Ejercitos getEjercitos() {
         return ejercitos;
@@ -48,9 +50,10 @@ public class Pais { //todo: crear interfaz de pais
 
     public void quitarEjercitos(int cantidad) {
         ejercitos.quitarEjercitos(cantidad);
+
     } //todo: validar que no quede en numeros negativos y conquista
 
-    public void transferirEjercitosA(Pais paisDestino, int cantidad) {
+    public void transferirEjercitos(Pais paisDestino, int cantidad) {
         ejercitos.transferirEjercitos(paisDestino, cantidad);
     }
 
@@ -59,14 +62,13 @@ public class Pais { //todo: crear interfaz de pais
     }
 
 
-    public void fueConquistadoPor(Pais atacante) {
-        jugador = atacante.getJugador();
-        ejercitos = new Ejercitos(0);
-        atacante.transferirEjercitosA(this,1);
-    }
-
     public Jugador getJugador() {
         return jugador;
+    }
+
+    public void conquistar(Pais defensor) {
+        defensor.asignarJugador(jugador);
+        transferirEjercitos(defensor,1);
     }
 }
 

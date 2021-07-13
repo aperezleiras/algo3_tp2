@@ -1,28 +1,34 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Pais { //todo: crear interfaz de pais
 
     private final String nombre;
     private Ejercitos ejercitos;
-    private final List<Pais> limitrofes;
+    private List<String> limitrofes;
     private Jugador jugador;
 
-    Pais(String nombre, List<Pais> limitrofes, Ejercitos ejercitos) {
+    Pais(String nombre, List<String> limitrofes, Ejercitos ejercitos) {
         this.nombre = nombre;
         this.limitrofes = limitrofes;
         this.ejercitos = ejercitos;
     }
 
-    public void agregarLimitrofe(Pais pais) {
+    public void agregarLimitrofe(String pais) {
         limitrofes.add(pais);
     }
 
+
+    //TODO esto o getter?
     public boolean esLimitrofeCon(Pais pais) {
+        return pais.esLimitrofeCon(nombre);
+    }
+
+    public boolean esLimitrofeCon(String pais) {
         return limitrofes.contains(pais);
     }
+
 
     public Ejercitos getEjercitos() {
         return ejercitos;
@@ -52,8 +58,6 @@ public class Pais { //todo: crear interfaz de pais
         jugador = unJugador;
     }
 
-    public Dados obtenerDadosAtacante() { return (ejercitos.calcularDadosAtacante()); }
-    public Dados obtenerDadosDefensor() { return (ejercitos.calcularDadosDefensor()); }
 
     public void fueConquistadoPor(Pais atacante) {
         jugador = atacante.getJugador();
@@ -61,7 +65,7 @@ public class Pais { //todo: crear interfaz de pais
         atacante.transferirEjercitosA(this,1);
     }
 
-    private Jugador getJugador() {
+    public Jugador getJugador() {
         return jugador;
     }
 }

@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.List;
-
 public class Ejercitos {
 
     int cantidad;
@@ -40,14 +38,5 @@ public class Ejercitos {
         }
     }
 
-    public Dados calcularDadosAtacante() {
-        int cantidadDados = Math.min(3, cantidad-1);
-        return (new Dados(cantidadDados));
-    }
-
-    public Dados calcularDadosDefensor() {
-        int cantidadDados = Math.min(3, cantidad);
-        return (new Dados(cantidadDados));
-    }
 }
 

@@ -34,7 +34,7 @@ public class Jugador {
     }
 
     public void atacarPaisDesde(Pais miPais, Pais paisEnemigo) {
-        Batalla.realizarAtaque(miPais, paisEnemigo);
+        //Batalla.realizarAtaque(miPais, paisEnemigo);
     }
 }
 

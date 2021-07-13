@@ -14,7 +14,7 @@ public class PaisTest {
         Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
 
         argentina.agregarLimitrofe("Brasil");
-        assertTrue(argentina.esLimitrofeCon(brasil));
+        assertTrue(brasil.esLimitrofeCon(argentina));
     }
 
     @Test

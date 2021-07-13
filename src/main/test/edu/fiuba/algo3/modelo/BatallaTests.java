@@ -109,7 +109,7 @@ public class BatallaTests {
         batalla.realizarAtaque();
 
         //assert
-        Assertions.assertEquals(atacante.cantidadEjercitos(),1);
+        Assertions.assertEquals(atacante.cantidadEjercitos(),2);
         Assertions.assertEquals(defensor.cantidadEjercitos(),1);
     }
 

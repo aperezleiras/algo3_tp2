@@ -6,8 +6,9 @@ import java.util.List;
 public class Pais { //todo: crear interfaz de pais
 
     private final String nombre;
-    private final Ejercitos ejercitos;
+    private Ejercitos ejercitos;
     private final List<Pais> limitrofes;
+    private Jugador jugador;
 
     Pais(String nombre, List<Pais> limitrofes, Ejercitos ejercitos) {
         this.nombre = nombre;
@@ -47,16 +48,21 @@ public class Pais { //todo: crear interfaz de pais
         ejercitos.transferirEjercitos(paisDestino, cantidad);
     }
 
-    public void asignarJugador(Jugador jugador) {
-        ejercitos.asignarJugador(jugador);
-    }
-
-    public void conquistar(Pais unPais) {
-        ejercitos.conquistarA(unPais);
+    public void asignarJugador(Jugador unJugador) {
+        jugador = unJugador;
     }
 
     public Dados obtenerDadosAtacante() { return (ejercitos.calcularDadosAtacante()); }
     public Dados obtenerDadosDefensor() { return (ejercitos.calcularDadosDefensor()); }
 
+    public void fueConquistadoPor(Pais atacante) {
+        jugador = atacante.getJugador();
+        ejercitos = new Ejercitos(0);
+        atacante.transferirEjercitosA(this,1);
+    }
+
+    private Jugador getJugador() {
+        return jugador;
+    }
 }
 

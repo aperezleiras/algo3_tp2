@@ -10,7 +10,7 @@ public class JugadorTest {
     @Test
     public void alAsignarleUnPaisAUnJugadorEsePaisLePertenece() {
         Jugador jugador = new Jugador(1);
-        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
 
         jugador.asignarPais(argentina);
         assertTrue(jugador.paisMePertenece(argentina));
@@ -19,7 +19,7 @@ public class JugadorTest {
     @Test
     public void alColocar3EjercitosEnUnPaisQueLePerteneceSeAgreganSatisfactoriamente() {
         Jugador jugador = new Jugador(1);
-        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
 
         jugador.asignarPais(argentina);
         jugador.colocarEjercitos(3, argentina);
@@ -32,8 +32,8 @@ public class JugadorTest {
     // Eventualmente hacer una excepcion para esto
     public void noSePermiteTransferirEjercitosDesdeUnPaisConUnEjercito() {
         Jugador jugador = new Jugador(1);
-        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
-        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
 
         jugador.asignarPais(argentina);
         jugador.asignarPais(brasil);
@@ -51,8 +51,8 @@ public class JugadorTest {
     // Eventualmente hacer una excepcion para esto
     public void noSePermiteTransferirEjercitosAUnPaisQueNoLePertenece() {
         Jugador jugador = new Jugador(1);
-        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
-        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
 
         jugador.asignarPais(argentina);
         jugador.colocarEjercitos(3, argentina);

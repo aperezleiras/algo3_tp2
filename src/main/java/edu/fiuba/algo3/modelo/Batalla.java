@@ -17,7 +17,7 @@ public class Batalla {
         }
 
         if (defensor.noTieneEjercitos())
-            atacante.conquistar(defensor);
+            defensor.fueConquistadoPor(atacante);
     }
 }
 

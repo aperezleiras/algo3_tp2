@@ -10,8 +10,8 @@ public class PaisTest {
 
     @Test
     public void unPaisLimitrofeSeAgregaCorrectamente() {
-        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
-        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
 
         argentina.agregarLimitrofe(brasil);
         assertTrue(argentina.esLimitrofeCon(brasil));
@@ -19,8 +19,8 @@ public class PaisTest {
 
     @Test
     public void porDefectoUnPaisNoEsLimitrofe() {
-        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
-        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
 
         assertFalse(argentina.esLimitrofeCon(brasil));
     }

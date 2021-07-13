@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.exception.CantidadATransferirInvalidaException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,9 +14,7 @@ public class EjercitosTest {
     public void porDefectoEjercitosTieneUnEjercito() {
         Ejercitos ejercitos = new Ejercitos(1);
 
-        //assertTrue(ejercitos.tieneCantidad(1));
-        //assertFalse(ejercitos.tieneCantidad(2));
-        assertEquals(ejercitos.cantidad, 1);
+        assertEquals(ejercitos.getCantidad(), 1);
     }
 
     @Test
@@ -22,8 +22,7 @@ public class EjercitosTest {
         Ejercitos ejercitos = new Ejercitos(1);
         ejercitos.agregarEjercitos(2);
 
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(2));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(3));
+        assertEquals(ejercitos.getCantidad(), 3);
     }
 
     @Test
@@ -32,37 +31,34 @@ public class EjercitosTest {
         ejercitos.agregarEjercitos(3);
         ejercitos.quitarEjercitos(2);
 
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(1));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(2));
+        assertEquals(ejercitos.getCantidad(), 2);
     }
 
     @Test
     // Eventualmente crear excepción para esto
-    public void alIntentarTransferirDosEjercitosAOtroPaisTeniendoUnSoloEjercitoNoSeTransfiere() {
+    public void intentarTransferirDosEjercitosDesdeUnPaisConUnEjercitoLanzaCantidadATransferirInvalidaException() {
         Ejercitos ejercitos = new Ejercitos(1);
         Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
 
-        ejercitos.transferirEjercitos(unPais, 2);
-
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(0));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(1));
+        assertThrows(CantidadATransferirInvalidaException.class,
+                () -> {
+                    ejercitos.transferirEjercitos(unPais, 2);
+                });
     }
 
     @Test
-    // Eventualmente crear excepción para esto
-    public void alIntentarTransferirDosEjercitosAOtroPaisTeniendoDosEjercitoNoSeTransfiere() {
+    public void intentarTransferirDosEjercitosDesdeUnPaisConDosEjercitosLanzaCantidadATransferirInvalidaException() {
         Ejercitos ejercitos = new Ejercitos(1);
         Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
-
         ejercitos.agregarEjercitos(1);
-        ejercitos.transferirEjercitos(unPais, 2);
 
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(1));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(2));
+        assertThrows(CantidadATransferirInvalidaException.class,
+                () -> {
+                    ejercitos.transferirEjercitos(unPais, 2);
+                });
     }
 
     @Test
-    // Eventualmente crear excepción para esto
     public void alIntentarTransferirTresEjercitosAOtroPaisTeniendoDosEjercitoSeTransfierenSatisfactoriamente() {
         Ejercitos ejercitos = new Ejercitos(1);
         Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
@@ -70,7 +66,8 @@ public class EjercitosTest {
         ejercitos.agregarEjercitos(2);
         ejercitos.transferirEjercitos(unPais, 2);
 
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(0));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(1));
+        assertEquals(ejercitos.getCantidad(), 1);
     }
+
 }
+

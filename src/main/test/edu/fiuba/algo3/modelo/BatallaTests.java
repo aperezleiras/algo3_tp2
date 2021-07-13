@@ -39,15 +39,15 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisConquistaAOtro() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
+    void PaisConquistaAOtroYCambiaJugador() {
         //arrange
         Jugador elDibu = new Jugador(0);
         Jugador neyPasto = new Jugador(1);
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 
-        when(dadoAtacante.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(6,6));
-        when(dadoDefensor.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(1,1));
+        when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
+        when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
         IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
 
@@ -60,10 +60,15 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisDefensorGana() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
+    void PaisConquistaAOtroYSeTransfierenEjercitos() {
         //arrange
-        when(dadoAtacante.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(1,1));
-        when(dadoDefensor.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(6,6));
+        Jugador elDibu = new Jugador(0);
+        Jugador neyPasto = new Jugador(1);
+        atacante.asignarJugador(elDibu);
+        defensor.asignarJugador(neyPasto);
+
+        when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
+        when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
         IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
 
@@ -71,15 +76,16 @@ public class BatallaTests {
         batalla.realizarAtaque();
 
         //assert
-        //TODO viola encapsulamiento?
-        Assertions.assertEquals(1, atacante.getEjercitos().getCantidad());
+        Assertions.assertEquals(defensor.cantidadEjercitos(), 1);
+        Assertions.assertEquals(atacante.cantidadEjercitos(), 2);
+
     }
 
     @Test
-    void PaisAtacanteGanaYNoConquista() throws PaisNoLimitrofeException, CantidadEjercitosInsuficienteException {
+    void PaisDefensorGana() {
         //arrange
-        when(dadoAtacante.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(6,1));
-        when(dadoDefensor.obtenerDado(any(Pais.class))).thenReturn(Arrays.asList(1,1));
+        when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(1,1));
+        when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(6,6));
 
         IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
 
@@ -87,7 +93,24 @@ public class BatallaTests {
         batalla.realizarAtaque();
 
         //assert
-        Assertions.assertEquals(1, defensor.getEjercitos().getCantidad());
+        Assertions.assertEquals(atacante.cantidadEjercitos(),1);
+    }
+
+
+    @Test
+    void AmbosPaisesPierden1Ejercito() {
+        //arrange
+        when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,1));
+        when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
+
+        IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
+
+        //act
+        batalla.realizarAtaque();
+
+        //assert
+        Assertions.assertEquals(atacante.cantidadEjercitos(),1);
+        Assertions.assertEquals(defensor.cantidadEjercitos(),1);
     }
 
     @Test

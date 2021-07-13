@@ -25,15 +25,14 @@ public class Ejercitos {
     }
 
     public void quitarEjercitos(int unaCantidad) {
-        if (cantidad >= unaCantidad)
-            cantidad -= unaCantidad;
+        if (unaCantidad > cantidad) throw new CantidadAQuitarInvalidaError();
+        cantidad -= unaCantidad;
     }
 
     public void transferirEjercitos(Pais paisDestino, int unaCantidad) {
-        if (cantidad > unaCantidad) {
-            quitarEjercitos(unaCantidad);
-            paisDestino.agregarEjercitos(unaCantidad);
-        }
+        if (unaCantidad >= cantidad) throw new CantidadATransferirInvalidaError();
+        quitarEjercitos(unaCantidad);
+        paisDestino.agregarEjercitos(unaCantidad);
     }
 
     public Dados calcularDadosAtacante() {

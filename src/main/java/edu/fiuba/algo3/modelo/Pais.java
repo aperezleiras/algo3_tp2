@@ -5,7 +5,7 @@ import java.util.List;
 public class Pais {
 
     private final String nombre;
-    Jugador jugador;
+    private Jugador jugador;
     private final Ejercitos ejercitos;
     private final List<Pais> limitrofes;
 
@@ -25,6 +25,10 @@ public class Pais {
 
     public boolean esLimitrofeCon(Pais pais) {
         return limitrofes.contains(pais);
+    }
+
+    public int cantidadEjercitos() {
+        return ejercitos.getCantidad();
     }
 
     public Ejercitos getEjercitos() {

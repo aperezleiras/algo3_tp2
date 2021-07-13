@@ -12,9 +12,7 @@ public class EjercitosTest {
     public void porDefectoEjercitosTieneUnEjercito() {
         Ejercitos ejercitos = new Ejercitos();
 
-        //assertTrue(ejercitos.tieneCantidad(1));
-        //assertFalse(ejercitos.tieneCantidad(2));
-        assertEquals(ejercitos.cantidad, 1);
+        assertEquals(ejercitos.getCantidad(), 1);
     }
 
     @Test
@@ -22,8 +20,7 @@ public class EjercitosTest {
         Ejercitos ejercitos = new Ejercitos();
         ejercitos.agregarEjercitos(2);
 
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(2));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(3));
+        assertEquals(ejercitos.getCantidad(), 3);
     }
 
     @Test
@@ -32,37 +29,34 @@ public class EjercitosTest {
         ejercitos.agregarEjercitos(3);
         ejercitos.quitarEjercitos(2);
 
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(1));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(2));
+        assertEquals(ejercitos.getCantidad(), 2);
     }
 
     @Test
     // Eventualmente crear excepción para esto
-    public void alIntentarTransferirDosEjercitosAOtroPaisTeniendoUnSoloEjercitoNoSeTransfiere() {
+    public void intentarTransferirDosEjercitosDesdeUnPaisConUnEjercitoLanzaCantidadATransferirInvalidaError() {
         Ejercitos ejercitos = new Ejercitos();
         Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
 
-        ejercitos.transferirEjercitos(unPais, 2);
-
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(0));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(1));
+        assertThrows(CantidadATransferirInvalidaError.class,
+                ()->{
+                    ejercitos.transferirEjercitos(unPais, 2);
+                });
     }
 
     @Test
-    // Eventualmente crear excepción para esto
-    public void alIntentarTransferirDosEjercitosAOtroPaisTeniendoDosEjercitoNoSeTransfiere() {
+    public void intentarTransferirDosEjercitosDesdeUnPaisConDosEjercitosLanzaCantidadATransferirInvalidaError() {
         Ejercitos ejercitos = new Ejercitos();
         Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
-
         ejercitos.agregarEjercitos(1);
-        ejercitos.transferirEjercitos(unPais, 2);
 
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(1));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(2));
+        assertThrows(CantidadATransferirInvalidaError.class,
+                ()->{
+                    ejercitos.transferirEjercitos(unPais, 2);
+                });
     }
 
     @Test
-    // Eventualmente crear excepción para esto
     public void alIntentarTransferirTresEjercitosAOtroPaisTeniendoDosEjercitoSeTransfierenSatisfactoriamente() {
         Ejercitos ejercitos = new Ejercitos();
         Pais unPais = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
@@ -70,7 +64,85 @@ public class EjercitosTest {
         ejercitos.agregarEjercitos(2);
         ejercitos.transferirEjercitos(unPais, 2);
 
-        assertTrue(ejercitos.cantidadEjercitosSuperiorA(0));
-        assertFalse(ejercitos.cantidadEjercitosSuperiorA(1));
+        assertEquals(ejercitos.getCantidad(), 1);
+    }
+
+    @Test
+    public void unEjercitoAtacanteConDosEjercitosTiraUnDado() {
+        Ejercitos ejercitos = new Ejercitos();
+        ejercitos.agregarEjercitos(1);
+
+        Dados dadosAtacante = ejercitos.calcularDadosAtacante();
+
+        assertEquals(dadosAtacante.cantidad(), 1);
+    }
+
+    @Test
+    public void unEjercitoAtacanteConTresEjercitosTiraDosDados() {
+        Ejercitos ejercitos = new Ejercitos();
+        ejercitos.agregarEjercitos(2);
+
+        Dados dadosAtacante = ejercitos.calcularDadosAtacante();
+
+        assertEquals(dadosAtacante.cantidad(), 2);
+    }
+
+    @Test
+    public void unEjercitoAtacanteConCuatroEjercitosTiraTresDados() {
+        Ejercitos ejercitos = new Ejercitos();
+        ejercitos.agregarEjercitos(3);
+
+        Dados dadosAtacante = ejercitos.calcularDadosAtacante();
+
+        assertEquals(dadosAtacante.cantidad(), 3);
+    }
+
+    @Test
+    public void unEjercitoAtacanteConCincoEjercitosTiraTresDados() {
+        Ejercitos ejercitos = new Ejercitos();
+        ejercitos.agregarEjercitos(4);
+
+        Dados dadosAtacante = ejercitos.calcularDadosAtacante();
+
+        assertEquals(dadosAtacante.cantidad(), 3);
+    }
+
+    @Test
+    public void unEjercitoDefensorConUnEjercitoTiraUnDado() {
+        Ejercitos ejercitos = new Ejercitos();
+
+        Dados dadosDefensor = ejercitos.calcularDadosDefensor();
+
+        assertEquals(dadosDefensor.cantidad(), 1);
+    }
+
+    @Test
+    public void unEjercitoDefensorConDosEjercitosTiraDosDados() {
+        Ejercitos ejercitos = new Ejercitos();
+        ejercitos.agregarEjercitos(1);
+
+        Dados dadosDefensor = ejercitos.calcularDadosDefensor();
+
+        assertEquals(dadosDefensor.cantidad(), 2);
+    }
+
+    @Test
+    public void unEjercitoDefensorConTresEjercitosTiraTresDados() {
+        Ejercitos ejercitos = new Ejercitos();
+        ejercitos.agregarEjercitos(2);
+
+        Dados dadosDefensor = ejercitos.calcularDadosDefensor();
+
+        assertEquals(dadosDefensor.cantidad(), 3);
+    }
+
+    @Test
+    public void unEjercitoDefensorConCuatroEjercitosTiraTresDados() {
+        Ejercitos ejercitos = new Ejercitos();
+        ejercitos.agregarEjercitos(3);
+
+        Dados dadosDefensor = ejercitos.calcularDadosDefensor();
+
+        assertEquals(dadosDefensor.cantidad(), 3);
     }
 }

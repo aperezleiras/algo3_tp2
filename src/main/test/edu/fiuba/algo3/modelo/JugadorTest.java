@@ -17,20 +17,55 @@ public class JugadorTest {
     }
 
     @Test
-    public void alColocar3EjercitosEnUnPaisQueLePerteneceSeAgreganSatisfactoriamente() {
+    public void alColocarTresEjercitosEnUnPaisQueLePerteneceSeAgreganSatisfactoriamente() {
         Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
 
         jugador.asignarPais(argentina);
         jugador.colocarEjercitos(3, argentina);
 
-        assertTrue(argentina.cantidadEjercitosSuperiorA(3));
-        assertFalse(argentina.cantidadEjercitosSuperiorA(4));
+        assertEquals(argentina.cantidadEjercitos(), 4);
     }
 
     @Test
-    // Eventualmente hacer una excepcion para esto
-    public void noSePermiteTransferirEjercitosDesdeUnPaisConUnEjercito() {
+    public void intentarColocarEjercitosEnUnPaisAjenoLanzaPaisInvalidoError() {
+        Jugador jugador = new Jugador(1);
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+
+        assertThrows(PaisInvalidoError.class,
+                ()->{
+                    jugador.colocarEjercitos(3, argentina);
+                });
+    }
+
+    @Test
+    public void intentarTransferirEjercitosAUnPaisAjenoLanzaPaisInvalidoError() {
+        Jugador jugador = new Jugador(1);
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        jugador.asignarPais(argentina);
+
+        assertThrows(PaisInvalidoError.class,
+                ()->{
+                    jugador.transferirEjercitosDesde(argentina, brasil, 1);
+                });
+    }
+
+    @Test
+    public void intentarTransferirEjercitosDesdeUnPaisAjenoLanzaPaisInvalidoError() {
+        Jugador jugador = new Jugador(1);
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        jugador.asignarPais(argentina);
+
+        assertThrows(PaisInvalidoError.class,
+                ()->{
+                    jugador.transferirEjercitosDesde(brasil, argentina, 1);
+                });
+    }
+
+    @Test
+    public void intentarTransferirEjercitosEntrePaisesNoLimitrofesLanzaPaisesNoConectadosError() {
         Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
         Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
@@ -38,32 +73,128 @@ public class JugadorTest {
         jugador.asignarPais(argentina);
         jugador.asignarPais(brasil);
 
-        jugador.transferirEjercitosDesde(argentina, brasil, 1);
-
-        assertTrue(argentina.cantidadEjercitosSuperiorA(0));
-        assertFalse(argentina.cantidadEjercitosSuperiorA(1));
-
-        assertTrue(brasil.cantidadEjercitosSuperiorA(0));
-        assertFalse(brasil.cantidadEjercitosSuperiorA(1));
+        assertThrows(PaisesNoConectadosError.class,
+                ()->{
+                    jugador.transferirEjercitosDesde(argentina, brasil, 1);
+                });
     }
 
     @Test
-    // Eventualmente hacer una excepcion para esto
-    public void noSePermiteTransferirEjercitosAUnPaisQueNoLePertenece() {
+    public void intentarTransferirUnEjercitoDesdeUnPaisConUnEjercitoLanzaCantidadATransferirInvalidaError() {
         Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
         Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        argentina.agregarLimitrofe(brasil);
 
         jugador.asignarPais(argentina);
-        jugador.colocarEjercitos(3, argentina);
+        jugador.asignarPais(brasil);
 
-        jugador.transferirEjercitosDesde(argentina, brasil, 1);
-
-        assertTrue(argentina.cantidadEjercitosSuperiorA(3));
-        assertFalse(argentina.cantidadEjercitosSuperiorA(4));
-
-        assertTrue(brasil.cantidadEjercitosSuperiorA(0));
-        assertFalse(brasil.cantidadEjercitosSuperiorA(1));
+        assertThrows(CantidadATransferirInvalidaError.class,
+                ()->{
+                    jugador.transferirEjercitosDesde(argentina, brasil, 1);
+                });
     }
 
+    @Test
+    public void intentarTransferirDosEjercitosDesdeUnPaisConDosEjercitosLanzaCantidadATransferirInvalidaError() {
+        Jugador jugador = new Jugador(1);
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        argentina.agregarLimitrofe(brasil);
+
+        jugador.asignarPais(argentina);
+        jugador.asignarPais(brasil);
+        jugador.colocarEjercitos(1, argentina);
+
+        assertThrows(CantidadATransferirInvalidaError.class,
+                ()->{
+                    jugador.transferirEjercitosDesde(argentina, brasil, 2);
+                });
+    }
+
+    @Test
+    public void laTransfenciaDeUnEjercitoDesdeUnPaisConDosEjercitosAUnoConUnEjercitoSeRealizaCorrectamente() {
+        Jugador jugador = new Jugador(1);
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        argentina.agregarLimitrofe(brasil);
+
+        jugador.asignarPais(argentina);
+        jugador.asignarPais(brasil);
+        jugador.colocarEjercitos(1, argentina);
+        jugador.transferirEjercitosDesde(argentina, brasil, 1);
+
+        assertEquals(argentina.cantidadEjercitos(), 1);
+        assertEquals(brasil.cantidadEjercitos(), 2);
+    }
+
+    @Test
+    public void intentarAtacarAUnPaisPropioLanzaPaisInvalidoError() {
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        argentina.agregarLimitrofe(brasil);
+
+        Jugador jugador1 = new Jugador(1);
+        jugador1.asignarPais(argentina);
+        jugador1.asignarPais(brasil);
+
+        assertThrows(PaisInvalidoError.class,
+                ()->{
+                    jugador1.atacarPaisDesde(argentina, brasil);
+                });
+    }
+
+    @Test
+    public void intentarAtacarAUnPaisNoLimitrofeLanzaPaisesNoConectadosError() {
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        jugador1.asignarPais(argentina);
+        jugador2.asignarPais(brasil);
+
+        assertThrows(PaisesNoConectadosError.class,
+                ()->{
+                    jugador1.atacarPaisDesde(argentina, brasil);
+                });
+    }
+
+    @Test
+    public void intentarAtacarDesdeUnPaisAjenoLanzaPaisInvalidoError() {
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        jugador1.asignarPais(argentina);
+        jugador2.asignarPais(brasil);
+
+        assertThrows(PaisInvalidoError.class,
+                ()->{
+                    jugador1.atacarPaisDesde(brasil, argentina);
+                });
+    }
+
+    @Test
+    public void intentarAtacarDesdeUnPaisConUnEjercitoLanzaInsuficientesEjercitosError() {
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos());
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos());
+        argentina.agregarLimitrofe(brasil);
+
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        jugador1.asignarPais(argentina);
+        jugador2.asignarPais(brasil);
+
+        assertThrows(InsuficientesEjercitosError.class,
+                ()->{
+                    jugador1.atacarPaisDesde(argentina, brasil);
+                });
+    }
+
+    @Test
+    public void ataqueSatisfactorio() {
+
+    }
 }

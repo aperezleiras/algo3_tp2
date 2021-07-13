@@ -25,5 +25,6 @@ public class PaisTest {
         assertFalse(argentina.esLimitrofeCon(brasil));
     }
 
+    //faltan varios tests pero que serian basicamente los mismos que hay en jugador
 
 }

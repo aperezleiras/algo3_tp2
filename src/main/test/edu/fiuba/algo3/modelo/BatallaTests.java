@@ -82,7 +82,7 @@ public class BatallaTests {
     }
 
     @Test
-    public void PaisDefensorGana() {
+    public void AtacantePierde2Ejercitos() {
         //arrange
         when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(1,1));
         when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(6,6));
@@ -95,7 +95,6 @@ public class BatallaTests {
         //assert
         Assertions.assertEquals(atacante.cantidadEjercitos(),1);
     }
-
 
     @Test
     public void AmbosPaisesPierden1Ejercito() {
@@ -112,6 +111,7 @@ public class BatallaTests {
         Assertions.assertEquals(atacante.cantidadEjercitos(),2);
         Assertions.assertEquals(defensor.cantidadEjercitos(),1);
     }
+
 
     @Test
     public void PaisAtacanteNoLimitrofeException(){

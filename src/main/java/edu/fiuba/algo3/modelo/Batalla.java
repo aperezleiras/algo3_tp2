@@ -35,7 +35,7 @@ public class Batalla implements IBatalla{
         for (int i = 0; i < cantidadDados; i++) {
 
             if (dadosAtacante.get(i) > dadosDefensor.get(i))
-                defensor.quitarEjercitos(1);  //todo: validar que no quede en numeros negativos, conquista y pueda atacar segun cantidad
+                defensor.quitarEjercitos(1);
             else
                 atacante.quitarEjercitos(1);
         }

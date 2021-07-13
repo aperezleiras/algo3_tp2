@@ -28,10 +28,9 @@ public class Pais { //todo: crear interfaz de pais
         return limitrofes.contains(pais.getNombre());
     }
 
-    private String getNombre() {
+    public String getNombre() {
         return nombre;
     }
-
 
     public Ejercitos getEjercitos() {
         return ejercitos;

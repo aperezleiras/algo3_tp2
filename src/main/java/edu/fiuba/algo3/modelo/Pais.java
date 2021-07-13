@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Pais { //todo: crear interfaz de pais
+public class Pais {
 
     private final String nombre;
+    Jugador jugador;
     private final Ejercitos ejercitos;
     private final List<Pais> limitrofes;
 
@@ -17,6 +17,10 @@ public class Pais { //todo: crear interfaz de pais
 
     public void agregarLimitrofe(Pais pais) {
         limitrofes.add(pais);
+    }
+
+    public void asignarJugador(Jugador jugador) {
+        this.jugador = jugador;
     }
 
     public boolean esLimitrofeCon(Pais pais) {
@@ -43,16 +47,13 @@ public class Pais { //todo: crear interfaz de pais
         ejercitos.quitarEjercitos(cantidad);
     } //todo: validar que no quede en numeros negativos y conquista
 
-    public void transferirEjercitosA(Pais paisDestino, int cantidad) {
+    public void transferirEjercitos(Pais paisDestino, int cantidad) {
         ejercitos.transferirEjercitos(paisDestino, cantidad);
     }
 
-    public void asignarJugador(Jugador jugador) {
-        ejercitos.asignarJugador(jugador);
-    }
-
     public void conquistar(Pais unPais) {
-        ejercitos.conquistarA(unPais);
+        unPais.asignarJugador(jugador);
+        transferirEjercitos(unPais, 1);
     }
 
     public Dados obtenerDadosAtacante() { return (ejercitos.calcularDadosAtacante()); }

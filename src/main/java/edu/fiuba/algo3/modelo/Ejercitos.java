@@ -5,7 +5,6 @@ import java.util.List;
 public class Ejercitos {
 
     int cantidad;
-    Jugador jugador;
 
     Ejercitos() {
         cantidad = 1;
@@ -23,10 +22,6 @@ public class Ejercitos {
         return (cantidad > unaCantidad);
     }
 
-    public void asignarJugador(Jugador unJugador) {
-        jugador = unJugador;
-    }
-
     public void agregarEjercitos(int unaCantidad) {
         cantidad += unaCantidad;
     }
@@ -41,11 +36,6 @@ public class Ejercitos {
             quitarEjercitos(unaCantidad);
             paisDestino.agregarEjercitos(unaCantidad);
         }
-    }
-
-    public void conquistarA(Pais paisEnemigo) {
-        paisEnemigo.asignarJugador(jugador);
-        transferirEjercitos(paisEnemigo, 1);
     }
 
     public Dados calcularDadosAtacante() {

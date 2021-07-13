@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Jugador {
 
@@ -30,7 +29,7 @@ public class Jugador {
     }
 
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {
-        if (paisMePertenece(paisDestino)) paisOrigen.transferirEjercitosA(paisDestino, cantidad);
+        if (paisMePertenece(paisDestino)) paisOrigen.transferirEjercitos(paisDestino, cantidad);
     }
 
     public void atacarPaisDesde(Pais miPais, Pais paisEnemigo) {

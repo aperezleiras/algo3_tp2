@@ -27,7 +27,7 @@ public class BatallaTests {
     private Pais defensor;
 
     @BeforeEach
-    void setUp(){
+    public void setUp(){
         dadoAtacante = Mockito.mock(Dado.class);
         dadoDefensor = Mockito.mock(Dado.class);
 
@@ -39,7 +39,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisConquistaAOtroYCambiaJugador() {
+    public void PaisConquistaAOtroYCambiaJugador() {
         //arrange
         Jugador elDibu = new Jugador(0);
         Jugador neyPasto = new Jugador(1);
@@ -60,7 +60,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisConquistaAOtroYSeTransfierenEjercitos() {
+    public void PaisConquistaAOtroYSeTransfierenEjercitos() {
         //arrange
         Jugador elDibu = new Jugador(0);
         Jugador neyPasto = new Jugador(1);
@@ -82,7 +82,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisDefensorGana() {
+    public void PaisDefensorGana() {
         //arrange
         when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(1,1));
         when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(6,6));
@@ -98,7 +98,7 @@ public class BatallaTests {
 
 
     @Test
-    void AmbosPaisesPierden1Ejercito() {
+    public void AmbosPaisesPierden1Ejercito() {
         //arrange
         when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,1));
         when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
@@ -114,7 +114,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisAtacanteNoLimitrofeException(){
+    public void PaisAtacanteNoLimitrofeException(){
         //arrange
         Pais atacante = new Pais("Noruega", Arrays.asList("Suecia"), new Ejercitos(3));
 
@@ -125,7 +125,7 @@ public class BatallaTests {
     }
 
     @Test
-    void PaisAtacaConEjercitosInsuficientesException(){
+    public void PaisAtacaConEjercitosInsuficientesException(){
         //arrange
         Pais atacante = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
 

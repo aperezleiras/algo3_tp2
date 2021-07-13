@@ -1,9 +1,16 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.List;
-
 public class Batalla {
-    public static void realizarAtaque(Pais atacante, Pais defensor) {
+
+    private final Pais atacante;
+    private final Pais defensor;
+
+    Batalla(Pais atacante, Pais defensor) {
+        this.atacante = atacante;
+        this.defensor = defensor;
+    }
+
+    public void resolver() {
         Dados dadosAtacante = atacante.obtenerDadosAtacante();
         Dados dadosDefensor = defensor.obtenerDadosDefensor();
 

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.exception;
 
 public class PaisInvalidoError extends RuntimeException {
     public PaisInvalidoError() {

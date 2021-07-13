@@ -2,34 +2,33 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.List;
 
-public class Pais {
+public class Pais { //todo: crear interfaz de pais
 
     private final String nombre;
+    private Ejercitos ejercitos;
+    private List<String> limitrofes;
     private Jugador jugador;
-    private final Ejercitos ejercitos;
-    private final List<Pais> limitrofes;
 
-    Pais(String nombre, List<Pais> limitrofes, Ejercitos ejercitos) {
+    Pais(String nombre, List<String> limitrofes, Ejercitos ejercitos) {
         this.nombre = nombre;
         this.limitrofes = limitrofes;
         this.ejercitos = ejercitos;
     }
 
-    public void agregarLimitrofe(Pais pais) {
+    public void agregarLimitrofe(String pais) {
         limitrofes.add(pais);
     }
 
-    public void asignarJugador(Jugador jugador) {
-        this.jugador = jugador;
+
+    //TODO esto o getter?
+    public boolean esLimitrofeCon(Pais pais) {
+        return pais.esLimitrofeCon(nombre);
     }
 
-    public boolean esLimitrofeCon(Pais pais) {
+    public boolean esLimitrofeCon(String pais) {
         return limitrofes.contains(pais);
     }
 
-    public int cantidadEjercitos() {
-        return ejercitos.getCantidad();
-    }
 
     public Ejercitos getEjercitos() {
         return ejercitos;
@@ -51,17 +50,23 @@ public class Pais {
         ejercitos.quitarEjercitos(cantidad);
     } //todo: validar que no quede en numeros negativos y conquista
 
-    public void transferirEjercitos(Pais paisDestino, int cantidad) {
+    public void transferirEjercitosA(Pais paisDestino, int cantidad) {
         ejercitos.transferirEjercitos(paisDestino, cantidad);
     }
 
-    public void conquistar(Pais unPais) {
-        unPais.asignarJugador(jugador);
-        transferirEjercitos(unPais, 1);
+    public void asignarJugador(Jugador unJugador) {
+        jugador = unJugador;
     }
 
-    public Dados obtenerDadosAtacante() { return (ejercitos.calcularDadosAtacante()); }
-    public Dados obtenerDadosDefensor() { return (ejercitos.calcularDadosDefensor()); }
 
+    public void fueConquistadoPor(Pais atacante) {
+        jugador = atacante.getJugador();
+        ejercitos = new Ejercitos(0);
+        atacante.transferirEjercitosA(this,1);
+    }
+
+    public Jugador getJugador() {
+        return jugador;
+    }
 }
 

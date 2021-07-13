@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Jugador {
 
@@ -25,25 +26,15 @@ public class Jugador {
     }
 
     public void colocarEjercitos(int cantidad, Pais unPais) {
-        if (!paisMePertenece(unPais)) throw new PaisInvalidoError();
-
-        unPais.agregarEjercitos(cantidad);
+        if (paisMePertenece(unPais)) unPais.agregarEjercitos(cantidad);
     }
 
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {
-        if (!paisMePertenece(paisOrigen) || !paisMePertenece(paisDestino)) throw new PaisInvalidoError();
-        if (!paisOrigen.esLimitrofeCon(paisDestino)) throw new PaisesNoConectadosError();
-
-        paisOrigen.transferirEjercitos(paisDestino, cantidad);
+        if (paisMePertenece(paisDestino)) paisOrigen.transferirEjercitosA(paisDestino, cantidad);
     }
 
     public void atacarPaisDesde(Pais miPais, Pais paisEnemigo) {
-        if (!paisMePertenece(miPais) || paisMePertenece(paisEnemigo)) throw new PaisInvalidoError();
-        if (!miPais.esLimitrofeCon(paisEnemigo)) throw new PaisesNoConectadosError(); // tal vez mover chequeo a batalla
-        if (!miPais.cantidadEjercitosSuperiorA(1)) throw new InsuficientesEjercitosError(); // tal vez mover chequeo a batalla
-
-        Batalla batalla = new Batalla(miPais, paisEnemigo);
-        batalla.resolver();
+        //Batalla.realizarAtaque(miPais, paisEnemigo);
     }
 }
 

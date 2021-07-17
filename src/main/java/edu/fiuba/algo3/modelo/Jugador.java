@@ -10,7 +10,8 @@ import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 public class Jugador {
 
     int color;
-    ArrayList paises = new ArrayList();
+
+    List<Pais> paises = new ArrayList<>();
     ArrayList cartas = new ArrayList();
     private int cantidadCanjes = 0;
 

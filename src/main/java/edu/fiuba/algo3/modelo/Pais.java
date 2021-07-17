@@ -9,6 +9,7 @@ public class Pais { //todo: crear interfaz de pais
     private final List<String> limitrofes;
     private Jugador jugador;
 
+
     Pais(String nombre, List<String> limitrofes, Ejercitos ejercitos) {
         this.nombre = nombre;
         this.limitrofes = limitrofes;

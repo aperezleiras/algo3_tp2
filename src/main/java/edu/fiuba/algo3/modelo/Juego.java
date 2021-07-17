@@ -38,8 +38,7 @@ public class Juego {
     }
 
     public static void cargar_paises(HashMap<String, Pais> paises ,HashMap<String, Continente> continentes) throws FileNotFoundException {
-        File file = new File("textfiles/Fronteras.csv");
-        Scanner scan = new Scanner(file);
+        Scanner scan = new Scanner(new File("textfiles/Fronteras.csv"));
         scan.nextLine();
 
         while (scan.hasNextLine()){
@@ -60,8 +59,7 @@ public class Juego {
     }
 
     public static void cargar_cartas(HashMap<String, Pais> paises, List<CartaPais> cartas) throws FileNotFoundException {
-        File file = new File("textfiles/Cartas.csv");
-        Scanner scan = new Scanner(file);
+        Scanner scan = new Scanner(new File("textfiles/Cartas.csv"));
         scan.nextLine();
 
         while(scan.hasNextLine()){

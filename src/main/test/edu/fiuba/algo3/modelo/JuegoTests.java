@@ -74,5 +74,18 @@ public class JuegoTests {
 
     }
 
+    @Test
+    public void LosPaisesNoSeRepitenEntreJugadores() throws FileNotFoundException {
+        List<Jugador> jugadores = new ArrayList<Jugador>();
+        jugadores.add(jugador_1);
+        jugadores.add(jugador_2);
+
+        Juego juego = new Juego(jugadores);
+
+        jugador_1.paises.forEach(pais -> assertFalse(jugador_2.paises.contains(pais)));
+
+    }
+
+
 
 }

@@ -6,10 +6,12 @@ import java.util.*;
 
 public class Juego {
     private final List<Jugador> jugadores;
+  
     private HashMap<String, Continente> continentes = new HashMap<String, Continente>();
     private HashMap<String, Pais> paises = new HashMap<String, Pais>();
+  
     private List<CartaPais> cartas = new ArrayList<>();
-
+    //private final MazoCartasPais mazoCartasPais;
 
     public Juego(List<Jugador> jugadores) throws FileNotFoundException {
         this.jugadores = jugadores;

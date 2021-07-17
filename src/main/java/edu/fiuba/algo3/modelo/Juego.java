@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Juego {
     private final List<Jugador> jugadores;
+    //private final MazoCartasPais mazoCartasPais;
 
     public Juego(List<Jugador> jugadores) {
         this.jugadores = jugadores;

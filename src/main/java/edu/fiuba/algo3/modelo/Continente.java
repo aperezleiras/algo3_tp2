@@ -10,12 +10,6 @@ public class Continente {
     private List<Pais> paises;
     private int cantidadEjercitosExtra;
 
-    public Continente(String nombre, List<Pais> paises, int cantidadEjercitosExtra) {
-        this.nombre = nombre;
-        this.paises = paises;
-        this.cantidadEjercitosExtra = cantidadEjercitosExtra;
-    }
-
     public Continente(String nombre) {
         this.nombre = nombre;
         paises = new ArrayList<>();

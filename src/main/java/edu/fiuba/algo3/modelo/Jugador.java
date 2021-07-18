@@ -11,7 +11,7 @@ import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 public class Jugador {
 
     int color;
-    ArrayList paises = new ArrayList();
+    List<Pais> paises = new ArrayList();
 
     Jugador(int unColor) {
         color = unColor;
@@ -49,5 +49,6 @@ public class Jugador {
         Batalla batalla = new Batalla(miPais,paisEnemigo,new Dado(), new Dado());
         batalla.realizarAtaque();
     }
+
 }
 

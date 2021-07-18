@@ -47,9 +47,10 @@ public class JuegoTests {
 
         Juego juego = new Juego(jugadores);
 
-        System.out.println(jugador_1.obtenerCantidadPaises());
-        System.out.println(jugador_2.obtenerCantidadPaises());
-        System.out.println(jugador_3.obtenerCantidadPaises());
+        //TODO y estos print??
+        //System.out.println(jugador_1.obtenerCantidadPaises());
+        //System.out.println(jugador_2.obtenerCantidadPaises());
+        //System.out.println(jugador_3.obtenerCantidadPaises());
 
         assertTrue(jugador_1.obtenerCantidadPaises()<18 && 15<jugador_1.obtenerCantidadPaises());
         assertTrue(jugador_2.obtenerCantidadPaises()<18 && 15<jugador_2.obtenerCantidadPaises());

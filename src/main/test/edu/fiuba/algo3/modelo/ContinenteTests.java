@@ -20,7 +20,8 @@ public class ContinenteTests {
 
         paises.forEach(jugador::asignarPais);
 
-        Continente continente = new Continente("America del Sur", paises, 10);
+        Continente continente = new Continente("America del Sur");
+        paises.forEach(continente::agregarPais);
 
         //act & assert
         Assertions.assertTrue(continente.completo(jugador));
@@ -37,7 +38,9 @@ public class ContinenteTests {
                 new Pais("Uruguay", null, null)
         );
 
-        Continente continente = new Continente("America del Sur", paises, 10);
+        Continente continente = new Continente("America del Sur");
+        paises.forEach(continente::agregarPais);
+
 
         //act & assert
         Assertions.assertFalse(continente.completo(jugador));
@@ -48,7 +51,8 @@ public class ContinenteTests {
         // arrange
         Pais pais = new Pais("Argentina", null, null);
 
-        Continente continente = new Continente("America del Sur", Arrays.asList(pais), 10);
+        Continente continente = new Continente("America del Sur");
+        continente.agregarPais(pais);
 
         //act & assert
         Assertions.assertTrue(continente.tienePais(pais));
@@ -59,7 +63,7 @@ public class ContinenteTests {
         // arrange
         Pais pais = new Pais("Argentina", null, null);
 
-        Continente continente = new Continente("America del Sur", new ArrayList<>(), 10);
+        Continente continente = new Continente("America del Sur");
 
         //act & assert
         Assertions.assertFalse(continente.tienePais(pais));
@@ -78,7 +82,9 @@ public class ContinenteTests {
 
         paises.forEach(jugador::asignarPais);
 
-        Continente continente = new Continente("America del Sur", paises, ejercitosExtrasEsperados);
+        Continente continente = new Continente("America del Sur");
+        continente.setCantidadEjercitosExtra(ejercitosExtrasEsperados);
+        paises.forEach(continente::agregarPais);
 
         //act
         int ejercitosExtrasActuales = continente.getEjercitosExtra(jugador);
@@ -100,9 +106,12 @@ public class ContinenteTests {
                 new Pais("Uruguay", null, null)
         );
 
+        Continente continente = new Continente("America del Sur");
+        continente.setCantidadEjercitosExtra(ejercitosExtras);
+        paises.forEach(continente::agregarPais);
+
         jugador.asignarPais(paises.get(0));
 
-        Continente continente = new Continente("America del Sur", paises, ejercitosExtras);
 
         //act
         int ejercitosExtrasActuales = continente.getEjercitosExtra(jugador);
@@ -110,4 +119,5 @@ public class ContinenteTests {
         // assert
         Assertions.assertEquals(ejercitosExtrasEsperados, ejercitosExtrasActuales);
     }
+
 }

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,20 @@ public class Continente {
         this.cantidadEjercitosExtra = cantidadEjercitosExtra;
     }
 
-    public int ejercitosExtra(Jugador jugador) {
+    public Continente(String nombre) {
+        this.nombre = nombre;
+        paises = new ArrayList<>();
+    }
+
+    public void setCantidadEjercitosExtra(int cantidadEjercitosExtra) {
+        this.cantidadEjercitosExtra = cantidadEjercitosExtra;
+    }
+
+    public void agregarPais(Pais pais){
+        paises.add(pais);
+    }
+
+    public int getEjercitosExtra(Jugador jugador) {
         return (completo(jugador)) ? cantidadEjercitosExtra : 0;
     }
 

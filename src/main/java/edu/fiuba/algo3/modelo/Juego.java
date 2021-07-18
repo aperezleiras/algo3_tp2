@@ -1,15 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Juego {
     private final List<Jugador> jugadores;
-    private final List<Continente> continentes;
 
-    public Juego(List<Jugador> jugadores, List<Continente> continentes) {
+    public Juego(List<Jugador> jugadores) {
         this.jugadores = jugadores;
-        this.continentes = continentes;
     }
 
     public void asignarPaises(List<Pais> paises) {
@@ -52,7 +49,7 @@ public class Juego {
     }*/
 
     public int obtenerCantidadEjercitos(Jugador jugador, Continente continente){
-        return  continente.ejercitosExtra(jugador);
+        return  continente.getEjercitosExtra(jugador);
     }
 
     //TODO pensar implementacion

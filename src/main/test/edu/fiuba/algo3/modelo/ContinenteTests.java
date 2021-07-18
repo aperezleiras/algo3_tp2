@@ -81,7 +81,7 @@ public class ContinenteTests {
         Continente continente = new Continente("America del Sur", paises, ejercitosExtrasEsperados);
 
         //act
-        int ejercitosExtrasActuales = continente.ejercitosExtra(jugador);
+        int ejercitosExtrasActuales = continente.getEjercitosExtra(jugador);
 
         // assert
         Assertions.assertEquals(ejercitosExtrasEsperados, ejercitosExtrasActuales);
@@ -105,7 +105,7 @@ public class ContinenteTests {
         Continente continente = new Continente("America del Sur", paises, ejercitosExtras);
 
         //act
-        int ejercitosExtrasActuales = continente.ejercitosExtra(jugador);
+        int ejercitosExtrasActuales = continente.getEjercitosExtra(jugador);
 
         // assert
         Assertions.assertEquals(ejercitosExtrasEsperados, ejercitosExtrasActuales);

@@ -15,6 +15,7 @@ public class Jugador {
 
     List<CartaPais> cartas = new ArrayList();
     private int cantidadCanjes = 0;
+    private int ejercitosDisponibles = 0;
 
     Jugador(int unColor) {
         color = unColor;
@@ -41,12 +42,12 @@ public class Jugador {
     public void obtenerEjercitosPorCanje() {
         int cantidadEjercitos;
         switch (cantidadCanjes) {
-            case 0: cantidadEjercitos = 3;
-            case 1: cantidadEjercitos = 7;
-            case 2: cantidadEjercitos = 10;
+            case 0: cantidadEjercitos = 3; break;
+            case 1: cantidadEjercitos = 7; break;
+            case 2: cantidadEjercitos = 10; break;
             default: cantidadEjercitos = cantidadCanjes * 5;
         }
-        // agregarEjercitosDisponibles(cantidadEjercitos) ??
+        agregarEjercitosDisponibles(cantidadEjercitos);
     }
 
     public int obtenerCantidadPaises() {
@@ -59,10 +60,16 @@ public class Jugador {
 
     public boolean cartaMePertenece(CartaPais unaCarta) {return (cartas.contains(unaCarta));}
 
+    public void agregarEjercitosDisponibles(int cantidad) {
+        ejercitosDisponibles += cantidad;
+    }
+
     public void colocarEjercitos(int cantidad, Pais unPais) {
         if (!paisMePertenece(unPais)) throw new PaisInvalidoException();
+        if (cantidad > ejercitosDisponibles) throw new CantidadEjercitosInsuficienteException();
 
         unPais.agregarEjercitos(cantidad);
+        ejercitosDisponibles -= cantidad;
     }
 
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {

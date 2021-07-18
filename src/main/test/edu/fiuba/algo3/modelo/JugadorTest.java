@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.exception.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,119 +10,135 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
 
+    private Jugador jugador1;
+    private Jugador jugador2;
+
+    @BeforeEach
+    public void setUp() {
+        jugador1 = new Jugador(1);
+        jugador2 = new Jugador(2);
+        jugador1.agregarEjercitosDisponibles(10);
+        jugador2.agregarEjercitosDisponibles(10);
+    }
+
     @Test
     public void alAsignarleUnPaisAUnJugadorEsePaisLePertenece() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
 
-        jugador.asignarPais(argentina);
-        assertTrue(jugador.paisMePertenece(argentina));
+        jugador1.asignarPais(argentina);
+        assertTrue(jugador1.paisMePertenece(argentina));
     }
 
     @Test
     public void alColocar3EjercitosEnUnPaisQueLePerteneceSeAgreganSatisfactoriamente() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
 
-        jugador.asignarPais(argentina);
-        jugador.colocarEjercitos(3, argentina);
+        jugador1.asignarPais(argentina);
+        jugador1.colocarEjercitos(3, argentina);
 
         assertTrue(argentina.cantidadEjercitosSuperiorA(3));
         assertFalse(argentina.cantidadEjercitosSuperiorA(4));
     }
 
     @Test
+    public void intentarColocarMasEjercitosQueLosDisponiblesSeLanzaCantidadEjercitosInsuficienteException() {
+        Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
+        Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
+        jugador1.asignarPais(argentina);
+        jugador1.asignarPais(brasil);
+
+        jugador1.colocarEjercitos(9, argentina);
+        assertThrows(CantidadEjercitosInsuficienteException.class,
+                ()->{
+                    jugador1.colocarEjercitos(2, brasil);
+                });
+    }
+
+    @Test
     public void intentarColocarEjercitosEnUnPaisAjenoLanzaPaisInvalidoException() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
 
         assertThrows(PaisInvalidoException.class,
                 ()->{
-                    jugador.colocarEjercitos(3, argentina);
+                    jugador1.colocarEjercitos(3, argentina);
                 });
     }
 
     @Test
     public void intentarTransferirEjercitosAUnPaisAjenoLanzaPaisInvalidoException() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
-        jugador.asignarPais(argentina);
+        jugador1.asignarPais(argentina);
 
         assertThrows(PaisInvalidoException.class,
                 ()->{
-                    jugador.transferirEjercitosDesde(argentina, brasil, 1);
+                    jugador1.transferirEjercitosDesde(argentina, brasil, 1);
                 });
     }
 
     @Test
     public void intentarTransferirEjercitosDesdeUnPaisAjenoLanzaPaisInvalidoException() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
-        jugador.asignarPais(argentina);
+        jugador1.asignarPais(argentina);
 
         assertThrows(PaisInvalidoException.class,
                 ()->{
-                    jugador.transferirEjercitosDesde(brasil, argentina, 1);
+                    jugador1.transferirEjercitosDesde(brasil, argentina, 1);
                 });
     }
 
     @Test
     public void intentarTransferirEjercitosEntrePaisesNoLimitrofesLanzaPaisNoLimitrofeException() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
 
-        jugador.asignarPais(argentina);
-        jugador.asignarPais(brasil);
+        jugador1.asignarPais(argentina);
+        jugador1.asignarPais(brasil);
 
         assertThrows(PaisNoLimitrofeException.class,
                 ()->{
-                    jugador.transferirEjercitosDesde(argentina, brasil, 1);
+                    jugador1.transferirEjercitosDesde(argentina, brasil, 1);
                 });
     }
 
     @Test
     public void intentarTransferirUnEjercitoDesdeUnPaisConUnEjercitoLanzaCantidadATransferirInvalidaException() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", Arrays.asList("Argentina"), new Ejercitos(1));
 
-        jugador.asignarPais(argentina);
-        jugador.asignarPais(brasil);
+        jugador1.asignarPais(argentina);
+        jugador1.asignarPais(brasil);
 
         assertThrows(CantidadATransferirInvalidaException.class,
                 ()->{
-                    jugador.transferirEjercitosDesde(argentina, brasil, 1);
+                    jugador1.transferirEjercitosDesde(argentina, brasil, 1);
                 });
     }
 
     @Test
     public void intentarTransferirDosEjercitosDesdeUnPaisConDosEjercitosLanzaCantidadATransferirInvalidaException() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", Arrays.asList("Argentina"), new Ejercitos(1));
 
-        jugador.asignarPais(argentina);
-        jugador.asignarPais(brasil);
+        jugador1.asignarPais(argentina);
+        jugador1.asignarPais(brasil);
 
         assertThrows(CantidadATransferirInvalidaException.class,
                 ()->{
-                    jugador.transferirEjercitosDesde(argentina, brasil, 2);
+                    jugador1.transferirEjercitosDesde(argentina, brasil, 2);
                 });
     }
 
     @Test
     public void laTransfenciaDeUnEjercitoDesdeUnPaisConDosEjercitosAUnoConUnEjercitoSeRealizaCorrectamente() {
-        Jugador jugador = new Jugador(1);
         Pais argentina = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", Arrays.asList("Argentina"), new Ejercitos(1));
 
-        jugador.asignarPais(argentina);
-        jugador.asignarPais(brasil);
-        jugador.colocarEjercitos(1, argentina);
-        jugador.transferirEjercitosDesde(argentina, brasil, 1);
+        jugador1.asignarPais(argentina);
+        jugador1.asignarPais(brasil);
+        jugador1.colocarEjercitos(1, argentina);
+        jugador1.transferirEjercitosDesde(argentina, brasil, 1);
 
         assertEquals(argentina.cantidadEjercitos(), 1);
         assertEquals(brasil.cantidadEjercitos(), 2);
@@ -132,7 +149,6 @@ public class JugadorTest {
         Pais argentina = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", Arrays.asList("Argentina"), new Ejercitos(1));
 
-        Jugador jugador1 = new Jugador(1);
         jugador1.asignarPais(argentina);
         jugador1.asignarPais(brasil);
 
@@ -147,8 +163,6 @@ public class JugadorTest {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
 
-        Jugador jugador1 = new Jugador(1);
-        Jugador jugador2 = new Jugador(2);
         jugador1.asignarPais(argentina);
         jugador2.asignarPais(brasil);
 
@@ -163,8 +177,6 @@ public class JugadorTest {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
         Pais brasil = new Pais("Brasil", new ArrayList<>(), new Ejercitos(1));
 
-        Jugador jugador1 = new Jugador(1);
-        Jugador jugador2 = new Jugador(2);
         jugador1.asignarPais(argentina);
         jugador2.asignarPais(brasil);
 
@@ -180,8 +192,6 @@ public class JugadorTest {
         Pais brasil = new Pais("Brasil", Arrays.asList("Argentina"), new Ejercitos(1));
 
 
-        Jugador jugador1 = new Jugador(1);
-        Jugador jugador2 = new Jugador(2);
         jugador1.asignarPais(argentina);
         jugador2.asignarPais(brasil);
 

@@ -49,7 +49,7 @@ public class CartaPaisTests {
     @Test
     public void tresCartasDeDistintoSimboloConCanjeables() {
         CartaPais carta1 = new CartaPais(argentina, Simbolo.GLOBO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.CANION);
+        CartaPais carta2 = new CartaPais(brasil, Simbolo.CAÑON);
         CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
 
         assertTrue(carta1.esCanjeableCon(carta2, carta3));

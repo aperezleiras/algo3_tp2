@@ -7,8 +7,8 @@ import java.util.*;
 public class Juego {
     private final List<Jugador> jugadores;
 
-    private HashMap<String, Continente> continentes = new HashMap<String, Continente>();
-    private HashMap<String, Pais> paises = new HashMap<String, Pais>();
+    private HashMap<String, Continente> continentes = new HashMap<>();
+    private HashMap<String, Pais> paises = new HashMap<>();
 
     private List<CartaPais> cartas = new ArrayList<>();
     //private final MazoCartasPais mazoCartasPais;
@@ -17,7 +17,7 @@ public class Juego {
         this.jugadores = jugadores;
         cargar_paises(paises, continentes);
         cargar_cartas(paises, cartas);
-        asignarPaises(new ArrayList<Pais>(paises.values()));
+        asignarPaises(new ArrayList<>(paises.values()));
     }
 
     void asignarPaises(List<Pais> listaPaises) {
@@ -102,7 +102,7 @@ public class Juego {
             String nombrePais = parametros[0];
             String simbolo = parametros[1];
 
-            CartaPais cartaPais = new CartaPais(paises.get(nombrePais), simbolo);
+            CartaPais cartaPais = new CartaPais(paises.get(nombrePais), Simbolo.valueOf(simbolo.toUpperCase()));
             cartas.add(cartaPais);
         }
     }

@@ -30,13 +30,19 @@ public class Jugador {
         cartas.add(mazo.levantarCarta());
     }
 
+    public void devolverCartaA(CartaPais carta, MazoCartasPais mazo) {
+        cartas.remove(carta);
+        carta.devolverA(mazo);
+    }
+
     public void canjearCartas(CartaPais carta1, CartaPais carta2, CartaPais carta3, MazoCartasPais mazo) {
         Canje canje = new Canje(carta1, carta2, carta3, this);
         canje.efectuarCanje(mazo);
+        cantidadCanjes ++;
     }
 
     public void activarCarta(CartaPais carta) {
-        carta.activar(this);
+        carta.serActivadaPor(this);
     }
 
     public void obtenerEjercitosPorCanje() {
@@ -45,7 +51,7 @@ public class Jugador {
             case 0: cantidadEjercitos = 3; break;
             case 1: cantidadEjercitos = 7; break;
             case 2: cantidadEjercitos = 10; break;
-            default: cantidadEjercitos = cantidadCanjes * 5;
+            default: cantidadEjercitos = (cantidadCanjes - 1) * 5;
         }
         agregarEjercitosDisponibles(cantidadEjercitos);
     }
@@ -53,6 +59,8 @@ public class Jugador {
     public int obtenerCantidadPaises() {
         return paises.size();
     }
+
+    public int obtenerCantidadEjercitosDisponibles() { return ejercitosDisponibles; }
 
     public boolean paisMePertenece(Pais unPais) {
         return (paises.contains(unPais));

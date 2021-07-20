@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.exception.MazoVacioException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -11,7 +13,6 @@ public class MazoCartasPais {
     public MazoCartasPais(ArrayList<CartaPais> cartas) {
         // Queue<CartaPais> cartasQ = new LinkedList<>(cartas);
         this.cartas = cartas;
-        mezclar();
     }
 
     public void mezclar() {
@@ -19,13 +20,18 @@ public class MazoCartasPais {
     }
 
     public CartaPais levantarCarta() {
-        CartaPais carta = cartas.get(cartas.size()-1);
-        cartas.remove(cartas.size()-1);
+        CartaPais carta;
+        try {
+            carta = cartas.get(cartas.size()-1);
+            cartas.remove(cartas.size()-1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new MazoVacioException();
+        }
         return carta;
     }
 
     // La pone al fondo del mazo
-    public void devolverCarta(CartaPais carta) {
+    public void agregarCarta(CartaPais carta) {
         cartas.add(0, carta);
     }
 }

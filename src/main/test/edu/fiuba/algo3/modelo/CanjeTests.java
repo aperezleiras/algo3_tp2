@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CanjeTests {
 
@@ -59,5 +59,45 @@ public class CanjeTests {
                 ()->{
                     jugador.canjearCartas(carta1, carta2, carta3, mazo);
                 });
+    }
+
+    @Test
+    public void alRealizarseUnCanjeCorrectamenteElJugadorDejaDeTenerLasCartas() {
+        ArrayList<CartaPais> cartas = new ArrayList<>();
+        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
+        CartaPais carta2 = new CartaPais(brasil, Simbolo.GLOBO);
+        CartaPais carta3 = new CartaPais(chile, Simbolo.CAÑON);
+        cartas.add(carta1);
+        cartas.add(carta2);
+        cartas.add(carta3);
+        MazoCartasPais mazo = new MazoCartasPais(cartas);
+        jugador.levantarCartaPais(mazo);
+        jugador.levantarCartaPais(mazo);
+        jugador.levantarCartaPais(mazo);
+
+        jugador.canjearCartas(carta1, carta2, carta3, mazo);
+
+        assertFalse(jugador.cartaMePertenece(carta1));
+        assertFalse(jugador.cartaMePertenece(carta2));
+        assertFalse(jugador.cartaMePertenece(carta3));
+    }
+
+    @Test
+    public void alRealizarseUnCanjeCorrectamenteSeAgreganEjercitosDisponiblesAlJugador() {
+        ArrayList<CartaPais> cartas = new ArrayList<>();
+        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
+        CartaPais carta2 = new CartaPais(brasil, Simbolo.GLOBO);
+        CartaPais carta3 = new CartaPais(chile, Simbolo.CAÑON);
+        cartas.add(carta1);
+        cartas.add(carta2);
+        cartas.add(carta3);
+        MazoCartasPais mazo = new MazoCartasPais(cartas);
+        jugador.levantarCartaPais(mazo);
+        jugador.levantarCartaPais(mazo);
+        jugador.levantarCartaPais(mazo);
+
+        assertTrue(jugador.obtenerCantidadEjercitosDisponibles() == 0);
+        jugador.canjearCartas(carta1, carta2, carta3, mazo);
+        assertTrue(jugador.obtenerCantidadEjercitosDisponibles() > 0);
     }
 }

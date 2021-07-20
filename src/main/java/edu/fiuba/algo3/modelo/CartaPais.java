@@ -17,15 +17,16 @@ public class CartaPais {
         return simbolo;
     }
 
-    public void activar(Jugador jugador) {
+    public void serActivadaPor(Jugador jugador) {
         if (!perteneceA(jugador)) throw new CartaNoMePerteneceException();
         if (activada) throw new CartaYaActivadaException();
         if (!jugador.paisMePertenece(pais)) throw new PaisNoMePerteneceException();
+        jugador.agregarEjercitosDisponibles(2);
         jugador.colocarEjercitos(2, pais);
         activada = true;
     }
 
-    public boolean activada() {
+    public boolean fueActivada() {
         return activada;
     }
 
@@ -35,7 +36,7 @@ public class CartaPais {
 
     public void devolverA(MazoCartasPais mazo) {
         restablecer();
-        mazo.devolverCarta(this);
+        mazo.agregarCarta(this);
     }
 
     public boolean perteneceA(Jugador jugador) {

@@ -22,9 +22,9 @@ public class Canje {
         if (!(carta1.perteneceA(jugador) && carta2.perteneceA(jugador) && carta3.perteneceA(jugador)))
             throw new CartaNoMePerteneceException();
         if (!cartasSonCanjeables()) throw new CartasNoCanjeablesException();
-        carta1.devolverA(mazo);
-        carta2.devolverA(mazo);
-        carta3.devolverA(mazo);
+        jugador.devolverCartaA(carta1, mazo);
+        jugador.devolverCartaA(carta2, mazo);
+        jugador.devolverCartaA(carta3, mazo);
         jugador.obtenerEjercitosPorCanje();
     }
 

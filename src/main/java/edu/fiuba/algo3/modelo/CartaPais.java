@@ -46,6 +46,8 @@ public class CartaPais {
     public boolean esCanjeableCon(CartaPais carta1, CartaPais carta2) {
         Simbolo simbolo1 = carta1.getSimbolo();
         Simbolo simbolo2 = carta2.getSimbolo();
+        if (simbolo == Simbolo.COMODIN || simbolo1 == Simbolo.COMODIN || simbolo2 == Simbolo.COMODIN)
+            return true;
         if (simbolo == simbolo1)
             return (simbolo == simbolo2);
         return (simbolo != simbolo2 && simbolo1 != simbolo2);

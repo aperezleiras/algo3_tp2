@@ -127,4 +127,13 @@ public class CartaPaisTests {
 
         assertFalse(carta1.esCanjeableCon(carta2, carta3));
     }
+
+    @Test
+    public void siAlgunaCartaEsComodinElConjuntoEsCanjeable() {
+        CartaPais carta1 = new CartaPais(argentina, Simbolo.COMODIN);
+        CartaPais carta2 = new CartaPais(argentina, Simbolo.GLOBO);
+        CartaPais carta3 = new CartaPais(argentina, Simbolo.BARCO);
+
+        assertTrue(carta1.esCanjeableCon(carta2, carta3));
+    }
 }

@@ -1,14 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
-public class Dado implements IDado{ //todo: cambiar a clase estatica
+public class Dado {
 
-    public Dado() {
-    }
-
-    @Override
-    public List<Integer> obtenerDadoDefensor(Pais pais) {
+    public static List<Integer> obtenerDadoDefensor(Pais pais) {
         Random rand = new Random();
 
         List<Integer> dados = new ArrayList<>();
@@ -23,7 +22,7 @@ public class Dado implements IDado{ //todo: cambiar a clase estatica
         return dados;
     }
 
-    public List<Integer> obtenerDadoAtacante(Pais pais) {
+    public static List<Integer> obtenerDadoAtacante(Pais pais) {
         Random rand = new Random();
 
         List<Integer> dados = new ArrayList<>();

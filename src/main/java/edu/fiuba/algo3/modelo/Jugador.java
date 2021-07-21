@@ -12,15 +12,19 @@ import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
 public class Jugador {
 
     int color;
-    List<Pais> paises = new ArrayList();
-
-    List<CartaPais> cartas = new ArrayList();
-    private int cantidadCanjes = 0;
-    private DepositoEjercitos deposito = new DepositoEjercitos();
-    private int ejercitosDisponibles = 0;
+    List<Pais> paises;
+    List<CartaPais> cartas;
+    private int cantidadCanjes;
+    private DepositoEjercitos deposito;
+    private int ejercitosDisponibles;
 
     Jugador(int unColor) {
         color = unColor;
+        paises = new ArrayList<>();
+        cartas = new ArrayList<>();
+        cantidadCanjes = 0;
+        deposito = new DepositoEjercitos();
+        ejercitosDisponibles = 0;
     }
 
     //<editor-fold desc="Pais">
@@ -35,6 +39,15 @@ public class Jugador {
 
     public int obtenerCantidadPaises() {
         return paises.size();
+    }
+
+    //todo: metodo provisorio
+    public Pais buscarPais(String nombrePais) {
+        for(Pais pais : paises) {
+            if (pais.getNombre().equals(nombrePais))
+                return pais;
+        }
+        return null;
     }
     //</editor-fold>
 

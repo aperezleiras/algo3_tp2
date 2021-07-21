@@ -23,7 +23,7 @@ public class Jugador {
         color = unColor;
     }
 
-//========================================================================================================PAISES
+    //<editor-fold desc="Pais">
     public void asignarPais(Pais unPais) {
         unPais.asignarJugador(this);
         paises.add(unPais);
@@ -36,8 +36,9 @@ public class Jugador {
     public int obtenerCantidadPaises() {
         return paises.size();
     }
+    //</editor-fold>
 
-//========================================================================================================EJERCITOS
+    //<editor-fold desc="Ejercitos">
     public void agregarEjercitosDisponibles(int cantidad) {
     deposito.agregarEjercitosDisponibles(cantidad);
 }
@@ -72,8 +73,9 @@ public class Jugador {
         Batalla batalla = new Batalla(miPais,paisEnemigo,new Dado(), new Dado());
         batalla.realizarAtaque();
     }
+    //</editor-fold>
 
-//========================================================================================================CARTAS
+    //<editor-fold desc="Cartas">
     public void levantarCartaPais(MazoCartasPais mazo) {
         cartas.add(mazo.levantarCarta());
     }
@@ -107,5 +109,7 @@ public class Jugador {
         }
         agregarEjercitosDisponibles(cantidadEjercitos);
     }
+    //</editor-fold>
+
 }
 

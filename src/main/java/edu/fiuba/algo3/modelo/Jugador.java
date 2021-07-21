@@ -70,7 +70,7 @@ public class Jugador {
     public void atacarPaisDesde(Pais miPais, Pais paisEnemigo) {
         if (!paisMePertenece(miPais) || paisMePertenece(paisEnemigo)) throw new PaisInvalidoException();
 
-        Batalla batalla = new Batalla(miPais,paisEnemigo,new Dado(), new Dado());
+        Batalla batalla = new Batalla(miPais,paisEnemigo, new Dado());
         batalla.realizarAtaque();
     }
     //</editor-fold>

@@ -1,20 +1,29 @@
 package edu.fiuba.algo3.modelo;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DadoTests {
 
+    private Dado dado;
+
+    @BeforeEach
+    public void setUp(){
+        dado = new Dado();
+    }
+
     @Test
     public void unEjercitoAtacanteConDosEjercitosTiraUnDado() {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(2));
-        IDado dadoAtacante = new Dado();
 
-        List<Integer> dadosAtacante = dadoAtacante.obtenerDadoAtacante(argentina);
+        List<Integer> dadosAtacante = dado.obtenerDadoAtacante(argentina);
 
         assertEquals(dadosAtacante.size(), 1);
     }
@@ -23,9 +32,8 @@ public class DadoTests {
     @Test
     public void unEjercitoAtacanteConTresEjercitosTiraDosDados() {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(3));
-        IDado dadoAtacante = new Dado();
 
-        List<Integer> dadosAtacante = dadoAtacante.obtenerDadoAtacante(argentina);
+        List<Integer> dadosAtacante = dado.obtenerDadoAtacante(argentina);
 
         assertEquals(dadosAtacante.size(), 2);
     }
@@ -33,9 +41,8 @@ public class DadoTests {
     @Test
     public void unEjercitoAtacanteConCuatroEjercitosTiraTresDados() {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(4));
-        IDado dadoAtacante = new Dado();
 
-        List<Integer> dadosAtacante = dadoAtacante.obtenerDadoAtacante(argentina);
+        List<Integer> dadosAtacante = dado.obtenerDadoAtacante(argentina);
 
         assertEquals(dadosAtacante.size(), 3);
     }
@@ -43,9 +50,8 @@ public class DadoTests {
     @Test
     public void unEjercitoAtacanteConCincoEjercitosTiraTresDados() {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(5));
-        IDado dadoAtacante = new Dado();
 
-        List<Integer> dadosAtacante = dadoAtacante.obtenerDadoAtacante(argentina);
+        List<Integer> dadosAtacante = dado.obtenerDadoAtacante(argentina);
 
         assertEquals(dadosAtacante.size(), 3);
     }
@@ -53,9 +59,8 @@ public class DadoTests {
     @Test
     public void unEjercitoDefensorConUnEjercitoTiraUnDado() {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(1));
-        IDado dadoDefensor = new Dado();
 
-        List<Integer> dadosAtacante = dadoDefensor.obtenerDadoDefensor(argentina);
+        List<Integer> dadosAtacante = dado.obtenerDadoDefensor(argentina);
 
         assertEquals(dadosAtacante.size(), 1);
     }
@@ -64,9 +69,8 @@ public class DadoTests {
     @Test
     public void unEjercitoDefensorConDosEjercitosTiraDosDados() {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(2));
-        IDado dadoDefensor = new Dado();
 
-        List<Integer> dadosAtacante = dadoDefensor.obtenerDadoDefensor(argentina);
+        List<Integer> dadosAtacante = dado.obtenerDadoDefensor(argentina);
 
         assertEquals(dadosAtacante.size(), 2);
     }
@@ -75,9 +79,8 @@ public class DadoTests {
     @Test
     public void unEjercitoDefensorConTresEjercitosTiraTresDados() {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(3));
-        IDado dadoDefensor = new Dado();
 
-        List<Integer> dadosAtacante = dadoDefensor.obtenerDadoDefensor(argentina);
+        List<Integer> dadosAtacante = dado.obtenerDadoDefensor(argentina);
 
         assertEquals(dadosAtacante.size(), 3);
     }
@@ -87,9 +90,8 @@ public class DadoTests {
     @Test
     public void unEjercitoDefensorConCuatroEjercitosTiraTresDados() {
         Pais argentina = new Pais("Argentina", new ArrayList<>(), new Ejercitos(4));
-        IDado dadoDefensor = new Dado();
 
-        List<Integer> dadosAtacante = dadoDefensor.obtenerDadoDefensor(argentina);
+        List<Integer> dadosAtacante = dado.obtenerDadoDefensor(argentina);
 
         assertEquals(dadosAtacante.size(), 3);
     }

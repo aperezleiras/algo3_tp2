@@ -11,24 +11,20 @@ public class Batalla implements IBatalla{
 
     private Pais defensor;
 
-    private IDado dadoAtacante;
+    private IDado dado;
 
-    private IDado dadoDefensor;
-
-    public Batalla(Pais atacante, Pais defensor, IDado dadoAtacante, IDado dadoDefensor) {
+    public Batalla(Pais atacante, Pais defensor, IDado dado) {
         this.atacante = atacante;
         this.defensor = defensor;
-        this.dadoAtacante = dadoAtacante;
-        this.dadoDefensor = dadoDefensor;
+        this.dado = dado;
     }
 
     @Override
     public void realizarAtaque() {
         validarAtaque();
 
-        //TODO dos metodos o sacar el ultimo/primer elemento
-        List<Integer> dadosAtacante = dadoAtacante.obtenerDadoAtacante(atacante);
-        List<Integer> dadosDefensor = dadoDefensor.obtenerDadoDefensor(defensor);
+        List<Integer> dadosAtacante = dado.obtenerDadoAtacante(atacante);
+        List<Integer> dadosDefensor = dado.obtenerDadoDefensor(defensor);
 
         int cantidadDados = Math.min(dadosAtacante.size(), dadosDefensor.size());
 

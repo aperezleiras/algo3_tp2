@@ -18,18 +18,13 @@ import static org.mockito.Mockito.*;
 
 public class BatallaTests {
 
-    private IDado dadoAtacante;
-
-    private IDado dadoDefensor;
-
+    private IDado dado;
     private Pais atacante;
-
     private Pais defensor;
 
     @BeforeEach
     public void setUp(){
-        dadoAtacante = Mockito.mock(Dado.class);
-        dadoDefensor = Mockito.mock(Dado.class);
+        dado = Mockito.mock(Dado.class);
 
         Ejercitos ejercitosArgentina = new Ejercitos(3);
         Ejercitos ejercitosBrasil = new Ejercitos(2);
@@ -46,10 +41,10 @@ public class BatallaTests {
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 
-        when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
-        when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
+        when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
+        when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
+        IBatalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -67,10 +62,10 @@ public class BatallaTests {
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 
-        when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
-        when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
+        when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
+        when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
+        IBatalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -84,10 +79,10 @@ public class BatallaTests {
     @Test
     public void AtacantePierde2Ejercitos() {
         //arrange
-        when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(1,1));
-        when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(6,6));
+        when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(1,1));
+        when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(6,6));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
+        IBatalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -99,10 +94,10 @@ public class BatallaTests {
     @Test
     public void AmbosPaisesPierden1Ejercito() {
         //arrange
-        when(dadoAtacante.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,1));
-        when(dadoDefensor.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
+        when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,1));
+        when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
+        IBatalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -118,7 +113,7 @@ public class BatallaTests {
         //arrange
         Pais atacante = new Pais("Noruega", Arrays.asList("Suecia"), new Ejercitos(3));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
+        IBatalla batalla = new Batalla(atacante, defensor, dado);
 
         //act & assert
         Assertions.assertThrows(PaisNoLimitrofeException.class, batalla::realizarAtaque);
@@ -129,7 +124,7 @@ public class BatallaTests {
         //arrange
         Pais atacante = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dadoAtacante, dadoDefensor);
+        IBatalla batalla = new Batalla(atacante, defensor, dado);
 
         //act & assert
         Assertions.assertThrows(CantidadEjercitosInsuficienteException.class, batalla::realizarAtaque);

@@ -2,10 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.*;
 
-public class Dado implements IDado{ //todo: cambiar a clase estatica
-
-    public Dado() {
-    }
+public class Dado implements IDado{
 
     @Override
     public List<Integer> obtenerDadoDefensor(Pais pais) {
@@ -23,6 +20,7 @@ public class Dado implements IDado{ //todo: cambiar a clase estatica
         return dados;
     }
 
+    @Override
     public List<Integer> obtenerDadoAtacante(Pais pais) {
         Random rand = new Random();
 

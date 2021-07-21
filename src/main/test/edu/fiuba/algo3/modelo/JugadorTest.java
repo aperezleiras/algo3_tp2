@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.exception.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -25,21 +24,21 @@ public class JugadorTest {
         brasil = new Pais("Brasil", new ArrayList<>(Arrays.asList("Argentina")), new Ejercitos(1));
     }
 
+//========================================================================================================PAISES
     @Test
     public void alAsignarleUnPaisAUnJugadorEsePaisLePertenece() {
         jugador1.asignarPais(argentina);
         assertTrue(jugador1.paisMePertenece(argentina));
     }
 
-    //==========================================================================COLOCAR
-
+//========================================================================================================EJERCITOS
     @Test
     public void alColocar3EjercitosEnUnPaisQueLePerteneceSeAgreganSatisfactoriamente() {
         jugador1.asignarPais(argentina);
         jugador1.agregarEjercitosDisponibles(3);
 
         assertTrue(argentina.cantidadEjercitos() == 1);
-        jugador1.colocarEjercitos(3, argentina);
+        jugador1.colocarEjercitos(argentina, 3);
         assertTrue(argentina.cantidadEjercitos() == 4);
     }
 
@@ -50,16 +49,16 @@ public class JugadorTest {
 
         assertThrows(CantidadEjercitosInsuficienteException.class,
                 ()->{
-                    jugador1.colocarEjercitos(2, argentina);
+                    jugador1.colocarEjercitos(argentina, 2);
                 });
     }
 
     @Test
     public void intentarColocarEjercitosEnUnPaisAjenoLanzaPaisInvalidoException() {
         jugador1.agregarEjercitosDisponibles(3);
-        assertThrows(PaisInvalidoException.class,
+        assertThrows(PaisNoMePerteneceException.class,
                 ()->{
-                    jugador1.colocarEjercitos(3, argentina);
+                    jugador1.colocarEjercitos(argentina, 3);
                 });
     }
 
@@ -189,7 +188,7 @@ public class JugadorTest {
                 });
     }
 
-    //===============================================================================================CARTAS
+//========================================================================================================CARTAS
 
     @Test
     public void unJugadorLevantaUnaCartaYEstaLePertenece() {

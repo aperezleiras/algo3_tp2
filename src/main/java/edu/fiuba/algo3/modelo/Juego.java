@@ -5,72 +5,50 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Juego {
-    private final List<Jugador> jugadores;
 
+    private final List<Jugador> jugadores;
     private HashMap<String, Continente> continentes = new HashMap<>();
     private HashMap<String, Pais> paises = new HashMap<>();
-
-    private List<CartaPais> cartas = new ArrayList<>();
-    //private final MazoCartasPais mazoCartasPais;
+    private MazoCartasPais mazoCartasPais = new MazoCartasPais(new ArrayList<>());
 
     public Juego(List<Jugador> jugadores) throws FileNotFoundException {
         this.jugadores = jugadores;
         cargar_paises(paises, continentes);
-        cargar_cartas(paises, cartas);
+        cargar_cartas(paises, mazoCartasPais);
         asignarPaises(new ArrayList<>(paises.values()));
     }
 
     void asignarPaises(List<Pais> listaPaises) {
         Collections.shuffle(listaPaises);
-        for(int i = 0; i<listaPaises.size();i++){
+        for (int i = 0; i < listaPaises.size(); i++) {
             jugadores.get(i % jugadores.size()).asignarPais(listaPaises.get(i));
         }
     }
 
-    public void asignarEjercitos(int jugadorId, Pais pais) {
+    public Continente getContinentePorNombre(String nombre) {
+        return continentes.get(nombre);
+    }
+
+    // No se me ocurre como testear este metodo
+    public void asignarEjercitosDisponibles(int jugadorId) {
         Jugador jugador = jugadores.get(jugadorId);
 
-        int cantidadEjercitos = obtenerCantidadEjercitos(jugadorId); //Aca podriamos acumular las otras cantidades calculadas
+        int cantidadEjercitosGeneral = jugador.obtenerCantidadPaises() / 2;
+        jugador.agregarEjercitosDisponibles(cantidadEjercitosGeneral);
 
-        jugador.colocarEjercitos(cantidadEjercitos, pais);
+        HashMap<Continente, Integer> cantidadEjercitosPorContinente = obtenerEjercitosPorContinente(jugador);
+        jugador.agregarEjercitosDisponibles(cantidadEjercitosPorContinente);
     }
 
-    public int obtenerCantidadEjercitos(int jugadorId) {
-
-        Jugador jugador = jugadores.get(jugadorId);
-
-        return jugador.obtenerCantidadPaises() / 2;
-    }
-
-
-    /* TODO revisear implementacion con o sin sobrecarga
-        public int obtenerCantidadEjercitos(Jugador jugador){
-            return  jugador.obtenerCantidadPaises() / 2;
+    private HashMap<Continente, Integer> obtenerEjercitosPorContinente(Jugador jugador) {
+        HashMap<Continente, Integer> ejercitosPorContinente = new HashMap<>();
+        int cantidadEjercitos;
+        for (Continente continente : continentes.values()) {
+            cantidadEjercitos = continente.getEjercitosExtra(jugador);
+            ejercitosPorContinente.put(continente, cantidadEjercitos);
         }
-    */
-
-    /* TODO pensarlo mejor la implementacion
-    public void colocarEjercitosContinente(Jugador jugador, Continente continente){
-        int cantidad = obtenerCantidadEjercitos(jugador, continente);
-
-        Pais pais;
-
-        while (cantidad > 0){
-            pais = elergirPais(jugador, continente);
-            pais.agregarEjercitos(1);
-            cantidad--;
-        }
-    }*/
-
-    public int obtenerCantidadEjercitos(Jugador jugador, Continente continente){
-        return  continente.getEjercitosExtra(jugador);
+        return ejercitosPorContinente;
     }
-
-    //TODO pensar implementacion
-    public Pais elergirPais(Jugador jugador, Continente continente){
-        return null;
-    }
-
 
     public static void cargar_paises(HashMap<String, Pais> paises ,HashMap<String, Continente> continentes) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("textfiles/Fronteras.csv"));
@@ -81,7 +59,7 @@ public class Juego {
             String nombrePais = (parametros[0]).split(",")[0];
             String nombreContinente = (parametros[0]).split(",")[1];
 
-            if(!continentes.containsKey(nombreContinente)) {
+            if (!continentes.containsKey(nombreContinente)) {
                 Continente continente = new Continente(nombreContinente);
                 continentes.put(nombreContinente, continente);
             }
@@ -93,17 +71,19 @@ public class Juego {
         }
     }
 
-    public static void cargar_cartas(HashMap<String, Pais> paises, List<CartaPais> cartas) throws FileNotFoundException {
+    public static void cargar_cartas(HashMap<String, Pais> paises, MazoCartasPais mazo) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("textfiles/Cartas.csv"));
         scan.nextLine();
 
-        while(scan.hasNextLine()){
+        while (scan.hasNextLine()) {
             String[] parametros = (scan.nextLine()).split(",");
             String nombrePais = parametros[0];
             String simbolo = parametros[1];
 
             CartaPais cartaPais = new CartaPais(paises.get(nombrePais), Simbolo.valueOf(simbolo.toUpperCase()));
-            cartas.add(cartaPais);
+            mazo.agregarCarta(cartaPais);
         }
+
+        mazo.mezclar();
     }
 }

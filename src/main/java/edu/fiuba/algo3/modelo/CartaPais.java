@@ -22,7 +22,7 @@ public class CartaPais {
         if (activada) throw new CartaYaActivadaException();
         if (!jugador.paisMePertenece(pais)) throw new PaisNoMePerteneceException();
         jugador.agregarEjercitosDisponibles(2);
-        jugador.colocarEjercitos(2, pais);
+        jugador.colocarEjercitos(pais, 2);
         activada = true;
     }
 

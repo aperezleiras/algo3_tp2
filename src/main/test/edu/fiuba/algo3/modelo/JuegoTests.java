@@ -2,12 +2,14 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 
 public class JuegoTests {
@@ -25,10 +27,9 @@ public class JuegoTests {
         jugador_4 = new Jugador(4);
     }
 
-
     @Test
     public void JuegoCon2JugadoresCadaUnoTiene25Paises() throws FileNotFoundException {
-        List<Jugador> jugadores = new ArrayList<Jugador>();
+        List<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador_1);
         jugadores.add(jugador_2);
 
@@ -87,6 +88,24 @@ public class JuegoTests {
 
     }
 
+    @Test
+    public void unJugadorConTodosLosPaisesRecibe25EjercitosGenerales() throws FileNotFoundException {
+        List<Jugador> jugadores = new ArrayList<Jugador>();
+        jugadores.add(jugador_1);
+        Juego juego = new Juego(jugadores);
 
+        juego.asignarEjercitosDisponibles(0);
+        assertEquals(jugador_1.obtenerCantidadEjercitosDisponibles(), 25);
+    }
 
+    @Test
+    public void unJugadorConTodosLosPaisesDeAmericaDelSurRecibe4EjercitosParaEseContinente() throws FileNotFoundException {
+        List<Jugador> jugadores = new ArrayList<Jugador>();
+        jugadores.add(jugador_1);
+        Juego juego = new Juego(jugadores);
+
+        juego.asignarEjercitosDisponibles(0);
+        int ejercitosDisponibles = jugador_1.obtenerCantidadEjercitosDisponibleEnContinente(juego.getContinentePorNombre("America del Sur"));
+        assertEquals(ejercitosDisponibles, 3);
+    }
 }

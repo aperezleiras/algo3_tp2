@@ -13,14 +13,30 @@ public class Continente {
     public Continente(String nombre) {
         this.nombre = nombre;
         paises = new ArrayList<>();
+        asignarEjercitosExtraSegunContinente();
+    }
+
+    public void agregarPais(Pais pais){
+        paises.add(pais);
+    }
+
+    public boolean tienePais(Pais pais){
+        return paises.contains(pais);
     }
 
     public void setCantidadEjercitosExtra(int cantidadEjercitosExtra) {
         this.cantidadEjercitosExtra = cantidadEjercitosExtra;
     }
 
-    public void agregarPais(Pais pais){
-        paises.add(pais);
+    private void asignarEjercitosExtraSegunContinente() {    ////////////////////////
+        switch (nombre) {
+            case "Asia": cantidadEjercitosExtra = 7; break;
+            case "Europa": cantidadEjercitosExtra = 5; break;
+            case "America del Norte": cantidadEjercitosExtra = 5; break;
+            case "America del Sur": cantidadEjercitosExtra = 3; break;
+            case "Africa": cantidadEjercitosExtra = 3; break;
+            case "Oceania": cantidadEjercitosExtra = 2; break;
+        }
     }
 
     public int getEjercitosExtra(Jugador jugador) {
@@ -31,9 +47,5 @@ public class Continente {
         List<Jugador> jugadores = paises.stream().map(Pais::getJugador).collect(Collectors.toList());
 
         return  jugadores.stream().allMatch(jugador::equals);
-    }
-
-    public boolean tienePais(Pais pais){
-        return paises.contains(pais);
     }
 }

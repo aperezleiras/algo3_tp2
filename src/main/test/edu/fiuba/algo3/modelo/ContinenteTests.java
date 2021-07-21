@@ -8,8 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ContinenteTests {
+
     @Test
-    public void ContinenteCompletoPorUnJugador(){
+    public void ContinenteCompletoPorUnJugador() {
         // arrange
         Jugador jugador = new Jugador(0);
         List<Pais> paises = Arrays.asList(
@@ -28,7 +29,7 @@ public class ContinenteTests {
     }
 
     @Test
-    public void ContinenteNoCompletoPorUnHJugador(){
+    public void ContinenteNoCompletoPorUnJugador(){
         // arrange
         Jugador jugador = new Jugador(0);
 
@@ -40,7 +41,6 @@ public class ContinenteTests {
 
         Continente continente = new Continente("America del Sur");
         paises.forEach(continente::agregarPais);
-
 
         //act & assert
         Assertions.assertFalse(continente.completo(jugador));

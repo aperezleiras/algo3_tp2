@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.exception.*;
-
+//todo: incorporar cambios de ejercitos
 public class CartaPais {
     private boolean activada;
     public Pais pais;
@@ -21,7 +21,7 @@ public class CartaPais {
         if (!perteneceA(jugador)) throw new CartaNoMePerteneceException();
         if (activada) throw new CartaYaActivadaException();
         if (!jugador.paisMePertenece(pais)) throw new PaisNoMePerteneceException();
-        jugador.agregarEjercitosDisponibles(2);
+        jugador.agregarEjercitosGenerales(2);
         jugador.colocarEjercitos(pais, 2);
         activada = true;
     }

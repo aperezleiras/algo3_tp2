@@ -29,22 +29,107 @@ public class JugadorTest {
 
     }
 
-    //========================================================================================================PAISES
+    //<editor-fold desc="Paises">
+
     @Test
     public void alAsignarleUnPaisAUnJugadorEsePaisLePertenece() {
         jugador1.asignarPais(argentina);
+
         assertTrue(jugador1.paisMePertenece(argentina));
     }
 
-    //========================================================================================================EJERCITOS
+    @Test
+    public void seBuscaUnPaisPorNombre() {
+        jugador1.asignarPais(argentina);
+
+        assertEquals(argentina, jugador1.buscarPais("Argentina"));
+    }
+
+    @Test
+    public void noEnontrarUnPaisDevuelveNull() {
+        assertNull(jugador1.buscarPais("Alemania"));
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Ejercitos">
+    @Test
+    public void jugadorComienzaCon0EjercitosGeneralesDisponibles() {
+        assertFalse(jugador1.tieneEjercitosGenerales());
+    }
+
+    @Test
+    public void despuesDeRestarleUnEjercitoElJugadorTieneUnEjercitoMenos() {
+        jugador1.agregarEjercitosGenerales(2);
+        jugador1.quitarEjercitosGenerales(1);
+
+        assertEquals(1, jugador1.obtenerEjercitosGeneralesDisponibles());
+    }
+
+    @Test
+    public void alAgregarleEjercitosPorContinenteAUnJugadorDejaDeTener0() {
+        Continente america = new Continente("America");
+
+        jugador1.agregarEjercitosPorContinente(america, 4);
+
+        assertTrue(jugador1.tieneEjercitosEnContinente(america));
+    }
+
+    @Test
+    public void quitarleEjercitosPorContinenteAUnJugador() {
+        Continente america = new Continente("America");
+
+        jugador1.agregarEjercitosPorContinente(america, 1);
+        jugador1.quitarEjercitosPorContinente(america, 1);
+
+        assertFalse(jugador1.tieneEjercitosEnContinente(america));
+    }
+
+    @Test
+    public void validarCantidadPorContinenteTiraCantidadEjercitosInsuficienteException() {
+        Continente america = new Continente("America");
+
+        jugador1.agregarEjercitosPorContinente(america, 1);
+
+        assertThrows(CantidadEjercitosInsuficienteException.class,
+                () -> jugador1.validarCantidad(america, 2));
+    }
+
+    @Test
+    public void validarCantidadPorContinenteNoTiraExceptionSiLaCantidadEsValida() {
+        Continente america = new Continente("America");
+
+        jugador1.agregarEjercitosPorContinente(america, 1);
+        jugador1.validarCantidad(america, 1);
+
+        assertTrue(jugador1.tieneEjercitosEnContinente((america)));
+    }
+
+    @Test
+    public void validarCantidadGeneralTiraCantidadEjercitosInsuficienteException() {
+        jugador1.agregarEjercitosGenerales(1);
+
+        assertThrows(CantidadEjercitosInsuficienteException.class,
+                () -> jugador1.validarCantidad(2));
+    }
+
+    @Test
+    public void validarCantidadGeneralNoTiraExceptionSiLaCantidadEsValida() {
+        jugador1.agregarEjercitosGenerales(1);
+        jugador1.validarCantidad(1);
+
+        assertEquals(1,jugador1.obtenerEjercitosGeneralesDisponibles());
+    }
+
     @Test
     public void alColocar3EjercitosEnUnPaisQueLePerteneceSeAgreganSatisfactoriamente() {
         jugador1.asignarPais(argentina);
         jugador1.agregarEjercitosGenerales(3);
 
-        assertTrue(argentina.cantidadEjercitos() == 1);
+        assertEquals(1, argentina.cantidadEjercitos());
+
         jugador1.colocarEjercitos(argentina, 3);
-        assertTrue(argentina.cantidadEjercitos() == 4);
+
+        assertEquals(4, argentina.cantidadEjercitos());
     }
     /* todo: tira excepcion en turno ahora
     @Test
@@ -59,10 +144,13 @@ public class JugadorTest {
     @Test
     public void intentarColocarEjercitosEnUnPaisAjenoLanzaPaisInvalidoException() {
         jugador1.agregarEjercitosGenerales(3);
+
         assertThrows(PaisNoMePerteneceException.class, ()-> jugador1.colocarEjercitos(argentina, 3));
     }
 
-    //==========================================================================TRANSFERIR
+    //</editor-fold>
+
+    //<editor-fold desc="Transferir">
 
     @Test
     public void intentarTransferirEjercitosAUnPaisAjenoLanzaPaisInvalidoException() {
@@ -108,8 +196,8 @@ public class JugadorTest {
     public void intentarTransferirDosEjercitosDesdeUnPaisConDosEjercitosLanzaCantidadATransferirInvalidaException() {
         jugador1.asignarPais(argentina);
         jugador1.asignarPais(brasil);
-
         argentina.agregarEjercitos(1);
+
         assertTrue(argentina.cantidadEjercitos() == 2);
         assertThrows(CantidadATransferirInvalidaException.class,
                 () -> jugador1.transferirEjercitosDesde(argentina, brasil, 2));
@@ -126,7 +214,9 @@ public class JugadorTest {
         assertEquals(brasil.cantidadEjercitos(), 2);
     }
 
-    //==========================================================================ATACAR
+    //</editor-fold>
+
+    //<editor-fold desc="Atacar">
 
     @Test
     public void intentarAtacarAUnPaisPropioLanzaPaisInvalidoException() {
@@ -170,7 +260,9 @@ public class JugadorTest {
                 () -> jugador1.atacarPaisDesde(argentina, brasil));
     }
 
-//========================================================================================================CARTAS
+    //</editor-fold>
+
+    //<editor-fold desc="Cartas">
 
     @Test
     public void unJugadorLevantaUnaCartaYEstaLePertenece() {
@@ -178,6 +270,7 @@ public class JugadorTest {
         MazoCartasPais mazo = new MazoCartasPais(new ArrayList<>(Arrays.asList(cartaArgentina)));
 
         jugador1.levantarCartaPais(mazo);
+
         assertTrue(jugador1.cartaMePertenece(cartaArgentina));
     }
 
@@ -187,8 +280,11 @@ public class JugadorTest {
         MazoCartasPais mazo = new MazoCartasPais(new ArrayList<>(Arrays.asList(cartaArgentina)));
 
         jugador1.levantarCartaPais(mazo);
+
         assertTrue(jugador1.cartaMePertenece(cartaArgentina));
+
         jugador1.devolverCartaA(cartaArgentina, mazo);
+
         assertFalse(jugador1.cartaMePertenece(cartaArgentina));
     }
 
@@ -218,6 +314,7 @@ public class JugadorTest {
     public void unJugadorActivaUnaCartaDeUnPaisAjenoYSeLanzaPaisNoMePerteneceException() {
         CartaPais cartaBrasil = new CartaPais(brasil, Simbolo.BARCO);
         MazoCartasPais mazo = new MazoCartasPais(new ArrayList<>(Arrays.asList(cartaBrasil)));
+
         mazo.agregarCarta(cartaBrasil);
         jugador1.levantarCartaPais(mazo);
 
@@ -239,7 +336,9 @@ public class JugadorTest {
         assertEquals(argentina.cantidadEjercitos(), 3);
     }
 
-    //==================================================================================== CANJE
+    //</editor-fold desc>
+
+    //<editor-fold desc="Canje">
 
     /*@Test
     public void siUnJugadorSolicitaUnCanjeConCartasQueNoPoseeSeLanzaCartaNoMePerteneceException() {
@@ -323,14 +422,15 @@ public class JugadorTest {
         assertEquals( 55, jugador1.obtenerEjercitosGeneralesDisponibles());
     }
 
+    //<editor-fold desc="Metodos auxiliares">
 
     private void simularCanjes(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
         for (int i = 0; i < 3; i++) {
             jugador.levantarCartaPais(mazo);
         }
         jugador.canjearCartas(cartas, mazo);
-
     }
+
     private void simularCanjes(int cantidad){
         List<CartaPais> cartas = generarCartasCanjeables();
         List<CartaPais> cartasMazo = new ArrayList<>(cartas);
@@ -351,10 +451,13 @@ public class JugadorTest {
     }
 
     private List<CartaPais> generarCartasNoCanjeables() {
-
         return Arrays.asList(
                 new CartaPais(argentina, Simbolo.CAÑON),
                 new CartaPais(brasil, Simbolo.BARCO),
                 new CartaPais(chile, Simbolo.BARCO));
     }
+    //</editor-fold>
+
+    //</editor-fold>
+
 }

@@ -12,7 +12,7 @@ public class Turno {
     public void rondaAtacar(Jugador atacante, Jugador defensor, MazoCartasPais mazo) {
         atacante.habilitadoLevantarCarta = false;
         boolean fin = false;
-
+        /*
         while(!fin) {
             //paises hardcodeados por el momento
             Pais paisAtacante = solicitarPais(atacante, "Argentina");
@@ -21,10 +21,21 @@ public class Turno {
             atacante.atacarPaisDesde(paisAtacante, paisDefensor);
             //todo: consultar al usuario, hardcodeado por el momento
             fin = true;
-        }
+        }*/
+
+        Pais paisAtacante = solicitarPais(atacante, "Argentina");
+        Pais paisDefensor = solicitarPais(defensor, "Brasil");
+
+        atacante.atacarPaisDesde(paisAtacante, paisDefensor);
+
+        paisDefensor = solicitarPais(defensor, "Chile");
+
+        atacante.atacarPaisDesde(paisAtacante, paisDefensor);
+
         if (atacante.habilitadoLevantarCarta) {
             atacante.levantarCartaPais(mazo);
         }
+
     }
 
     public void realizarCanje(Jugador jugador, MazoCartasPais mazo) {

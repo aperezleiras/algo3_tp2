@@ -39,7 +39,7 @@ public class Continente {
         }
     }
 
-    public int getEjercitosExtra(Jugador jugador) {
+    public int obtenerEjercitosExtra(Jugador jugador) {
         return (completo(jugador)) ? cantidadEjercitosExtra : 0;
     }
 

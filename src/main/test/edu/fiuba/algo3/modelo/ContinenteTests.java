@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -87,7 +86,7 @@ public class ContinenteTests {
         paises.forEach(continente::agregarPais);
 
         //act
-        int ejercitosExtrasActuales = continente.getEjercitosExtra(jugador);
+        int ejercitosExtrasActuales = continente.obtenerEjercitosExtra(jugador);
 
         // assert
         Assertions.assertEquals(ejercitosExtrasEsperados, ejercitosExtrasActuales);
@@ -114,7 +113,7 @@ public class ContinenteTests {
 
 
         //act
-        int ejercitosExtrasActuales = continente.getEjercitosExtra(jugador);
+        int ejercitosExtrasActuales = continente.obtenerEjercitosExtra(jugador);
 
         // assert
         Assertions.assertEquals(ejercitosExtrasEsperados, ejercitosExtrasActuales);

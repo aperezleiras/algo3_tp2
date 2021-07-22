@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.exception.*;
+import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
+import edu.fiuba.algo3.exception.PaisInvalidoException;
+import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
+import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,10 +44,9 @@ public class Jugador {
 
     //todo: metodo provisorio
     public Pais buscarPais(String nombrePais) {
-        for (Pais pais : paises) {
+        for (Pais pais : paises){
             if (pais.getNombre().equals(nombrePais))
-                return pais;
-        }
+                return pais; }
         return null;
     }
     //</editor-fold>
@@ -69,30 +71,25 @@ public class Jugador {
 
     public void quitarEjercitosPorContinente(Continente continente, int cantidad) {
         int cantidadActualizada = ejercitosPorContinenteDisponibles.get(continente) - cantidad;
-        if (cantidadActualizada < 0) {
-            throw new CantidadAQuitarInvalidaException();
-        }
         ejercitosPorContinenteDisponibles.put(continente, cantidadActualizada);
     }
 
     public boolean tieneEjercitosGenerales() {
-        return ejercitosGeneralesDisponibles == 0;
+        return ejercitosGeneralesDisponibles != 0;
     }
 
     public boolean tieneEjercitosEnContinente(Continente continente) {
-        return ejercitosPorContinenteDisponibles.get(continente) == 0;
+        return ejercitosPorContinenteDisponibles.get(continente) != 0;
     }
 
     public void validarCantidad(int cantidad) {
-        if (ejercitosGeneralesDisponibles < cantidad) {
+        if (ejercitosGeneralesDisponibles < cantidad)
             throw new CantidadEjercitosInsuficienteException();
-        }
     }
 
     public void validarCantidad(Continente continente, int cantidad) {
-        if (ejercitosPorContinenteDisponibles.get(continente) < cantidad) {
+        if (ejercitosPorContinenteDisponibles.get(continente) < cantidad)
             throw new CantidadEjercitosInsuficienteException();
-        }
     }
 
     public void colocarEjercitos(Pais unPais, int cantidad) {
@@ -107,12 +104,12 @@ public class Jugador {
         paisOrigen.transferirEjercitos(paisDestino, cantidad);
     }
 
-    public void atacarPaisDesde(Pais miPais, Pais paisEnemigo) {
+    public void atacarPaisDesde(Pais miPais, Pais paisEnemigo){
         if (!paisMePertenece(miPais) || paisMePertenece(paisEnemigo)) throw new PaisInvalidoException();
 
         Batalla batalla = new Batalla(miPais, paisEnemigo, new Dado());
-        batalla.realizarAtaque();
-    }
+        batalla.realizarAtaque(); }
+
     //</editor-fold>
 
     //<editor-fold desc="Cartas">

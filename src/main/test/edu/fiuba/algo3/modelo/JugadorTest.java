@@ -288,7 +288,7 @@ public class JugadorTest {
 
         simularCanjes(1);
 
-        assertEquals(jugador1.obtenerCantidadEjercitosDisponibles(), 3);
+        assertEquals(jugador1.obtenerEjercitosGeneralesDisponibles(), 3);
     }
 
     @Test
@@ -296,7 +296,7 @@ public class JugadorTest {
 
         simularCanjes(2);
 
-        assertEquals(10, jugador1.obtenerCantidadEjercitosDisponibles());
+        assertEquals(10, jugador1.obtenerEjercitosGeneralesDisponibles());
     }
 
     @Test
@@ -304,7 +304,7 @@ public class JugadorTest {
 
         simularCanjes(3);
 
-        assertEquals(20,jugador1.obtenerCantidadEjercitosDisponibles());
+        assertEquals(20,jugador1.obtenerEjercitosGeneralesDisponibles());
     }
 
     @Test
@@ -312,7 +312,7 @@ public class JugadorTest {
 
         simularCanjes(4);
 
-        assertEquals(35, jugador1.obtenerCantidadEjercitosDisponibles() );
+        assertEquals(35, jugador1.obtenerEjercitosGeneralesDisponibles() );
     }
 
     @Test
@@ -320,7 +320,7 @@ public class JugadorTest {
 
         simularCanjes( 5);
 
-        assertEquals( 55, jugador1.obtenerCantidadEjercitosDisponibles());
+        assertEquals( 55, jugador1.obtenerEjercitosGeneralesDisponibles());
     }
 
 

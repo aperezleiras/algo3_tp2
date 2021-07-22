@@ -50,6 +50,11 @@ public class Jugador {
     //</editor-fold>
 
     //<editor-fold desc="Ejercitos">
+
+    public int obtenerEjercitosGeneralesDisponibles() {
+        return ejercitosGeneralesDisponibles;
+    }
+
     public void agregarEjercitosGenerales(int cantidad) {
         ejercitosGeneralesDisponibles += cantidad;
     }
@@ -147,7 +152,7 @@ public class Jugador {
                 cantidadEjercitos = 10;
                 break;
             default:
-                cantidadEjercitos = (cantidadCanjes - 1) * 5;
+                cantidadEjercitos = (cantidadCanjes) * 5;
         }
         agregarEjercitosGenerales(cantidadEjercitos);
     }

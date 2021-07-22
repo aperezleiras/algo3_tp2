@@ -327,9 +327,9 @@ public class JugadorTest {
 
     private void simularCanjes(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
         for (int i = 0; i < 3; i++) {
-            jugador1.levantarCartaPais(mazo);
+            jugador.levantarCartaPais(mazo);
         }
-        jugador1.canjearCartas(cartas, mazo);
+        jugador.canjearCartas(cartas, mazo);
 
     }
     private void simularCanjes(int cantidad){

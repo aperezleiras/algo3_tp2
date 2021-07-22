@@ -106,8 +106,8 @@ public class Jugador {
         carta.serActivadaPor(this);
     }
 
-    public void canjearCartas(CartaPais carta1, CartaPais carta2, CartaPais carta3, MazoCartasPais mazo) {
-        Canje canje = new Canje(carta1, carta2, carta3, this);
+    public void canjearCartas(List<CartaPais> cartas, MazoCartasPais mazo) {
+        Canje canje = new Canje(cartas, this);
         canje.efectuarCanje(mazo);
         cantidadCanjes ++;
     }

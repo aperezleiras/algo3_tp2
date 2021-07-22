@@ -1,30 +1,31 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import edu.fiuba.algo3.exception.CantidadAQuitarInvalidaException;
 import edu.fiuba.algo3.exception.PaisInvalidoException;
 import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class Jugador {
 
     int color;
-    List<Pais> paises;
+    List<Pais> paises; //todo cambiar a atributos privados
     List<CartaPais> cartas;
     private int cantidadCanjes;
-    private DepositoEjercitos deposito;
-    private int ejercitosDisponibles;
+    private int ejercitosGeneralesDisponibles;
+    private final HashMap<Continente, Integer> ejercitosPorContinenteDisponibles;
 
     Jugador(int unColor) {
         color = unColor;
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
         cantidadCanjes = 0;
-        deposito = new DepositoEjercitos();
-        ejercitosDisponibles = 0;
+        ejercitosGeneralesDisponibles = 0;
+        ejercitosPorContinenteDisponibles = new HashMap<>();
     }
 
     //<editor-fold desc="Pais">
@@ -43,7 +44,7 @@ public class Jugador {
 
     //todo: metodo provisorio
     public Pais buscarPais(String nombrePais) {
-        for(Pais pais : paises) {
+        for (Pais pais : paises) {
             if (pais.getNombre().equals(nombrePais))
                 return pais;
         }
@@ -52,25 +53,37 @@ public class Jugador {
     //</editor-fold>
 
     //<editor-fold desc="Ejercitos">
-    public void agregarEjercitosDisponibles(int cantidad) {
-    deposito.agregarEjercitosDisponibles(cantidad);
-}
-
-    public void agregarEjercitosDisponibles(HashMap<Continente, Integer> ejercitosPorContinente) {
-        deposito.agregarEjercitosDisponibles(ejercitosPorContinente);
+    public void agregarEjercitosGenerales(int cantidad) {
+        ejercitosGeneralesDisponibles += cantidad;
     }
 
-    public int obtenerCantidadEjercitosDisponibles() {
-        return deposito.getEjercitosGenerales();
+    public void quitarEjercitosGenerales(int cantidad) {
+        ejercitosGeneralesDisponibles -= cantidad;
     }
 
-    public int obtenerCantidadEjercitosDisponibleEnContinente(Continente continente) {
-        return deposito.getEjercitosContinente(continente);
+    public void agregarEjercitosPorContinente(Continente continente, int cantidad) {
+        this.ejercitosPorContinenteDisponibles.put(continente, cantidad);
+    }
+
+    public void quitarEjercitosPorContinente(Continente continente, int cantidad) {
+        int cantidadActualizada = ejercitosPorContinenteDisponibles.get(continente) - cantidad;
+        if (cantidadActualizada < 0) {
+            throw new CantidadAQuitarInvalidaException();
+        }
+        ejercitosPorContinenteDisponibles.put(continente, cantidadActualizada);
+    }
+
+    public boolean tieneEjercitosGenerales() {
+        return ejercitosGeneralesDisponibles == 0;
+    }
+
+    public boolean tieneEjercitosEnContinente(Continente continente) {
+        return ejercitosPorContinenteDisponibles.get(continente) == 0;
     }
 
     public void colocarEjercitos(Pais unPais, int cantidad) {
         if (!paisMePertenece(unPais)) throw new PaisNoMePerteneceException();
-        deposito.agregarEjercitosAPais(unPais, cantidad);
+        unPais.agregarEjercitos(cantidad);
     }
 
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {
@@ -83,7 +96,7 @@ public class Jugador {
     public void atacarPaisDesde(Pais miPais, Pais paisEnemigo) {
         if (!paisMePertenece(miPais) || paisMePertenece(paisEnemigo)) throw new PaisInvalidoException();
 
-        Batalla batalla = new Batalla(miPais,paisEnemigo, new Dado());
+        Batalla batalla = new Batalla(miPais, paisEnemigo, new Dado());
         batalla.realizarAtaque();
     }
     //</editor-fold>
@@ -109,18 +122,25 @@ public class Jugador {
     public void canjearCartas(CartaPais carta1, CartaPais carta2, CartaPais carta3, MazoCartasPais mazo) {
         Canje canje = new Canje(carta1, carta2, carta3, this);
         canje.efectuarCanje(mazo);
-        cantidadCanjes ++;
+        cantidadCanjes++;
     }
 
     public void obtenerEjercitosPorCanje() {
         int cantidadEjercitos;
         switch (cantidadCanjes) {
-            case 0: cantidadEjercitos = 3; break;
-            case 1: cantidadEjercitos = 7; break;
-            case 2: cantidadEjercitos = 10; break;
-            default: cantidadEjercitos = (cantidadCanjes - 1) * 5;
+            case 0:
+                cantidadEjercitos = 3;
+                break;
+            case 1:
+                cantidadEjercitos = 7;
+                break;
+            case 2:
+                cantidadEjercitos = 10;
+                break;
+            default:
+                cantidadEjercitos = (cantidadCanjes - 1) * 5;
         }
-        agregarEjercitosDisponibles(cantidadEjercitos);
+        agregarEjercitosGenerales(cantidadEjercitos);
     }
     //</editor-fold>
 

@@ -21,7 +21,7 @@ public class CartaPais {
         if (!perteneceA(jugador)) throw new CartaNoMePerteneceException();
         if (activada) throw new CartaYaActivadaException();
         if (!jugador.paisMePertenece(pais)) throw new PaisNoMePerteneceException();
-        jugador.agregarEjercitosGenerales(2);
+        //jugador.agregarEjercitosGenerales(2); //todo: creo que podemos sacar esto
         jugador.colocarEjercitos(pais, 2);
         activada = true;
     }

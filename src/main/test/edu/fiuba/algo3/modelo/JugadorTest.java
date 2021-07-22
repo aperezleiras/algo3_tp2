@@ -270,12 +270,11 @@ public class JugadorTest {
 
 
         MazoCartasPais mazo = new MazoCartasPais(cartas);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
+
+        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
 
         assertThrows(CartasNoCanjeablesException.class,
-                () -> jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo));
+                () -> simularCanje(cartasCanje, mazo, jugador1));
     }
 
     @Test
@@ -287,14 +286,11 @@ public class JugadorTest {
 
         List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
 
-
-
         MazoCartasPais mazo = new MazoCartasPais(cartas);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
 
-        jugador1.canjearCartas(cartas, mazo);
+
+        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+        simularCanje(cartasCanje, mazo, jugador1);
 
         cartas.forEach(c -> assertFalse(jugador1.cartaMePertenece(c)));
     }
@@ -311,12 +307,11 @@ public class JugadorTest {
 
 
         MazoCartasPais mazo = new MazoCartasPais(cartas);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
+
+        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
 
         assertEquals(0, jugador1.obtenerCantidadEjercitosDisponibles());
-        jugador1.canjearCartas(cartas, mazo);
+        simularCanje(cartasCanje, mazo, jugador1);
         assertTrue(jugador1.obtenerCantidadEjercitosDisponibles() > 0);
     }
 
@@ -332,12 +327,12 @@ public class JugadorTest {
 
 
         MazoCartasPais mazo = new MazoCartasPais(cartas);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
-
         assertEquals(jugador1.obtenerCantidadEjercitosDisponibles(), 0);
-        jugador1.canjearCartas(cartas, mazo);
+
+        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+
+        simularCanje(cartasCanje, mazo, jugador1);
+
         assertEquals(jugador1.obtenerCantidadEjercitosDisponibles(), 3);
     }
 
@@ -353,17 +348,16 @@ public class JugadorTest {
 
         MazoCartasPais mazo = new MazoCartasPais(cartas);
 
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo);
+        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
 
+        simularCanje(cartasCanje, mazo, jugador1);
 
-        for (int i = 0; i < 3; i ++) jugador1.levantarCartaPais(mazo);
 
         int ejercitosDisponiblesAntes = jugador1.obtenerCantidadEjercitosDisponibles();
 
-        jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo);
+        cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+        simularCanje(cartasCanje, mazo, jugador1);
+
         assertEquals(jugador1.obtenerCantidadEjercitosDisponibles() - ejercitosDisponiblesAntes, 7);
     }
 
@@ -379,16 +373,16 @@ public class JugadorTest {
 
         MazoCartasPais mazo = new MazoCartasPais(cartas);
 
+        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+
         for (int i = 0; i < 2; i ++) {
-            jugador1.levantarCartaPais(mazo);
-            jugador1.levantarCartaPais(mazo);
-            jugador1.levantarCartaPais(mazo);
-            jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo);
+            simularCanje(cartasCanje, mazo, jugador1);
         }
-        for (int i = 0; i < 3; i ++) jugador1.levantarCartaPais(mazo);
         int ejercitosDisponiblesAntes = jugador1.obtenerCantidadEjercitosDisponibles();
 
-        jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo);
+        cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+        simularCanje(cartasCanje, mazo, jugador1);
+
         assertEquals(jugador1.obtenerCantidadEjercitosDisponibles() - ejercitosDisponiblesAntes, 10);
     }
 
@@ -404,16 +398,17 @@ public class JugadorTest {
 
         MazoCartasPais mazo = new MazoCartasPais(cartas);
 
+        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+
         for (int i = 0; i < 4; i ++) {
-            jugador1.levantarCartaPais(mazo);
-            jugador1.levantarCartaPais(mazo);
-            jugador1.levantarCartaPais(mazo);
-            jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo);
+            simularCanje(cartasCanje, mazo, jugador1);
         }
-        for (int i = 0; i < 3; i ++) jugador1.levantarCartaPais(mazo);
         int ejercitosDisponiblesAntes = jugador1.obtenerCantidadEjercitosDisponibles();
 
-        jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo);
+        cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+        simularCanje(cartasCanje, mazo, jugador1);
+
+
         assertEquals(jugador1.obtenerCantidadEjercitosDisponibles() - ejercitosDisponiblesAntes, 15);
     }
 
@@ -427,20 +422,26 @@ public class JugadorTest {
         List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
 
 
-
         MazoCartasPais mazo = new MazoCartasPais(cartas);
 
+        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+
         for (int i = 0; i < 5; i ++) {
-            jugador1.levantarCartaPais(mazo);
-            jugador1.levantarCartaPais(mazo);
-            jugador1.levantarCartaPais(mazo);
-            jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo);
+            simularCanje(cartasCanje, mazo, jugador1);
         }
-        for (int i = 0; i < 3; i ++) jugador1.levantarCartaPais(mazo);
+
         int ejercitosDisponiblesAntes = jugador1.obtenerCantidadEjercitosDisponibles();
 
-        jugador1.canjearCartas(new ArrayList<>(Arrays.asList(carta1,carta2,carta3)), mazo);
+        cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+        simularCanje(cartasCanje, mazo, jugador1);
+
         assertEquals(jugador1.obtenerCantidadEjercitosDisponibles() - ejercitosDisponiblesAntes, 20);
     }
 
+    private void simularCanje(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
+        jugador1.levantarCartaPais(mazo);
+        jugador1.levantarCartaPais(mazo);
+        jugador1.levantarCartaPais(mazo);
+        jugador1.canjearCartas(cartas, mazo);
+    }
 }

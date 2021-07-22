@@ -2,15 +2,12 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.exception.MazoVacioException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class MazoCartasPais {
-    public ArrayList<CartaPais> cartas;
+    public List<CartaPais> cartas;
 
-    public MazoCartasPais(ArrayList<CartaPais> cartas) {
+    public MazoCartasPais(List<CartaPais> cartas) {
         // Queue<CartaPais> cartasQ = new LinkedList<>(cartas);
         this.cartas = cartas;
     }

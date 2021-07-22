@@ -49,6 +49,7 @@ public class Turno {
             //todo: obtener input del usuario
             Pais pais = solicitarPais(jugador, "Argentina");
             int cantidad = 2;
+            jugador.validarCantidad(cantidad);
             jugador.colocarEjercitos(pais, cantidad);
             jugador.quitarEjercitosGenerales(cantidad); //viola tell dont ask pero como diferencio entre ejercitosGenerales y Continentales?
         }
@@ -60,6 +61,7 @@ public class Turno {
                 //todo: obtener input del usuario
                 Pais pais = solicitarPais(jugador, "Argentina");
                 int cantidad = 2;
+                jugador.validarCantidad(continente, cantidad);
                 jugador.colocarEjercitos(pais, cantidad);
                 jugador.quitarEjercitosPorContinente(continente, cantidad); //viola tell dont ask pero como diferencio entre ejercitosGenerales y Continentales?
             }

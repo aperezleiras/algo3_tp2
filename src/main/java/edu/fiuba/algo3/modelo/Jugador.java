@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.exception.CantidadAQuitarInvalidaException;
-import edu.fiuba.algo3.exception.PaisInvalidoException;
-import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
-import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
+import edu.fiuba.algo3.exception.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,6 +76,18 @@ public class Jugador {
 
     public boolean tieneEjercitosEnContinente(Continente continente) {
         return ejercitosPorContinenteDisponibles.get(continente) == 0;
+    }
+
+    public void validarCantidad(int cantidad) {
+        if (ejercitosGeneralesDisponibles < cantidad) {
+            throw new CantidadEjercitosInsuficienteException();
+        }
+    }
+
+    public void validarCantidad(Continente continente, int cantidad) {
+        if (ejercitosPorContinenteDisponibles.get(continente) < cantidad) {
+            throw new CantidadEjercitosInsuficienteException();
+        }
     }
 
     public void colocarEjercitos(Pais unPais, int cantidad) {

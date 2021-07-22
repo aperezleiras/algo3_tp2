@@ -28,28 +28,18 @@ public class Juego {
     public Continente getContinentePorNombre(String nombre) {
         return continentes.get(nombre);
     }
-
-    // No se me ocurre como testear este metodo
-    public void asignarEjercitosDisponibles(int jugadorId) {
-        Jugador jugador = jugadores.get(jugadorId);
-
-        int cantidadEjercitosGeneral = jugador.obtenerCantidadPaises() / 2;
-        jugador.agregarEjercitosDisponibles(cantidadEjercitosGeneral);
-
-        HashMap<Continente, Integer> cantidadEjercitosPorContinente = obtenerEjercitosPorContinente(jugador);
-        jugador.agregarEjercitosDisponibles(cantidadEjercitosPorContinente);
-    }
-
+/*
     private HashMap<Continente, Integer> obtenerEjercitosPorContinente(Jugador jugador) {
         HashMap<Continente, Integer> ejercitosPorContinente = new HashMap<>();
         int cantidadEjercitos;
+
         for (Continente continente : continentes.values()) {
             cantidadEjercitos = continente.getEjercitosExtra(jugador);
             ejercitosPorContinente.put(continente, cantidadEjercitos);
         }
         return ejercitosPorContinente;
     }
-
+*/
     public static void cargar_paises(HashMap<String, Pais> paises ,HashMap<String, Continente> continentes) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("textfiles/Fronteras.csv"));
         scan.nextLine();

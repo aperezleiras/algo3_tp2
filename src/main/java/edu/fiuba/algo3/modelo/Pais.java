@@ -70,6 +70,7 @@ public class Pais { //todo: crear interfaz de pais
     public void conquistar(Pais defensor) {
         defensor.asignarJugador(jugador);
         transferirEjercitos(defensor,1);
+        jugador.habilitadoLevantarCarta = true;
     }
 }
 

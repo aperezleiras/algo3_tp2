@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Turno {
@@ -8,8 +9,10 @@ public class Turno {
 
     }
 
-    public void rondaAtacar(Jugador atacante, Jugador defensor) {
+    public void rondaAtacar(Jugador atacante, Jugador defensor, MazoCartasPais mazo) {
+        atacante.habilitadoLevantarCarta = false;
         boolean fin = false;
+
         while(!fin) {
             //paises hardcodeados por el momento
             Pais paisAtacante = solicitarPais(atacante, "Argentina");
@@ -19,17 +22,14 @@ public class Turno {
             //todo: consultar al usuario, hardcodeado por el momento
             fin = true;
         }
-    }
-    // llamar a este metodo primero
-    public void actualizarEjercitosDisponibles(Jugador jugador, HashMap<String, Continente> continentes) {
-        // Ejercitos generales
-        int cantidadEjercitosGeneral = jugador.obtenerCantidadPaises() / 2;
-        jugador.agregarEjercitosGenerales(cantidadEjercitosGeneral);
-
-        // Ejercitos por continente
-        for (Continente continente : continentes.values()) {
-            jugador.agregarEjercitosPorContinente(continente, continente.obtenerEjercitosExtra(jugador));
+        if (atacante.habilitadoLevantarCarta) {
+            atacante.levantarCartaPais(mazo);
         }
+    }
+
+    public void realizarCanje(Jugador jugador, MazoCartasPais mazo) {
+        //todo: obtener seleccion de cartas del usuario
+        jugador.canjearCartas(new ArrayList<>(), mazo);
     }
 
     public void rondaReagrupar(Jugador jugador) {
@@ -43,7 +43,24 @@ public class Turno {
             //todo: consultar al usuario, hardcodeade por le momento
             fin = true;
         }
+    }
 
+    public void actualizarEjercitosDisponibles(Jugador jugador, HashMap<String, Continente> continentes) {
+        // Ejercitos generales
+        int cantidadEjercitosGeneral = jugador.obtenerCantidadPaises() / 2;
+        jugador.agregarEjercitosGenerales(cantidadEjercitosGeneral);
+
+        // Ejercitos por continente
+        for (Continente continente : continentes.values()) {
+            jugador.agregarEjercitosPorContinente(continente, continente.obtenerEjercitosExtra(jugador));
+        }
+    }
+
+    public void agregarEjercitosSegunCartas(Jugador jugador) {
+        for (CartaPais carta : jugador.cartas) {
+            //todo: obtener input del usuario: Desea activar la carta?
+            carta.serActivadaPor(jugador);
+        }
     }
 
     public void agregarEjercitosGenerales(Jugador jugador) {

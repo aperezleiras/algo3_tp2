@@ -13,8 +13,9 @@ import java.util.List;
 public class Jugador {
 
     int color;
-    List<Pais> paises; //todo cambiar a atributos privados
+    List<Pais> paises; //todo cambiar a atributos privados??
     List<CartaPais> cartas;
+    boolean habilitadoLevantarCarta;
     private int cantidadCanjes;
     private int ejercitosGeneralesDisponibles;
     private final HashMap<Continente, Integer> ejercitosPorContinenteDisponibles;
@@ -23,6 +24,7 @@ public class Jugador {
         color = unColor;
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
+        habilitadoLevantarCarta = false;
         cantidadCanjes = 0;
         ejercitosGeneralesDisponibles = 0;
         ejercitosPorContinenteDisponibles = new HashMap<>();
@@ -113,6 +115,7 @@ public class Jugador {
     //</editor-fold>
 
     //<editor-fold desc="Cartas">
+
     public void levantarCartaPais(MazoCartasPais mazo) {
         cartas.add(mazo.levantarCarta());
     }

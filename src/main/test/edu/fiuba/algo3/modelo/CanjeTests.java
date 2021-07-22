@@ -65,30 +65,30 @@ public class CanjeTests {
         assertThrows(CartasNoCanjeablesException.class, () -> canje.efectuarCanje(mazo));
     }
 
-    @Test
-    public void alRealizarseUnCanjeCorrectamenteSeAgreganEjercitosDisponiblesAlJugador() {
-        List<CartaPais> cartas = new ArrayList<>(
-                Arrays.asList(
-                        new CartaPais(argentina, Simbolo.BARCO),
-                        new CartaPais(brasil, Simbolo.CAÑON),
-                        new CartaPais(chile, Simbolo.GLOBO)
-                )
-        );
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-        Canje canje = new Canje(cartas, jugador);
-
-        jugador.levantarCartaPais(mazo);
-        jugador.levantarCartaPais(mazo);
-        jugador.levantarCartaPais(mazo);
-
-        assertEquals(0, jugador.obtenerCantidadEjercitosDisponibles());
-
-        canje.efectuarCanje(mazo);
-
-        assertTrue(jugador.obtenerCantidadEjercitosDisponibles() > 0);
-    }
+//    @Test
+//    public void alRealizarseUnCanjeCorrectamenteSeAgreganEjercitosDisponiblesAlJugador() {
+//        List<CartaPais> cartas = new ArrayList<>(
+//                Arrays.asList(
+//                        new CartaPais(argentina, Simbolo.BARCO),
+//                        new CartaPais(brasil, Simbolo.CAÑON),
+//                        new CartaPais(chile, Simbolo.GLOBO)
+//                )
+//        );
+//
+//        MazoCartasPais mazo = new MazoCartasPais(cartas);
+//
+//        Canje canje = new Canje(cartas, jugador);
+//
+//        jugador.levantarCartaPais(mazo);
+//        jugador.levantarCartaPais(mazo);
+//        jugador.levantarCartaPais(mazo);
+//
+//        assertEquals(0, jugador.obtenerCantidadEjercitosDisponibles());
+//
+//        canje.efectuarCanje(mazo);
+//
+//        assertTrue(jugador.obtenerCantidadEjercitosDisponibles() > 0);
+//    }
 
 
     @Test

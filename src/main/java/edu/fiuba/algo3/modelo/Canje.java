@@ -12,12 +12,12 @@ public class Canje {
     private List<CartaPais> cartas;
     private Jugador jugador;
 
-    public Canje(CartaPais carta1, CartaPais carta2, CartaPais carta3, Jugador jugador) {
-        this.carta1 = carta1;
-        this.carta2 = carta2;
-        this.carta3 = carta3;
-        this.jugador = jugador;
-    }
+//    public Canje(CartaPais carta1, CartaPais carta2, CartaPais carta3, Jugador jugador) {
+//        this.carta1 = carta1;
+//        this.carta2 = carta2;
+//        this.carta3 = carta3;
+//        this.jugador = jugador;
+//    }
 
     public Canje(List<CartaPais> cartas, Jugador jugador) {
         this.cartas = cartas;

@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo;
+
 import edu.fiuba.algo3.exception.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,14 +29,14 @@ public class JugadorTest {
 
     }
 
-//========================================================================================================PAISES
+    //========================================================================================================PAISES
     @Test
     public void alAsignarleUnPaisAUnJugadorEsePaisLePertenece() {
         jugador1.asignarPais(argentina);
         assertTrue(jugador1.paisMePertenece(argentina));
     }
 
-//========================================================================================================EJERCITOS
+    //========================================================================================================EJERCITOS
     @Test
     public void alColocar3EjercitosEnUnPaisQueLePerteneceSeAgreganSatisfactoriamente() {
         jugador1.asignarPais(argentina);
@@ -261,77 +262,32 @@ public class JugadorTest {
     @Test
     public void siUnJugadorSolicitaUnCanjeConCartasQueNoSonCanjeableSeLanzaCartasNoCanjeablesException() {
 
-        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
-        CartaPais carta3 = new CartaPais(chile, Simbolo.GLOBO);
+        List<CartaPais> cartas = generarCartasNoCanjeables();
+        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
 
-        List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+        MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
 
-
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-        assertThrows(CartasNoCanjeablesException.class,
-                () -> simularCanje(cartasCanje, mazo, jugador1));
+        assertThrows(CartasNoCanjeablesException.class, () -> simularCanjes(cartasCanje, mazo, jugador1));
     }
 
     @Test
     public void alRealizarseUnCanjeCorrectamenteElJugadorDejaDeTenerLasCartas() {
 
-        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
-        CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
+        List<CartaPais> cartas = generarCartasCanjeables();
+        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
 
-        List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
+        MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
 
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-
-        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-        simularCanje(cartasCanje, mazo, jugador1);
-
-        cartas.forEach(c -> assertFalse(jugador1.cartaMePertenece(c)));
-    }
-
-    @Test
-    public void alRealizarseUnCanjeCorrectamenteSeAgreganEjercitosDisponiblesAlJugador() {
-
-        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
-        CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
-
-        List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-        assertEquals(0, jugador1.obtenerCantidadEjercitosDisponibles());
-        simularCanje(cartasCanje, mazo, jugador1);
-        assertTrue(jugador1.obtenerCantidadEjercitosDisponibles() > 0);
+        simularCanjes(cartasCanje, mazo, jugador1);
+        cartasMazo.forEach(c -> assertFalse(jugador1.cartaMePertenece(c)));
     }
 
     @Test
     public void elPrimerCanjeOtorgaTresEjercitosAColocar() {
 
-        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
-        CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
-
-        List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-        assertEquals(jugador1.obtenerCantidadEjercitosDisponibles(), 0);
-
-        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-        simularCanje(cartasCanje, mazo, jugador1);
+        simularCanjes(1);
 
         assertEquals(jugador1.obtenerCantidadEjercitosDisponibles(), 3);
     }
@@ -339,109 +295,67 @@ public class JugadorTest {
     @Test
     public void elSegundoCanjeOtorgaSieteEjercitosAColocar() {
 
-        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
-        CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
+        simularCanjes(2);
 
-        List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-        simularCanje(cartasCanje, mazo, jugador1);
-
-
-        int ejercitosDisponiblesAntes = jugador1.obtenerCantidadEjercitosDisponibles();
-
-        cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-        simularCanje(cartasCanje, mazo, jugador1);
-
-        assertEquals(jugador1.obtenerCantidadEjercitosDisponibles() - ejercitosDisponiblesAntes, 7);
+        assertEquals(10, jugador1.obtenerCantidadEjercitosDisponibles());
     }
 
     @Test
     public void elTercerCanjeOtorgaDiezEjercitosAColocar() {
 
-        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
-        CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
+        simularCanjes(3);
 
-        List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-        for (int i = 0; i < 2; i ++) {
-            simularCanje(cartasCanje, mazo, jugador1);
-        }
-        int ejercitosDisponiblesAntes = jugador1.obtenerCantidadEjercitosDisponibles();
-
-        cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-        simularCanje(cartasCanje, mazo, jugador1);
-
-        assertEquals(jugador1.obtenerCantidadEjercitosDisponibles() - ejercitosDisponiblesAntes, 10);
+        assertEquals(20,jugador1.obtenerCantidadEjercitosDisponibles());
     }
 
     @Test
     public void elCuartoCanjeOtorgaQuinceEjercitosAColocar() {
 
-        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
-        CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
+        simularCanjes(4);
 
-        List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-        for (int i = 0; i < 4; i ++) {
-            simularCanje(cartasCanje, mazo, jugador1);
-        }
-        int ejercitosDisponiblesAntes = jugador1.obtenerCantidadEjercitosDisponibles();
-
-        cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-        simularCanje(cartasCanje, mazo, jugador1);
-
-
-        assertEquals(jugador1.obtenerCantidadEjercitosDisponibles() - ejercitosDisponiblesAntes, 15);
+        assertEquals(35, jugador1.obtenerCantidadEjercitosDisponibles() );
     }
 
     @Test
     public void elQuintoCanjeOtorgaVeinteEjercitosAColocar() {
 
-        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
-        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
-        CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
+        simularCanjes( 5);
 
-        List<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-        List<CartaPais> cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-
-        for (int i = 0; i < 5; i ++) {
-            simularCanje(cartasCanje, mazo, jugador1);
-        }
-
-        int ejercitosDisponiblesAntes = jugador1.obtenerCantidadEjercitosDisponibles();
-
-        cartasCanje = new ArrayList<>(Arrays.asList(carta1,carta2,carta3));
-        simularCanje(cartasCanje, mazo, jugador1);
-
-        assertEquals(jugador1.obtenerCantidadEjercitosDisponibles() - ejercitosDisponiblesAntes, 20);
+        assertEquals( 55, jugador1.obtenerCantidadEjercitosDisponibles());
     }
 
-    private void simularCanje(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
-        jugador1.levantarCartaPais(mazo);
+
+    private void simularCanjes(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
+        for (int i = 0; i < 3; i++) {
+            jugador1.levantarCartaPais(mazo);
+        }
         jugador1.canjearCartas(cartas, mazo);
+
+    }
+    private void simularCanjes(int cantidad){
+        List<CartaPais> cartas = generarCartasCanjeables();
+        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
+
+        MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
+
+        for (int i = 0; i < cantidad; i++) {
+            simularCanjes(cartasCanje, mazo, jugador1);
+        }
+    }
+
+    private List<CartaPais> generarCartasCanjeables() {
+        return Arrays.asList(
+                new CartaPais(argentina, Simbolo.BARCO),
+                new CartaPais(brasil, Simbolo.BARCO),
+                new CartaPais(chile, Simbolo.BARCO));
+    }
+
+    private List<CartaPais> generarCartasNoCanjeables() {
+
+        return Arrays.asList(
+                new CartaPais(argentina, Simbolo.CAÑON),
+                new CartaPais(brasil, Simbolo.BARCO),
+                new CartaPais(chile, Simbolo.BARCO));
     }
 }

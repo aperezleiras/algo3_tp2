@@ -118,7 +118,7 @@ public class Jugador {
             case 0: cantidadEjercitos = 3; break;
             case 1: cantidadEjercitos = 7; break;
             case 2: cantidadEjercitos = 10; break;
-            default: cantidadEjercitos = (cantidadCanjes - 1) * 5;
+            default: cantidadEjercitos = (cantidadCanjes) * 5;
         }
         agregarEjercitosDisponibles(cantidadEjercitos);
     }

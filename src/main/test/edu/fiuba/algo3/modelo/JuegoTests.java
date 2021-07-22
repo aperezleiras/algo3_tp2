@@ -87,7 +87,8 @@ public class JuegoTests {
         jugador_1.paises.forEach(pais -> assertFalse(jugador_2.paises.contains(pais)));
 
     }
-
+    // todo: deberiamos mover esto a test de jugador
+    /*
     @Test
     public void unJugadorConTodosLosPaisesRecibe25EjercitosGenerales() throws FileNotFoundException {
         List<Jugador> jugadores = new ArrayList<Jugador>();
@@ -97,7 +98,7 @@ public class JuegoTests {
         juego.asignarEjercitosDisponibles(0);
         assertEquals(jugador_1.obtenerCantidadEjercitosDisponibles(), 25);
     }
-
+    // todo: deberiamos mover esto al test de continente o turno
     @Test
     public void unJugadorConTodosLosPaisesDeAmericaDelSurRecibe4EjercitosParaEseContinente() throws FileNotFoundException {
         List<Jugador> jugadores = new ArrayList<Jugador>();
@@ -107,5 +108,5 @@ public class JuegoTests {
         juego.asignarEjercitosDisponibles(0);
         int ejercitosDisponibles = jugador_1.obtenerCantidadEjercitosDisponibleEnContinente(juego.getContinentePorNombre("America del Sur"));
         assertEquals(ejercitosDisponibles, 3);
-    }
+    }*/
 }

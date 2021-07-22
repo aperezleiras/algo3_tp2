@@ -22,9 +22,11 @@ public class Turno {
     }
     // llamar a este metodo primero
     public void actualizarEjercitosDisponibles(Jugador jugador, HashMap<String, Continente> continentes) {
+        // Ejercitos generales
         int cantidadEjercitosGeneral = jugador.obtenerCantidadPaises() / 2;
         jugador.agregarEjercitosGenerales(cantidadEjercitosGeneral);
 
+        // Ejercitos por continente
         for (Continente continente : continentes.values()) {
             jugador.agregarEjercitosPorContinente(continente, continente.obtenerEjercitosExtra(jugador));
         }

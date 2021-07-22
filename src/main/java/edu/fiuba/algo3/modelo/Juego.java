@@ -24,11 +24,11 @@ public class Juego {
             jugadores.get(i % jugadores.size()).asignarPais(listaPaises.get(i));
         }
     }
-
+/*
     public Continente getContinentePorNombre(String nombre) {
         return continentes.get(nombre);
     }
-/*
+
     private HashMap<Continente, Integer> obtenerEjercitosPorContinente(Jugador jugador) {
         HashMap<Continente, Integer> ejercitosPorContinente = new HashMap<>();
         int cantidadEjercitos;

@@ -36,6 +36,10 @@ public class Jugador {
         paises.add(unPais);
     }
 
+    public void asignarPais(List<Pais> paises){
+        this.paises.addAll(paises);
+    }
+
     public boolean paisMePertenece(Pais unPais) {
         return (paises.contains(unPais));
     }

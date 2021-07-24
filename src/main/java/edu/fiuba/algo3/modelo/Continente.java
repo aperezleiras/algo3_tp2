@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import java.nio.channels.Pipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,8 +17,18 @@ public class Continente {
         asignarEjercitosExtraSegunContinente();
     }
 
+    public Continente(String nombre, List<Pais> paises, int cantidadEjercitosExtra) {
+        this.nombre = nombre;
+        this.cantidadEjercitosExtra = cantidadEjercitosExtra;
+        this.paises = new ArrayList<>(paises);
+    }
+
     public void agregarPais(Pais pais){
         paises.add(pais);
+    }
+
+    public void agrearPais(List<Pais> paises){
+        this.paises.addAll(paises);
     }
 
     public boolean tienePais(Pais pais){

@@ -7,7 +7,7 @@ public class Ejercitos {
 
     private int cantidad;
 
-    Ejercitos(int unaCantidad) {
+    public Ejercitos(int unaCantidad) {
         cantidad = unaCantidad;
     }
 

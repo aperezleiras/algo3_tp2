@@ -46,6 +46,14 @@ public class JugadorTest {
     }
 
     @Test
+    public void alAsignarDosPaisesAUnJugadorLePertenecen(){
+        jugador1.asignarPais(Arrays.asList(argentina, brasil));
+
+        assertTrue(jugador1.paisMePertenece(argentina));
+        assertTrue(jugador1.paisMePertenece(brasil));
+    }
+
+    @Test
     public void seBuscaUnPaisPorNombre() {
         jugador1.asignarPais(argentina);
 

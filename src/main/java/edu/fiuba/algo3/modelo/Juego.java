@@ -13,8 +13,8 @@ public class Juego {
 
     public Juego(List<Jugador> jugadores) throws FileNotFoundException {
         this.jugadores = jugadores;
-        cargar_paises(paises, continentes);
-        cargar_cartas(paises, mazoCartasPais);
+        cargarPaises(paises, continentes);
+        cargarCartas(paises, mazoCartasPais);
         asignarPaises(new ArrayList<>(paises.values()));
     }
 
@@ -40,7 +40,7 @@ public class Juego {
         return ejercitosPorContinente;
     }
 */
-    public static void cargar_paises(HashMap<String, Pais> paises ,HashMap<String, Continente> continentes) throws FileNotFoundException {
+    public static void cargarPaises(HashMap<String, Pais> paises , HashMap<String, Continente> continentes) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("textfiles/Fronteras.csv"));
         scan.nextLine();
 
@@ -55,13 +55,13 @@ public class Juego {
             }
 
             List<String> limitrofes = Arrays.asList((parametros[1]).split(","));
-            Pais pais = new Pais(nombrePais, limitrofes, new Ejercitos(1));
+            Pais pais = new Pais(nombrePais, limitrofes, new Ejercitos(5));
             paises.put(nombrePais, pais);
             continentes.get(nombreContinente).agregarPais(pais);
         }
     }
 
-    public static void cargar_cartas(HashMap<String, Pais> paises, MazoCartasPais mazo) throws FileNotFoundException {
+    public static void cargarCartas(HashMap<String, Pais> paises, MazoCartasPais mazo) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("textfiles/Cartas.csv"));
         scan.nextLine();
 
@@ -75,5 +75,13 @@ public class Juego {
         }
 
         mazo.mezclar();
+    }
+
+    public HashMap<String, Pais> getPaises() {
+        return paises;
+    }
+
+    public HashMap<String, Continente> getContinentes() {
+        return continentes;
     }
 }

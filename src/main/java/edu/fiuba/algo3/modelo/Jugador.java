@@ -1,16 +1,22 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
 import edu.fiuba.algo3.exception.PaisInvalidoException;
 import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 
 public class Jugador {
 
     int color;
+    Color auxColor; // AUXILIAR
     List<Pais> paises; //todo cambiar a atributos privados??
     List<CartaPais> cartas;
     boolean habilitadoLevantarCarta;
@@ -19,6 +25,10 @@ public class Jugador {
 
     Jugador(int unColor, DepositoEjercitos deposito) {
         color = unColor;
+
+        Random rand = new Random();
+        auxColor = Color.rgb(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255));
+
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
         habilitadoLevantarCarta = false;
@@ -30,6 +40,10 @@ public class Jugador {
     public void asignarPais(Pais unPais) {
         unPais.asignarJugador(this);
         paises.add(unPais);
+    }
+
+    public void asignarPais(List<Pais> paises){
+        this.paises.addAll(paises);
     }
 
     public boolean paisMePertenece(Pais unPais) {
@@ -131,6 +145,12 @@ public class Jugador {
         }
         agregarEjercitosGenerales(cantidadEjercitos);
     }
+
+    public Paint getColor() { // AUXILIAR
+        return auxColor;
+    }
+
+
     //</editor-fold>
 
 }

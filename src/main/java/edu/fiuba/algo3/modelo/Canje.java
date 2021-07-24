@@ -47,13 +47,6 @@ public class Canje {
 
     private boolean todasDistintas(){
         Set<Simbolo> set = new HashSet<>();
-        System.out.println(cartas.size());
-        Simbolo s1 = cartas.get(0).getSimbolo();
-        Simbolo s2 = cartas.get(1).getSimbolo();
-        Simbolo s3 = cartas.get(2).getSimbolo();
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s3);
         return cartas.stream().allMatch(c -> set.add(c.getSimbolo()) || c.getSimbolo() == Simbolo.COMODIN);
     }
 

@@ -36,8 +36,9 @@ public class Batalla implements IBatalla{
                 atacante.quitarEjercitos(1);
         }
 
-        if (defensor.noTieneEjercitos())
+        if (defensor.noTieneEjercitos()){
             atacante.conquistar(defensor);
+        }
     }
 
     private void validarAtaque(){

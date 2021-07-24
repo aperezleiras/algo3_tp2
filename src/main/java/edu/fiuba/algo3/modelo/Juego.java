@@ -6,15 +6,20 @@ import java.util.*;
 
 public class Juego {
 
-    private final List<Jugador> jugadores;
+    private final List<Jugador> jugadores = new ArrayList<>();
     private HashMap<String, Continente> continentes = new HashMap<>();
     private HashMap<String, Pais> paises = new HashMap<>();
     private MazoCartasPais mazoCartasPais = new MazoCartasPais(new ArrayList<>());
 
-    public Juego(List<Jugador> jugadores) throws FileNotFoundException {
-        this.jugadores = jugadores;
+    public Juego(int cantidadJugadores) throws FileNotFoundException {
+
         cargarPaises(paises, continentes);
         cargarCartas(paises, mazoCartasPais);
+
+        ArrayList<Continente> listaContinentes = new ArrayList<>(continentes.values());
+        for (int i = 1; i <= cantidadJugadores; i ++)
+            jugadores.add(new Jugador(i, new DepositoEjercitos(listaContinentes)));
+
         asignarPaises(new ArrayList<>(paises.values()));
     }
 
@@ -24,22 +29,7 @@ public class Juego {
             jugadores.get(i % jugadores.size()).asignarPais(listaPaises.get(i));
         }
     }
-/*
-    public Continente getContinentePorNombre(String nombre) {
-        return continentes.get(nombre);
-    }
 
-    private HashMap<Continente, Integer> obtenerEjercitosPorContinente(Jugador jugador) {
-        HashMap<Continente, Integer> ejercitosPorContinente = new HashMap<>();
-        int cantidadEjercitos;
-
-        for (Continente continente : continentes.values()) {
-            cantidadEjercitos = continente.getEjercitosExtra(jugador);
-            ejercitosPorContinente.put(continente, cantidadEjercitos);
-        }
-        return ejercitosPorContinente;
-    }
-*/
     public static void cargarPaises(HashMap<String, Pais> paises , HashMap<String, Continente> continentes) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("textfiles/Fronteras.csv"));
         scan.nextLine();
@@ -83,5 +73,9 @@ public class Juego {
 
     public HashMap<String, Continente> getContinentes() {
         return continentes;
+    }
+
+    public Jugador getJugador(int idJugador) {
+        return jugadores.get(idJugador - 1);
     }
 }

@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-/*
+
 public class Controller implements Initializable {
 
     @FXML
@@ -125,14 +125,15 @@ public class Controller implements Initializable {
     public Label LabelNuevaYork;
 
     public Label LabelErrores;
-
+/*
     Jugador jugador1 = new Jugador(1);
     Jugador jugador2 = new Jugador(2);
     Jugador jugador3 = new Jugador(3);
     Jugador jugador4 = new Jugador(4);
 
     Jugador[] jugadores = {jugador1,jugador2};
-    Juego juego = new Juego(Arrays.asList(jugadores));
+    Juego juego = new Juego(Arrays.asList(jugadores));*/
+    Juego juego = new Juego(2);
     HashMap<String, Pais> mapPaises = juego.getPaises();
     HashMap<String, Label> mapLabels = new HashMap<>();
     HashMap<String, Circle> mapCircles= new HashMap<>();
@@ -259,7 +260,7 @@ public class Controller implements Initializable {
         Pais atacante = mapPaises.get(CBAtacante.getValue());
         Pais defensor = mapPaises.get(CBDefensor.getValue());
         try {
-            jugador1.atacarPaisDesde(atacante,defensor);
+            juego.getJugador(1).atacarPaisDesde(atacante,defensor);
         } catch(PaisInvalidoException e){
             LabelErrores.setText("Pais inválido.");
         } catch(CantidadEjercitosInsuficienteException e){
@@ -276,4 +277,4 @@ public class Controller implements Initializable {
 
 
 
-}*/
+}

@@ -10,7 +10,7 @@ public class Pais { //todo: crear interfaz de pais
     private Jugador jugador;
 
 
-    Pais(String nombre, List<String> limitrofes, Ejercitos ejercitos) {
+    public Pais(String nombre, List<String> limitrofes, Ejercitos ejercitos) {
         this.nombre = nombre;
         this.limitrofes = limitrofes;
         this.ejercitos = ejercitos;
@@ -69,6 +69,7 @@ public class Pais { //todo: crear interfaz de pais
 
     public void conquistar(Pais defensor) {
         defensor.asignarJugador(jugador);
+        jugador.asignarPais(defensor);
         transferirEjercitos(defensor,1);
         jugador.habilitadoLevantarCarta = true;
     }

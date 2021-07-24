@@ -22,7 +22,7 @@ public class DepositoEjercitos {
     public void actualizarEjercitosDisponibles(Jugador jugador) {
 
         // Ejercitos generales
-        int cantidadEjercitosGenerales = jugador.obtenerCantidadPaises() / 2;
+        int cantidadEjercitosGenerales = Math.max(3, jugador.obtenerCantidadPaises() / 2);
         agregarEjercitosGenerales(cantidadEjercitosGenerales);
 
         // Ejercitos por continente

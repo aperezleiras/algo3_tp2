@@ -24,7 +24,6 @@ public class Pais { //todo: crear interfaz de pais
         return ejercitos.getCantidad();
     }
 
-    //TODO esto o getter?
     public boolean esLimitrofeCon(Pais pais) {
         return limitrofes.contains(pais.getNombre());
     }
@@ -51,8 +50,7 @@ public class Pais { //todo: crear interfaz de pais
 
     public void quitarEjercitos(int cantidad) {
         ejercitos.quitarEjercitos(cantidad);
-
-    } //todo: validar que no quede en numeros negativos y conquista
+    }
 
     public void transferirEjercitos(Pais paisDestino, int cantidad) {
         ejercitos.transferirEjercitos(paisDestino, cantidad);
@@ -71,7 +69,7 @@ public class Pais { //todo: crear interfaz de pais
         defensor.asignarJugador(jugador);
         jugador.asignarPais(defensor);
         transferirEjercitos(defensor,1);
-        jugador.habilitadoLevantarCarta = true;
+        jugador.conquistoPais();
     }
 }
 

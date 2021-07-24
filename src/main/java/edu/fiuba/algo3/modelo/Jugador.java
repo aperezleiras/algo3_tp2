@@ -20,8 +20,9 @@ public class Jugador {
     List<Pais> paises; //todo cambiar a atributos privados??
     List<CartaPais> cartas;
     boolean habilitadoLevantarCarta;
-    private int cantidadCanjes;
     private DepositoEjercitos deposito;
+    private GestorCanjes gestorCanjes;
+    private List<Objetivo> objetivos;
 
     Jugador(int unColor, DepositoEjercitos deposito) {
         color = unColor;
@@ -32,8 +33,10 @@ public class Jugador {
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
         habilitadoLevantarCarta = false;
-        cantidadCanjes = 0;
         this.deposito = deposito;
+        objetivos = new ArrayList<>();
+        gestorCanjes = new GestorCanjes();
+        objetivos.add(new Objetivo());
     }
 
     //<editor-fold desc="Pais">
@@ -123,35 +126,21 @@ public class Jugador {
     }
 
     public void canjearCartas(List<CartaPais> cartas, MazoCartasPais mazo) {
-        Canje canje = new Canje(cartas, this);
-        canje.efectuarCanje(mazo);
-        cantidadCanjes++;
+        gestorCanjes.canjearCartas(this, cartas, mazo);
     }
 
-    public void obtenerEjercitosPorCanje() {
-        int cantidadEjercitos;
-        switch (cantidadCanjes) {
-            case 0:
-                cantidadEjercitos = 3;
-                break;
-            case 1:
-                cantidadEjercitos = 7;
-                break;
-            case 2:
-                cantidadEjercitos = 10;
-                break;
-            default:
-                cantidadEjercitos = (cantidadCanjes) * 5;
-        }
-        agregarEjercitosGenerales(cantidadEjercitos);
-    }
+    //</editor-fold>
 
     public Paint getColor() { // AUXILIAR
         return auxColor;
     }
 
+    public void conquistoPais() {
+        habilitadoLevantarCarta = true;
+    }
 
-    //</editor-fold>
-
+    public boolean haGanado() {
+        return objetivos.stream().anyMatch(o -> o.cumplido(this));
+    }
 }
 

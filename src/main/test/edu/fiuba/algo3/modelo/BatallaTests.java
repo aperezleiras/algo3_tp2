@@ -41,7 +41,7 @@ public class BatallaTests {
         when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
         when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -62,7 +62,7 @@ public class BatallaTests {
         when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
         when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -79,7 +79,7 @@ public class BatallaTests {
         when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(1,1));
         when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(6,6));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -94,7 +94,7 @@ public class BatallaTests {
         when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,1));
         when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -110,7 +110,7 @@ public class BatallaTests {
         //arrange
         Pais atacante = new Pais("Noruega", Arrays.asList("Suecia"), new Ejercitos(3));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act & assert
         Assertions.assertThrows(PaisNoLimitrofeException.class, batalla::realizarAtaque);
@@ -121,7 +121,7 @@ public class BatallaTests {
         //arrange
         Pais atacante = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act & assert
         Assertions.assertThrows(CantidadEjercitosInsuficienteException.class, batalla::realizarAtaque);

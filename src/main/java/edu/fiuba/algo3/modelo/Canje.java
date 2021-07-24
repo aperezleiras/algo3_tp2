@@ -4,6 +4,8 @@ import edu.fiuba.algo3.exception.*;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 public class Canje {
     private List<CartaPais> cartas;
     private Jugador jugador;
@@ -16,9 +18,11 @@ public class Canje {
     public void efectuarCanje(MazoCartasPais mazo) {
         if (!cartas.stream().allMatch(jugador::cartaMePertenece))
             throw new CartaNoMePerteneceException();
-        if (!cartasSonCanjeables()) throw new CartasNoCanjeablesException();
-        cartas.forEach(c -> jugador.devolverCartaA(c, mazo));
-        jugador.obtenerEjercitosPorCanje();
+        if (!cartasSonCanjeables())
+            throw new CartasNoCanjeablesException();
+        while (!cartas.isEmpty())
+            jugador.devolverCartaA(cartas.get(0), mazo);
+        //cartas.forEach(c -> jugador.devolverCartaA(c, mazo));
     }
 
     //private boolean cartasSonCanjeables() {
@@ -26,28 +30,20 @@ public class Canje {
     //}
 
     public boolean cartasSonCanjeables() {
-        return todasDistintas() || todasIguales();
+        List<Simbolo> simbolos = cartas.stream().map(CartaPais::getSimbolo).collect(toList());
+        return todosDistintos(simbolos) || todosIguales(simbolos) || hayComodin(simbolos);
     }
 
-    private boolean todasIguales(){
-        boolean iguales = true;
-        Simbolo actual;
-        Simbolo anterior = cartas.get(0).getSimbolo();
-
-        for (CartaPais carta: cartas){
-            actual = carta.getSimbolo();
-
-            if (actual != Simbolo.COMODIN){
-                iguales = iguales && ( actual == anterior || anterior == Simbolo.COMODIN);
-                anterior = actual;
-            }
-        }
-        return iguales;
+    private boolean hayComodin(List<Simbolo> simbolos) {
+        return simbolos.stream().anyMatch(s -> s == Simbolo.COMODIN);
     }
 
-    private boolean todasDistintas(){
-        Set<Simbolo> set = new HashSet<>();
-        return cartas.stream().allMatch(c -> set.add(c.getSimbolo()) || c.getSimbolo() == Simbolo.COMODIN);
+    private boolean todosIguales(List<Simbolo> simbolos){
+        return simbolos.stream().distinct().count() == 1;
+    }
+
+    private boolean todosDistintos(List<Simbolo> simbolos){
+        return simbolos.stream().distinct().count() == cartas.size();
     }
 
 }

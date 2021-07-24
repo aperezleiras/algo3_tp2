@@ -70,43 +70,23 @@ public class CanjeTests {
 
     @Test
     public void CanjeConCartasQueNoSonCanjeableSeLanzaCartasNoCanjeablesException() {
-        List<CartaPais> cartas = generarCartas(Arrays.asList(Simbolo.BARCO, Simbolo.BARCO, Simbolo.CAÑON));
-
-
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-
-        Canje canje = new Canje(cartas, jugador);
-
-        // FIXME: Canje dice que estas tres cartas son canjeables
-        //assertThrows(CartasNoCanjeablesException.class, () -> canje.efectuarCanje(mazo));
-    }
-
-    /*
-    @Test
-    public void alRealizarseUnCanjeCorrectamenteSeAgreganEjercitosDisponiblesAlJugador() {
         List<CartaPais> cartas = new ArrayList<>(
                 Arrays.asList(
                         new CartaPais(argentina, Simbolo.BARCO),
-                        new CartaPais(brasil, Simbolo.GLOBO),
-                        new CartaPais(chile, Simbolo.CAÑON)
+                        new CartaPais(brasil, Simbolo.BARCO),
+                        new CartaPais(chile, Simbolo.GLOBO)
                 )
         );
-
         MazoCartasPais mazo = new MazoCartasPais(cartas);
-
         jugador.levantarCartaPais(mazo);
         jugador.levantarCartaPais(mazo);
         jugador.levantarCartaPais(mazo);
 
-        Canje canje = new Canje(cartas, jugador);
-
-        assertEquals(0, jugador.obtenerEjercitosGeneralesDisponibles());
-
-        canje.efectuarCanje(mazo);
-
-        assertTrue(jugador.obtenerEjercitosGeneralesDisponibles() > 0);
+        Canje canje = new Canje(jugador.cartas, jugador);
+        assertFalse(canje.cartasSonCanjeables());
+        // FIXME: Canje dice que estas tres cartas son canjeables
+        assertThrows(CartasNoCanjeablesException.class, () -> canje.efectuarCanje(mazo));
     }
-    */
 
     @Test
     public void todasDistintasSonCanjeables() {

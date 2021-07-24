@@ -20,14 +20,8 @@ public class Canje {
             throw new CartaNoMePerteneceException();
         if (!cartasSonCanjeables())
             throw new CartasNoCanjeablesException();
-        while (!cartas.isEmpty())
-            jugador.devolverCartaA(cartas.get(0), mazo);
-        //cartas.forEach(c -> jugador.devolverCartaA(c, mazo));
+        cartas.forEach(c -> jugador.devolverCartaA(c, mazo));
     }
-
-    //private boolean cartasSonCanjeables() {
-    //    return carta1.esCanjeableCon(carta2, carta3);
-    //}
 
     public boolean cartasSonCanjeables() {
         List<Simbolo> simbolos = cartas.stream().map(CartaPais::getSimbolo).collect(toList());
@@ -42,7 +36,7 @@ public class Canje {
         return simbolos.stream().distinct().count() == 1;
     }
 
-    private boolean todosDistintos(List<Simbolo> simbolos){
+    private boolean todosDistintos(List<Simbolo> simbolos) {
         return simbolos.stream().distinct().count() == cartas.size();
     }
 

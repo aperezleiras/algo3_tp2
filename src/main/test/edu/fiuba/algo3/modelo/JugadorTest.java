@@ -324,25 +324,25 @@ public class JugadorTest {
     @Test
     public void siUnJugadorSolicitaUnCanjeConCartasQueNoSonCanjeableSeLanzaCartasNoCanjeablesException() {
 
-        List<CartaPais> cartas = generarCartasNoCanjeables();
-        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
-        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartas = generarCartasNoCanjeables();
+        ArrayList<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartasCanje = new ArrayList<>(cartas);
 
         MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
 
-        assertThrows(CartasNoCanjeablesException.class, () -> simularCanjes(cartasCanje, mazo, jugador1));
+        assertThrows(CartasNoCanjeablesException.class, () -> simularCanje(cartasCanje, mazo, jugador1));
     }
 
     @Test
     public void alRealizarseUnCanjeCorrectamenteElJugadorDejaDeTenerLasCartas() {
 
-        List<CartaPais> cartas = generarCartasCanjeables();
-        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
-        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartas = generarCartasCanjeables();
+        ArrayList<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartasCanje = new ArrayList<>(cartas);
 
         MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
 
-        simularCanjes(cartasCanje, mazo, jugador1);
+        simularCanje(cartasCanje, mazo, jugador1);
         cartasMazo.forEach(c -> assertFalse(jugador1.cartaMePertenece(c)));
     }
 
@@ -388,7 +388,7 @@ public class JugadorTest {
 
     //<editor-fold desc="Metodos auxiliares">
 
-    private void simularCanjes(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
+    private void simularCanje(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
         for (int i = 0; i < 3; i++) {
             jugador.levantarCartaPais(mazo);
         }
@@ -396,29 +396,29 @@ public class JugadorTest {
     }
 
     private void simularCanjes(int cantidad){
-        List<CartaPais> cartas = generarCartasCanjeables();
-        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
-        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartas = generarCartasCanjeables();
+        ArrayList<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartasCanje = new ArrayList<>(cartas);
 
         MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
 
         for (int i = 0; i < cantidad; i++) {
-            simularCanjes(cartasCanje, mazo, jugador1);
+            simularCanje(cartasCanje, mazo, jugador1);
         }
     }
 
-    private List<CartaPais> generarCartasCanjeables() {
-        return Arrays.asList(
+    private ArrayList<CartaPais> generarCartasCanjeables() {
+        return new ArrayList<>(Arrays.asList(
                 new CartaPais(argentina, Simbolo.BARCO),
                 new CartaPais(brasil, Simbolo.BARCO),
-                new CartaPais(chile, Simbolo.BARCO));
+                new CartaPais(chile, Simbolo.BARCO)));
     }
 
-    private List<CartaPais> generarCartasNoCanjeables() {
-        return Arrays.asList(
+    private ArrayList<CartaPais> generarCartasNoCanjeables() {
+        return new ArrayList<>(Arrays.asList(
                 new CartaPais(argentina, Simbolo.CAÑON),
                 new CartaPais(brasil, Simbolo.BARCO),
-                new CartaPais(chile, Simbolo.BARCO));
+                new CartaPais(chile, Simbolo.BARCO)));
     }
     //</editor-fold>
 

@@ -54,7 +54,7 @@ public class CanjeTests {
 
     @Test
     public void DosIgualesUnaDistintaNoSonCanjeables() {
-        List<CartaPais> cartas = new ArrayList<>(
+        ArrayList<CartaPais> cartas = new ArrayList<>(
                 Arrays.asList(
                         new CartaPais(argentina, Simbolo.BARCO),
                         new CartaPais(brasil, Simbolo.BARCO),
@@ -70,7 +70,7 @@ public class CanjeTests {
 
     @Test
     public void CanjeConCartasQueNoSonCanjeableSeLanzaCartasNoCanjeablesException() {
-        List<CartaPais> cartas = new ArrayList<>(
+        ArrayList<CartaPais> cartas = new ArrayList<>(
                 Arrays.asList(
                         new CartaPais(argentina, Simbolo.BARCO),
                         new CartaPais(brasil, Simbolo.BARCO),
@@ -83,8 +83,6 @@ public class CanjeTests {
         jugador.levantarCartaPais(mazo);
 
         Canje canje = new Canje(jugador.cartas, jugador);
-        assertFalse(canje.cartasSonCanjeables());
-        // FIXME: Canje dice que estas tres cartas son canjeables
         assertThrows(CartasNoCanjeablesException.class, () -> canje.efectuarCanje(mazo));
     }
 

@@ -5,10 +5,9 @@ import edu.fiuba.algo3.exception.MazoVacioException;
 import java.util.*;
 
 public class MazoCartasPais {
-    public List<CartaPais> cartas;
+    public ArrayList<CartaPais> cartas;
 
-    public MazoCartasPais(List<CartaPais> cartas) {
-        // Queue<CartaPais> cartasQ = new LinkedList<>(cartas);
+    public MazoCartasPais(ArrayList<CartaPais> cartas) {
         this.cartas = cartas;
     }
 

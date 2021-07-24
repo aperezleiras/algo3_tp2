@@ -17,7 +17,7 @@ public class ContinenteTests {
     private int ejercitosEsperados;
 
     @BeforeEach
-    private void setUp(){
+    public void setUp(){
         paises = crearPaises();
         ejercitosEsperados = 10;
         continente = crearContinente(paises, ejercitosEsperados);

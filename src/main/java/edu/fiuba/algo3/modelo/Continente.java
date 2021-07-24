@@ -27,16 +27,12 @@ public class Continente {
         paises.add(pais);
     }
 
-    public void agrearPais(List<Pais> paises){
+    public void agregarPais(List<Pais> paises){
         this.paises.addAll(paises);
     }
 
     public boolean tienePais(Pais pais){
         return paises.contains(pais);
-    }
-
-    public void setCantidadEjercitosExtra(int cantidadEjercitosExtra) {
-        this.cantidadEjercitosExtra = cantidadEjercitosExtra;
     }
 
     private void asignarEjercitosExtraSegunContinente() {    ////////////////////////

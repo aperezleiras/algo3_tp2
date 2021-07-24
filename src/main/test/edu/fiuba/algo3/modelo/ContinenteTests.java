@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class ContinenteTests {
 
     private List<Pais> paises;
@@ -23,24 +25,47 @@ public class ContinenteTests {
     }
 
     @Test
+    public void ContinenteTienePaisAgregado(){
+        Continente continente = new Continente("Antartida");
+        Pais pais = new Pais("estado libre", null, null);
+
+        continente.agregarPais(pais);
+
+        assertTrue(continente.tienePais(pais));
+    }
+
+    @Test
+    public void ContinenteTieneDosPaisesAgregados(){
+        Continente continente = new Continente("Antartida");
+        Pais pais1 = new Pais("estado libre", null, null);
+        Pais pais2 = new Pais("estado libre", null, null);
+
+        continente.agregarPais(Arrays.asList(pais1, pais2));
+
+        assertTrue(continente.tienePais(pais1));
+        assertTrue(continente.tienePais(pais2));
+    }
+
+
+    @Test
     public void ContinenteCompletoPorUnJugador() {
         // arrange
         paises.forEach(jugador::asignarPais);
 
         //act & assert
-        Assertions.assertTrue(continente.completo(jugador));
+        assertTrue(continente.completo(jugador));
     }
 
     @Test
     public void ContinenteNoCompletoPorUnJugador(){
         //act & assert
-        Assertions.assertFalse(continente.completo(jugador));
+        assertFalse(continente.completo(jugador));
     }
 
     @Test
     public void ContinenteTienePais(){
         //act & assert
-        Assertions.assertTrue(continente.tienePais(paises.get(0)));
+        assertTrue(continente.tienePais(paises.get(0)));
     }
 
     @Test
@@ -49,7 +74,7 @@ public class ContinenteTests {
         Pais pais = new Pais("Argentina", null, null);
 
         //act & assert
-        Assertions.assertFalse(continente.tienePais(pais));
+        assertFalse(continente.tienePais(pais));
     }
 
     @Test
@@ -61,7 +86,7 @@ public class ContinenteTests {
         int ejercitosExtrasActuales = continente.obtenerEjercitosExtra(jugador);
 
         // assert
-        Assertions.assertEquals(ejercitosEsperados, ejercitosExtrasActuales);
+        assertEquals(ejercitosEsperados, ejercitosExtrasActuales);
     }
 
     @Test
@@ -73,7 +98,7 @@ public class ContinenteTests {
         int ejercitosExtrasActuales = continente.obtenerEjercitosExtra(jugador);
 
         // assert
-        Assertions.assertEquals(0, ejercitosExtrasActuales);
+        assertEquals(0, ejercitosExtrasActuales);
     }
 
     private List<Pais> crearPaises(){

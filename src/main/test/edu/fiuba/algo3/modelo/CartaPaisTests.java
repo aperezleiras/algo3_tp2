@@ -18,6 +18,10 @@ public class CartaPaisTests {
     private Pais argentina;
     private Pais chile;
     private Pais brasil;
+    private Continente sudamerica;
+
+    private DepositoEjercitos depo1;
+    private DepositoEjercitos depo2;
 
     private Jugador jugador1;
     private Jugador jugador2;
@@ -25,12 +29,21 @@ public class CartaPaisTests {
 
     @BeforeEach
     public void setUp() {
+
+
         mazo = new MazoCartasPais(new ArrayList<>());
         argentina = new Pais("Argentina", Arrays.asList("Brasil", "Chile"), new Ejercitos(1));
         chile = new Pais("Chile", Arrays.asList("Argentina"), new Ejercitos(1));
         brasil = new Pais("Brasil", Arrays.asList("Argentina"), new Ejercitos(1));
-        jugador1 = new Jugador(1);
-        jugador2 = new Jugador(2);
+        sudamerica = new Continente("America del Sur");
+        sudamerica.agregarPais(argentina);
+        sudamerica.agregarPais(brasil);
+        sudamerica.agregarPais(chile);
+        depo1 = new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica)));
+        depo2 = new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica)));
+
+        jugador1 = new Jugador(1, depo1);
+        jugador2 = new Jugador(2, depo2);
         jugador1.asignarPais(argentina);
         jugador1.asignarPais(chile);
         jugador2.asignarPais(brasil);

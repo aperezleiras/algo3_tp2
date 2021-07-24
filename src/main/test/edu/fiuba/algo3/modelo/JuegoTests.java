@@ -21,10 +21,10 @@ public class JuegoTests {
 
     @BeforeEach
     public void setUp(){
-        jugador_1 = new Jugador(1);
-        jugador_2 = new Jugador(2);
-        jugador_3 = new Jugador(3);
-        jugador_4 = new Jugador(4);
+        jugador_1 = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
+        jugador_2 = new Jugador(2, new DepositoEjercitos(new ArrayList<>()));
+        jugador_3 = new Jugador(3, new DepositoEjercitos(new ArrayList<>()));
+        jugador_4 = new Jugador(4, new DepositoEjercitos(new ArrayList<>()));
     }
 
     @Test

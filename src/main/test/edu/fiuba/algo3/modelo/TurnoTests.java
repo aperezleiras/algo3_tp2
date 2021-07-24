@@ -17,7 +17,7 @@ public class TurnoTests {
         assertEquals(1,1);
 
     }
-
+/*
 
     @Test
     public void enLaRondaDeColocacionSeActivanLasTarjetasDePaisDelJugador() {
@@ -60,6 +60,6 @@ public class TurnoTests {
 
         turno.rondaAtacar(atacante, defensor, mazo);
 
-    }
+    }*/
 
 }

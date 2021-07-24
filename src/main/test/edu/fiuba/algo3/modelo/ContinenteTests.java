@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,17 +12,19 @@ public class ContinenteTests {
     @Test
     public void ContinenteCompletoPorUnJugador() {
         // arrange
-        Jugador jugador = new Jugador(0);
         List<Pais> paises = Arrays.asList(
                 new Pais("Argentina", null, null),
                 new Pais("Brasil", null, null),
                 new Pais("Uruguay", null, null)
         );
 
-        paises.forEach(jugador::asignarPais);
-
         Continente continente = new Continente("America del Sur");
+        DepositoEjercitos depo = new DepositoEjercitos(new ArrayList<>(Arrays.asList(continente)));
+
+        Jugador jugador = new Jugador(0, depo);
+
         paises.forEach(continente::agregarPais);
+        paises.forEach(jugador::asignarPais);
 
         //act & assert
         Assertions.assertTrue(continente.completo(jugador));
@@ -30,7 +33,6 @@ public class ContinenteTests {
     @Test
     public void ContinenteNoCompletoPorUnJugador(){
         // arrange
-        Jugador jugador = new Jugador(0);
 
         List<Pais> paises = Arrays.asList(
                 new Pais("Argentina", null, null),
@@ -39,6 +41,10 @@ public class ContinenteTests {
         );
 
         Continente continente = new Continente("America del Sur");
+        DepositoEjercitos depo = new DepositoEjercitos(new ArrayList<>(Arrays.asList(continente)));
+
+        Jugador jugador = new Jugador(0, depo);
+
         paises.forEach(continente::agregarPais);
 
         //act & assert
@@ -69,21 +75,24 @@ public class ContinenteTests {
     }
 
     @Test
-    public void ContinenteDevuelve_10_Ejertcitos(){
+    public void ContinenteDevuelve_10_Ejercitos(){
         // arrange
         int ejercitosExtrasEsperados = 10;
-        Jugador jugador = new Jugador(0);
         List<Pais> paises = Arrays.asList(
                 new Pais("Argentina", null, null),
                 new Pais("Brasil", null, null),
                 new Pais("Uruguay", null, null)
         );
 
-        paises.forEach(jugador::asignarPais);
-
         Continente continente = new Continente("America del Sur");
-        continente.setCantidadEjercitosExtra(ejercitosExtrasEsperados);
+        DepositoEjercitos depo = new DepositoEjercitos(new ArrayList<>(Arrays.asList(continente)));
+
+        Jugador jugador = new Jugador(0, depo);
+
+        paises.forEach(jugador::asignarPais);
         paises.forEach(continente::agregarPais);
+
+        continente.setCantidadEjercitosExtra(ejercitosExtrasEsperados);
 
         //act
         int ejercitosExtrasActuales = continente.obtenerEjercitosExtra(jugador);
@@ -98,7 +107,6 @@ public class ContinenteTests {
         int ejercitosExtras = 10;
         int ejercitosExtrasEsperados = 0;
 
-        Jugador jugador = new Jugador(0);
         List<Pais> paises = Arrays.asList(
                 new Pais("Argentina", null, null),
                 new Pais("Brasil", null, null),
@@ -106,11 +114,14 @@ public class ContinenteTests {
         );
 
         Continente continente = new Continente("America del Sur");
-        continente.setCantidadEjercitosExtra(ejercitosExtras);
-        paises.forEach(continente::agregarPais);
+        DepositoEjercitos depo = new DepositoEjercitos(new ArrayList<>(Arrays.asList(continente)));
 
+        Jugador jugador = new Jugador(0, depo);
+
+        paises.forEach(continente::agregarPais);
         jugador.asignarPais(paises.get(0));
 
+        continente.setCantidadEjercitosExtra(ejercitosExtras);
 
         //act
         int ejercitosExtrasActuales = continente.obtenerEjercitosExtra(jugador);

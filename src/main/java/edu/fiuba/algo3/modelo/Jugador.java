@@ -1,12 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
 import edu.fiuba.algo3.exception.PaisInvalidoException;
 import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -17,17 +15,15 @@ public class Jugador {
     List<CartaPais> cartas;
     boolean habilitadoLevantarCarta;
     private int cantidadCanjes;
-    private int ejercitosGeneralesDisponibles;
-    private final HashMap<Continente, Integer> ejercitosPorContinenteDisponibles;
+    private DepositoEjercitos deposito;
 
-    Jugador(int unColor) {
+    Jugador(int unColor, DepositoEjercitos deposito) {
         color = unColor;
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
         habilitadoLevantarCarta = false;
         cantidadCanjes = 0;
-        ejercitosGeneralesDisponibles = 0;
-        ejercitosPorContinenteDisponibles = new HashMap<>();
+        this.deposito = deposito;
     }
 
     //<editor-fold desc="Pais">
@@ -55,48 +51,27 @@ public class Jugador {
 
     //<editor-fold desc="Ejercitos">
 
-    public int obtenerEjercitosGeneralesDisponibles() {
-        return ejercitosGeneralesDisponibles;
+    public void actualizarEjercitosDisponibles() {
+        deposito.actualizarEjercitosDisponibles(this);
     }
 
     public void agregarEjercitosGenerales(int cantidad) {
-        ejercitosGeneralesDisponibles += cantidad;
+        deposito.agregarEjercitosGenerales(cantidad);
     }
 
-    public void quitarEjercitosGenerales(int cantidad) {
-        ejercitosGeneralesDisponibles -= cantidad;
+    // Se podria necesitar para la UI (mostrarle al jugador cuantos ejercitos disponibles tiene)
+    public int obtenerEjercitosGeneralesDisponibles() {
+        return deposito.obtenerEjercitosGenerales();
     }
 
-    public void agregarEjercitosPorContinente(Continente continente, int cantidad) {
-        this.ejercitosPorContinenteDisponibles.put(continente, cantidad);
-    }
-
-    public void quitarEjercitosPorContinente(Continente continente, int cantidad) {
-        int cantidadActualizada = ejercitosPorContinenteDisponibles.get(continente) - cantidad;
-        ejercitosPorContinenteDisponibles.put(continente, cantidadActualizada);
-    }
-
-    public boolean tieneEjercitosGenerales() {
-        return ejercitosGeneralesDisponibles != 0;
-    }
-
-    public boolean tieneEjercitosEnContinente(Continente continente) {
-        return ejercitosPorContinenteDisponibles.get(continente) != 0;
-    }
-
-    public void validarCantidad(int cantidad) {
-        if (ejercitosGeneralesDisponibles < cantidad)
-            throw new CantidadEjercitosInsuficienteException();
-    }
-
-    public void validarCantidad(Continente continente, int cantidad) {
-        if (ejercitosPorContinenteDisponibles.get(continente) < cantidad)
-            throw new CantidadEjercitosInsuficienteException();
+    // Se podria necesitar para la UI (mostrarle al jugador cuantos ejercitos disponibles tiene)
+    public int obtenerEjercitosDisponiblesEnContinente(Continente continente) {
+        return deposito.obtenerEjercitosContinente(continente);
     }
 
     public void colocarEjercitos(Pais unPais, int cantidad) {
         if (!paisMePertenece(unPais)) throw new PaisNoMePerteneceException();
-        unPais.agregarEjercitos(cantidad);
+        deposito.agregarEjercitosAPais(unPais, cantidad);
     }
 
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {

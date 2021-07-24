@@ -5,14 +5,10 @@ import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 import static org.mockito.Mockito.*;
 
@@ -24,6 +20,7 @@ public class BatallaTests {
 
     @BeforeEach
     public void setUp(){
+
         dado = Mockito.mock(Dado.class);
 
         Ejercitos ejercitosArgentina = new Ejercitos(3);
@@ -36,8 +33,8 @@ public class BatallaTests {
     @Test
     public void PaisConquistaAOtroYCambiaJugador() {
         //arrange
-        Jugador elDibu = new Jugador(0);
-        Jugador neyPasto = new Jugador(1);
+        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()));
+        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 
@@ -57,8 +54,8 @@ public class BatallaTests {
     @Test
     public void PaisConquistaAOtroYSeTransfierenEjercitos() {
         //arrange
-        Jugador elDibu = new Jugador(0);
-        Jugador neyPasto = new Jugador(1);
+        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()));
+        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 

@@ -1,10 +1,12 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.*;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,25 +17,36 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class GameScreenController implements Initializable {
 
-
+    @FXML
     public Button botonAvanzarFase;
     public Group groupTransferir;
     public Group groupAtacar;
+    public Group botonesPaises;
 
     public Juego juego;
-    public ArrayList<String> listaJugadores;
+    public ArrayList<Jugador> jugadores;
+    public HashMap<String, Pais> paises;
+    public HashMap<String, Button> mapBotonesPaises = new HashMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        cargarBotonesPaises();
+    }
 
+    private void cargarBotonesPaises() {
+        botonesPaises.getChildren().forEach(node -> {
+            String nombrePais = node.getAccessibleText();
+            Button botonPais = (Button) node;
+            mapBotonesPaises.put(nombrePais,botonPais);
+        });
     }
 
     public void avanzarFase(){
-
 
 
     }
@@ -44,10 +57,17 @@ public class GameScreenController implements Initializable {
 
     }
 
-    public void iniciarPartida(ArrayList<String> jugadores) throws FileNotFoundException {
-        listaJugadores = jugadores;
-        juego = new Juego(jugadores.size()); // Ahora mismo Juego() recibe la cantidad, pero habria que pasarle los nombres
+    public void iniciarPartida(ArrayList<String> nombresJugadores) throws FileNotFoundException {
+        juego = new Juego(nombresJugadores.size()); // Ahora mismo Juego() recibe la cantidad, pero habria que pasarle los nombres
+        jugadores = juego.getJugadores();
+        paises = juego.getPaises();
+        mapBotonesPaises.forEach((paisNombre, botonPais) -> {
+             actualizarBotonPais(paisNombre, botonPais);
+        });
+    }
 
+    private void actualizarBotonPais(String paisNombre, Button botonPais){
+        botonPais.setStyle("-fx-background-color: " + paises.get(paisNombre).getJugador().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
     }
 
     public void verObjetivo() throws IOException {

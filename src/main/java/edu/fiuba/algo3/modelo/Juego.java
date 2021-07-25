@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Juego {
 
-    private final List<Jugador> jugadores = new ArrayList<>();
+    private ArrayList<Jugador> jugadores = new ArrayList<>();
     private HashMap<String, Continente> continentes = new HashMap<>();
     private HashMap<String, Pais> paises = new HashMap<>();
     private MazoCartasPais mazoCartasPais = new MazoCartasPais(new ArrayList<>());
@@ -17,7 +17,7 @@ public class Juego {
         cargarCartas(paises, mazoCartasPais);
 
         ArrayList<Continente> listaContinentes = new ArrayList<>(continentes.values());
-        for (int i = 1; i <= cantidadJugadores; i ++)
+        for (int i = 0; i < cantidadJugadores; i ++)
             jugadores.add(new Jugador(i, new DepositoEjercitos(listaContinentes)));
 
         asignarPaises(new ArrayList<>(paises.values()));
@@ -78,4 +78,9 @@ public class Juego {
     public Jugador getJugador(int idJugador) {
         return jugadores.get(idJugador - 1);
     }
+
+    public ArrayList<Jugador> getJugadores() { return jugadores;}
+
+
+
 }

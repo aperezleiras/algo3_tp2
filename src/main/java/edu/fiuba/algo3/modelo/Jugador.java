@@ -7,16 +7,12 @@ import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class Jugador {
 
-    int color;
-    Color auxColor; // AUXILIAR
+    String color;
     List<Pais> paises; //todo cambiar a atributos privados??
     List<CartaPais> cartas;
     boolean habilitadoLevantarCarta;
@@ -24,11 +20,12 @@ public class Jugador {
     private GestorCanjes gestorCanjes;
     private List<Objetivo> objetivos;
 
-    Jugador(int unColor, DepositoEjercitos deposito) {
-        color = unColor;
+    private List<String> colores = Arrays.asList("#0000FF", "#cc3311", "#ee7733", "#009988", "#ee3377", "#000000");
 
-        Random rand = new Random();
-        auxColor = Color.rgb(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255));
+    Jugador(int unColor, DepositoEjercitos deposito) {
+        System.out.println(unColor);
+        color = colores.get(unColor);
+
 
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
@@ -131,8 +128,8 @@ public class Jugador {
 
     //</editor-fold>
 
-    public Paint getColor() { // AUXILIAR
-        return auxColor;
+    public String getColor() { // AUXILIAR
+        return color;
     }
 
     public void conquistoPais() {

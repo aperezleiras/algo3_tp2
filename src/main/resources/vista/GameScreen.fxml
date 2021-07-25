@@ -28,256 +28,260 @@
                         <Image url="@../img/mapa.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="botonChile" accessibleText="Chile" layoutX="310.0" layoutY="586.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonArgentina" accessibleText="Argentina" layoutX="369.0" layoutY="586.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonUruguay" accessibleText="Uruguay" layoutX="422.0" layoutY="565.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonPeru" accessibleText="Peru" layoutX="300.0" layoutY="497.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonBrasil" accessibleText="Brasil" layoutX="436.0" layoutY="497.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonColombia" accessibleText="Colombia" layoutX="326.0" layoutY="419.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonMexico" accessibleText="Mexico" layoutX="257.0" layoutY="405.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonCalifornia" accessibleText="California" layoutX="131.0" layoutY="382.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonNuevaYork" accessibleText="Nueva York" layoutX="257.0" layoutY="313.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonOregon" accessibleText="Oregon" layoutX="77.0" layoutY="355.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonCanada" accessibleText="Canada" layoutX="143.0" layoutY="222.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonTerranova" accessibleText="Terranova" layoutX="282.0" layoutY="274.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonAlaska" accessibleText="Alaska" layoutX="46.0" layoutY="303.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonYukon" accessibleText="Yukon" layoutX="89.0" layoutY="222.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonLabrador" accessibleText="Labrador" layoutX="270.0" layoutY="209.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonGroenlandia" accessibleText="Groenlandia" layoutX="368.0" layoutY="216.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonIslandia" accessibleText="Islandia" layoutX="452.0" layoutY="270.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonGranBretania" accessibleText="Gran Bretaña" layoutX="586.0" layoutY="285.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonEspania" accessibleText="España" layoutX="554.0" layoutY="409.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonFrancia" accessibleText="Francia" layoutX="625.0" layoutY="355.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonAlemania" accessibleText="Alemania" layoutX="683.0" layoutY="342.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonRusia" accessibleText="Rusia" layoutX="731.0" layoutY="223.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="30.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonPolonia" accessibleText="Polonia" layoutX="737.0" layoutY="324.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="30.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonSuecia" accessibleText="Suecia" layoutX="626.0" layoutY="194.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonItalia" accessibleText="Italia" layoutX="672.0" layoutY="409.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonSahara" accessibleText="Sahara" layoutX="641.0" layoutY="505.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonEgipto" accessibleText="Egipto" layoutX="815.0" layoutY="528.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonEtiopia" accessibleText="Etiopia" layoutX="795.0" layoutY="561.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonZaire" accessibleText="Zaire" layoutX="702.0" layoutY="599.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonSudafrica" accessibleText="Sudafrica" layoutX="771.0" layoutY="632.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonMadagascar" accessibleText="Madagascar" layoutX="871.0" layoutY="599.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonSumatra" accessibleText="Sumatra" layoutX="929.0" layoutY="528.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonAustralia" accessibleText="Australia" layoutX="1013.0" layoutY="536.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonArabia" accessibleText="Arabia" layoutX="859.0" layoutY="457.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonJava" accessibleText="Java" layoutX="1040.0" layoutY="413.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonBorneo" accessibleText="Borneo" layoutX="961.0" layoutY="460.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonIndia" accessibleText="India" layoutX="931.0" layoutY="381.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonIsrael" accessibleText="Israel" layoutX="783.0" layoutY="438.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonTurquia" accessibleText="Turquia" layoutX="780.0" layoutY="383.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonMalasia" accessibleText="Malasia" layoutX="1018.0" layoutY="382.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonIran" accessibleText="Iran" layoutX="815.0" layoutY="270.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonChina" accessibleText="China" layoutX="968.0" layoutY="324.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonGobi" accessibleText="Gobi" layoutX="888.0" layoutY="324.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonJapon" accessibleText="Japon" layoutX="1041.0" layoutY="223.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonMongolia" accessibleText="Mongolia" layoutX="846.0" layoutY="232.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="30.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonAral" accessibleText="Aral" layoutX="769.0" layoutY="168.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonKamtchatka" accessibleText="Kamtchatka" layoutX="919.0" layoutY="132.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonSiberia" accessibleText="Siberia" layoutX="825.0" layoutY="201.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="30.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonTartaria" accessibleText="Tartaria" layoutX="799.0" layoutY="132.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="botonTaymir" accessibleText="Taymir" layoutX="859.0" layoutY="132.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
+                  <Group fx:id="botonesPaises" accessibleRole="BUTTON" layoutX="45.0" layoutY="131.0">
+                     <children>
+                        <Button fx:id="botonChile" accessibleText="Chile" layoutX="265.0" layoutY="455.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonArgentina" accessibleText="Argentina" layoutX="324.0" layoutY="455.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonUruguay" accessibleText="Uruguay" layoutX="377.0" layoutY="434.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonPeru" accessibleText="Peru" layoutX="255.0" layoutY="366.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonBrasil" accessibleText="Brasil" layoutX="391.0" layoutY="366.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonColombia" accessibleText="Colombia" layoutX="281.0" layoutY="288.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonMexico" accessibleText="Mexico" layoutX="212.0" layoutY="274.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonCalifornia" accessibleText="California" layoutX="86.0" layoutY="251.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonNuevaYork" accessibleText="Nueva York" layoutX="212.0" layoutY="182.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonOregon" accessibleText="Oregon" layoutX="32.0" layoutY="224.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonCanada" accessibleText="Canada" layoutX="98.0" layoutY="91.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonTerranova" accessibleText="Terranova" layoutX="237.0" layoutY="143.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonAlaska" accessibleText="Alaska" layoutX="1.0" layoutY="172.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonYukon" accessibleText="Yukon" layoutX="44.0" layoutY="91.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonLabrador" accessibleText="Labrador" layoutX="225.0" layoutY="78.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonGroenlandia" accessibleText="Groenlandia" layoutX="323.0" layoutY="85.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonIslandia" accessibleText="Islandia" layoutX="407.0" layoutY="139.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonGranBretania" accessibleText="Gran Bretaña" layoutX="541.0" layoutY="154.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonEspania" accessibleText="España" layoutX="509.0" layoutY="278.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonFrancia" accessibleText="Francia" layoutX="580.0" layoutY="224.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonAlemania" accessibleText="Alemania" layoutX="638.0" layoutY="211.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonRusia" accessibleText="Rusia" layoutX="686.0" layoutY="92.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="30.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonPolonia" accessibleText="Polonia" layoutX="692.0" layoutY="193.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="30.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonSuecia" accessibleText="Suecia" layoutX="581.0" layoutY="63.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonItalia" accessibleText="Italia" layoutX="627.0" layoutY="278.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonSahara" accessibleText="Sahara" layoutX="596.0" layoutY="374.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonEgipto" accessibleText="Egipto" layoutX="770.0" layoutY="397.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonEtiopia" accessibleText="Etiopia" layoutX="750.0" layoutY="430.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonZaire" accessibleText="Zaire" layoutX="657.0" layoutY="468.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonSudafrica" accessibleText="Sudafrica" layoutX="726.0" layoutY="501.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonMadagascar" accessibleText="Madagascar" layoutX="826.0" layoutY="468.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonSumatra" accessibleText="Sumatra" layoutX="884.0" layoutY="397.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonAustralia" accessibleText="Australia" layoutX="968.0" layoutY="405.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonArabia" accessibleText="Arabia" layoutX="814.0" layoutY="326.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonJava" accessibleText="Java" layoutX="995.0" layoutY="282.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonBorneo" accessibleText="Borneo" layoutX="916.0" layoutY="329.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonIndia" accessibleText="India" layoutX="886.0" layoutY="250.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonIsrael" accessibleText="Israel" layoutX="738.0" layoutY="307.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonTurquia" accessibleText="Turquia" layoutX="735.0" layoutY="252.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonMalasia" accessibleText="Malasia" layoutX="973.0" layoutY="251.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonIran" accessibleText="Iran" layoutX="770.0" layoutY="139.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonChina" accessibleText="China" layoutX="923.0" layoutY="193.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonGobi" accessibleText="Gobi" layoutX="843.0" layoutY="193.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonJapon" accessibleText="Japon" layoutX="996.0" layoutY="92.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonMongolia" accessibleText="Mongolia" layoutX="801.0" layoutY="101.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="30.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonAral" accessibleText="Aral" layoutX="724.0" layoutY="37.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonKamtchatka" accessibleText="Kamtchatka" layoutX="874.0" layoutY="1.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonSiberia" accessibleText="Siberia" layoutX="780.0" layoutY="70.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="30.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonTartaria" accessibleText="Tartaria" layoutX="754.0" layoutY="1.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="botonTaymir" accessibleText="Taymir" layoutX="814.0" layoutY="1.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Group>
                </children>
             </Group>
             <AnchorPane prefHeight="774.0" prefWidth="268.0">

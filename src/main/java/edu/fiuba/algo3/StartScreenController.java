@@ -31,13 +31,13 @@ public class StartScreenController {
 
 
     public void iniciarPartida(ActionEvent event) throws IOException {
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        if(!textJugador1.getText().isEmpty()) jugadores.add(new Jugador(1)); // todo: agregar nombre del jugador para mostrar en la interfaz grafica
-        if(!textJugador2.getText().isEmpty()) jugadores.add(new Jugador(2));
-        if(!textJugador3.getText().isEmpty()) jugadores.add(new Jugador(3));
-        if(!textJugador4.getText().isEmpty()) jugadores.add(new Jugador(4));
-        if(!textJugador5.getText().isEmpty()) jugadores.add(new Jugador(5));
-        if(!textJugador6.getText().isEmpty()) jugadores.add(new Jugador(6));
+        ArrayList<String> jugadores = new ArrayList<>();
+        if(!textJugador1.getText().isEmpty()) jugadores.add(textJugador1.getText()); // todo: agregar nombre del jugador para mostrar en la interfaz grafica
+        if(!textJugador2.getText().isEmpty()) jugadores.add(textJugador2.getText());
+        if(!textJugador3.getText().isEmpty()) jugadores.add(textJugador3.getText());
+        if(!textJugador4.getText().isEmpty()) jugadores.add(textJugador4.getText());
+        if(!textJugador5.getText().isEmpty()) jugadores.add(textJugador5.getText());
+        if(!textJugador6.getText().isEmpty()) jugadores.add(textJugador6.getText());
 
         if(jugadores.size()<2) labelError.setText("Ingrese una cantidad de jugadores mayor a 1");
         else {

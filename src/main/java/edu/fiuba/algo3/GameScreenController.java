@@ -29,7 +29,7 @@ public class GameScreenController implements Initializable {
     public Group groupAtacar;
     boolean faseAtacar = true;
     public Juego juego;
-    public ArrayList<Jugador> listaJugadores;
+    public ArrayList<String> listaJugadores;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,9 +50,9 @@ public class GameScreenController implements Initializable {
 
     }
 
-    public void iniciarPartida(ArrayList<Jugador> jugadores) throws FileNotFoundException {
+    public void iniciarPartida(ArrayList<String> jugadores) throws FileNotFoundException {
         listaJugadores = jugadores;
-        juego = new Juego(jugadores);
+        juego = new Juego(jugadores.size()); // Ahora mismo Juego() recibe la cantidad, pero habria que pasarle los nombres
 
     }
 

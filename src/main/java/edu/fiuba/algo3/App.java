@@ -15,7 +15,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load((getClass().getResource("/StartScreen.fxml")));
+        Parent root = FXMLLoader.load((getClass().getResource("/vista/StartScreen.fxml")));
         stage.setTitle("TEG");
 
         stage.setScene(new Scene(root));

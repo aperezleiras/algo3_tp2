@@ -1,13 +1,10 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Jugador;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class GameScreenController implements Initializable {
@@ -27,7 +23,7 @@ public class GameScreenController implements Initializable {
     public Button botonAvanzarFase;
     public Group groupTransferir;
     public Group groupAtacar;
-    boolean faseAtacar = true;
+
     public Juego juego;
     public ArrayList<String> listaJugadores;
 
@@ -37,9 +33,7 @@ public class GameScreenController implements Initializable {
     }
 
     public void avanzarFase(){
-        faseAtacar = !faseAtacar;
-        groupTransferir.setVisible(!faseAtacar);
-        groupAtacar.setVisible(faseAtacar);
+
 
 
     }
@@ -57,7 +51,7 @@ public class GameScreenController implements Initializable {
     }
 
     public void verObjetivo() throws IOException {
-        Parent root = FXMLLoader.load((getClass().getResource("/ObjetivoScreen.fxml")));
+        Parent root = FXMLLoader.load((getClass().getResource("/vista/ObjetivoScreen.fxml")));
         // todo: Acá habría que sacar del jugador actual el texto de la misión
         Stage objetivoStage = new Stage();
 

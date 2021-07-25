@@ -1,6 +1,5 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.modelo.Jugador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +40,7 @@ public class StartScreenController {
 
         if(jugadores.size()<2) labelError.setText("Ingrese una cantidad de jugadores mayor a 1");
         else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GameScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/GameScreen.fxml"));
             Parent root = loader.load();
             GameScreenController gameScreenController = loader.getController();
             gameScreenController.iniciarPartida(jugadores);

@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1360.0" style="-fx-background-color: #493D30;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.GameScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1360.0" style="-fx-background-color: #493D30;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.controlador.GameScreenController">
    <effect>
       <InnerShadow height="27.674999999999997" radius="13.893749999999999" width="29.9" />
    </effect>
@@ -25,7 +25,7 @@
                <children>
                   <ImageView fitHeight="774.0" fitWidth="1086.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/mapa.png" />
+                        <Image url="@../img/mapa.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="botonChile" accessibleText="Chile" layoutX="310.0" layoutY="586.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
@@ -330,7 +330,7 @@
                            <graphic>
                               <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/barco.jpg" />
+                                    <Image url="@../img/barco.jpg" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -342,7 +342,7 @@
                            <graphic>
                               <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/barco.jpg" />
+                                    <Image url="@../img/barco.jpg" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -354,7 +354,7 @@
                            <graphic>
                               <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/barco.jpg" />
+                                    <Image url="@../img/barco.jpg" />
                                  </image>
                               </ImageView>
                            </graphic>

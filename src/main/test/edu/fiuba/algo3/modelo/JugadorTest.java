@@ -18,15 +18,22 @@ public class JugadorTest {
     private Pais argentina;
     private Pais brasil;
     private Pais chile;
+    private Continente sudamerica;
 
     @BeforeEach
     public void setUp() {
-        jugador1 = new Jugador(1);
-        jugador2 = new Jugador(2);
         argentina = new Pais("Argentina", new ArrayList<>(Arrays.asList("Brasil")), new Ejercitos(1));
         brasil = new Pais("Brasil", new ArrayList<>(Arrays.asList("Argentina")), new Ejercitos(1));
         chile = new Pais("Chile", new ArrayList<>(Arrays.asList("Argentina")), new Ejercitos(1));
+        sudamerica = new Continente("America del Sur");
+        sudamerica.agregarPais(argentina);
+        sudamerica.agregarPais(brasil);
+        sudamerica.agregarPais(chile);
+        DepositoEjercitos depo1 = new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica)));
+        DepositoEjercitos depo2 = new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica)));
 
+        jugador1 = new Jugador(1, depo1);
+        jugador2 = new Jugador(2, depo2);
     }
 
     //<editor-fold desc="Paises">
@@ -54,78 +61,25 @@ public class JugadorTest {
     }
 
     @Test
-    public void noEnontrarUnPaisDevuelveNull() {
+    public void noEncontrarUnPaisDevuelveNull() {
         assertNull(jugador1.buscarPais("Alemania"));
     }
     //</editor-fold>
 
     //<editor-fold desc="Ejercitos">
+
     @Test
     public void jugadorComienzaCon0EjercitosGeneralesDisponibles() {
-        assertFalse(jugador1.tieneEjercitosGenerales());
+        assertEquals(jugador1.obtenerEjercitosGeneralesDisponibles(), 0);
     }
 
     @Test
-    public void despuesDeRestarleUnEjercitoElJugadorTieneUnEjercitoMenos() {
+    public void despuesDeColocarUnEjercitoElJugadorTieneUnEjercitoMenos() {
+        jugador1.asignarPais(argentina);
         jugador1.agregarEjercitosGenerales(2);
-        jugador1.quitarEjercitosGenerales(1);
+        jugador1.colocarEjercitos(argentina, 1);
 
-        assertEquals(1, jugador1.obtenerEjercitosGeneralesDisponibles());
-    }
-
-    @Test
-    public void alAgregarleEjercitosPorContinenteAUnJugadorDejaDeTener0() {
-        Continente america = new Continente("America");
-
-        jugador1.agregarEjercitosPorContinente(america, 4);
-
-        assertTrue(jugador1.tieneEjercitosEnContinente(america));
-    }
-
-    @Test
-    public void quitarleEjercitosPorContinenteAUnJugador() {
-        Continente america = new Continente("America");
-
-        jugador1.agregarEjercitosPorContinente(america, 1);
-        jugador1.quitarEjercitosPorContinente(america, 1);
-
-        assertFalse(jugador1.tieneEjercitosEnContinente(america));
-    }
-
-    @Test
-    public void validarCantidadPorContinenteTiraCantidadEjercitosInsuficienteException() {
-        Continente america = new Continente("America");
-
-        jugador1.agregarEjercitosPorContinente(america, 1);
-
-        assertThrows(CantidadEjercitosInsuficienteException.class,
-                () -> jugador1.validarCantidad(america, 2));
-    }
-
-    @Test
-    public void validarCantidadPorContinenteNoTiraExceptionSiLaCantidadEsValida() {
-        Continente america = new Continente("America");
-
-        jugador1.agregarEjercitosPorContinente(america, 1);
-        jugador1.validarCantidad(america, 1);
-
-        assertTrue(jugador1.tieneEjercitosEnContinente((america)));
-    }
-
-    @Test
-    public void validarCantidadGeneralTiraCantidadEjercitosInsuficienteException() {
-        jugador1.agregarEjercitosGenerales(1);
-
-        assertThrows(CantidadEjercitosInsuficienteException.class,
-                () -> jugador1.validarCantidad(2));
-    }
-
-    @Test
-    public void validarCantidadGeneralNoTiraExceptionSiLaCantidadEsValida() {
-        jugador1.agregarEjercitosGenerales(1);
-        jugador1.validarCantidad(1);
-
-        assertEquals(1,jugador1.obtenerEjercitosGeneralesDisponibles());
+        assertEquals(jugador1.obtenerEjercitosGeneralesDisponibles(), 1);
     }
 
     @Test
@@ -139,7 +93,9 @@ public class JugadorTest {
 
         assertEquals(4, argentina.cantidadEjercitos());
     }
-    /* todo: tira excepcion en turno ahora
+
+    // todo: tira excepcion en turno ahora
+    //  Queda mas simple lanzandola en deposito y que se vaya elevando, para no tener que validar desde tan arriba (desde turno o jugador) posiblemente rompiendo encapusulamiento
     @Test
     public void intentarColocarMasEjercitosQueLosDisponiblesLanzaCantidadEjercitosInsuficienteException() {
         jugador1.asignarPais(argentina);
@@ -148,9 +104,9 @@ public class JugadorTest {
         assertThrows(CantidadEjercitosInsuficienteException.class,
                 () -> jugador1.colocarEjercitos(argentina, 2));
     }
-    */
+
     @Test
-    public void intentarColocarEjercitosEnUnPaisAjenoLanzaPaisInvalidoException() {
+    public void intentarColocarEjercitosEnUnPaisAjenoLanzaPaisNoMePerteneceException() {
         jugador1.agregarEjercitosGenerales(3);
 
         assertThrows(PaisNoMePerteneceException.class, ()-> jugador1.colocarEjercitos(argentina, 3));
@@ -368,25 +324,25 @@ public class JugadorTest {
     @Test
     public void siUnJugadorSolicitaUnCanjeConCartasQueNoSonCanjeableSeLanzaCartasNoCanjeablesException() {
 
-        List<CartaPais> cartas = generarCartasNoCanjeables();
-        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
-        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartas = generarCartasNoCanjeables();
+        ArrayList<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartasCanje = new ArrayList<>(cartas);
 
         MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
 
-        assertThrows(CartasNoCanjeablesException.class, () -> simularCanjes(cartasCanje, mazo, jugador1));
+        assertThrows(CartasNoCanjeablesException.class, () -> simularCanje(cartasCanje, mazo, jugador1));
     }
 
     @Test
     public void alRealizarseUnCanjeCorrectamenteElJugadorDejaDeTenerLasCartas() {
 
-        List<CartaPais> cartas = generarCartasCanjeables();
-        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
-        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartas = generarCartasCanjeables();
+        ArrayList<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartasCanje = new ArrayList<>(cartas);
 
         MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
 
-        simularCanjes(cartasCanje, mazo, jugador1);
+        simularCanje(cartasCanje, mazo, jugador1);
         cartasMazo.forEach(c -> assertFalse(jugador1.cartaMePertenece(c)));
     }
 
@@ -432,7 +388,7 @@ public class JugadorTest {
 
     //<editor-fold desc="Metodos auxiliares">
 
-    private void simularCanjes(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
+    private void simularCanje(List<CartaPais> cartas, MazoCartasPais mazo, Jugador jugador){
         for (int i = 0; i < 3; i++) {
             jugador.levantarCartaPais(mazo);
         }
@@ -440,29 +396,29 @@ public class JugadorTest {
     }
 
     private void simularCanjes(int cantidad){
-        List<CartaPais> cartas = generarCartasCanjeables();
-        List<CartaPais> cartasMazo = new ArrayList<>(cartas);
-        List<CartaPais> cartasCanje = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartas = generarCartasCanjeables();
+        ArrayList<CartaPais> cartasMazo = new ArrayList<>(cartas);
+        ArrayList<CartaPais> cartasCanje = new ArrayList<>(cartas);
 
         MazoCartasPais mazo = new MazoCartasPais(cartasMazo);
 
         for (int i = 0; i < cantidad; i++) {
-            simularCanjes(cartasCanje, mazo, jugador1);
+            simularCanje(cartasCanje, mazo, jugador1);
         }
     }
 
-    private List<CartaPais> generarCartasCanjeables() {
-        return Arrays.asList(
+    private ArrayList<CartaPais> generarCartasCanjeables() {
+        return new ArrayList<>(Arrays.asList(
                 new CartaPais(argentina, Simbolo.BARCO),
                 new CartaPais(brasil, Simbolo.BARCO),
-                new CartaPais(chile, Simbolo.BARCO));
+                new CartaPais(chile, Simbolo.BARCO)));
     }
 
-    private List<CartaPais> generarCartasNoCanjeables() {
-        return Arrays.asList(
+    private ArrayList<CartaPais> generarCartasNoCanjeables() {
+        return new ArrayList<>(Arrays.asList(
                 new CartaPais(argentina, Simbolo.CAÑON),
                 new CartaPais(brasil, Simbolo.BARCO),
-                new CartaPais(chile, Simbolo.BARCO));
+                new CartaPais(chile, Simbolo.BARCO)));
     }
     //</editor-fold>
 

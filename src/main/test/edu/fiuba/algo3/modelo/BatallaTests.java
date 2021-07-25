@@ -5,14 +5,10 @@ import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 import static org.mockito.Mockito.*;
 
@@ -24,6 +20,7 @@ public class BatallaTests {
 
     @BeforeEach
     public void setUp(){
+
         dado = Mockito.mock(Dado.class);
 
         Ejercitos ejercitosArgentina = new Ejercitos(3);
@@ -36,15 +33,15 @@ public class BatallaTests {
     @Test
     public void PaisConquistaAOtroYCambiaJugador() {
         //arrange
-        Jugador elDibu = new Jugador(0);
-        Jugador neyPasto = new Jugador(1);
+        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()));
+        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 
         when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
         when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -57,15 +54,15 @@ public class BatallaTests {
     @Test
     public void PaisConquistaAOtroYSeTransfierenEjercitos() {
         //arrange
-        Jugador elDibu = new Jugador(0);
-        Jugador neyPasto = new Jugador(1);
+        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()));
+        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 
         when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,6));
         when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -82,7 +79,7 @@ public class BatallaTests {
         when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(1,1));
         when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(6,6));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -97,7 +94,7 @@ public class BatallaTests {
         when(dado.obtenerDadoAtacante(any(Pais.class))).thenReturn(Arrays.asList(6,1));
         when(dado.obtenerDadoDefensor(any(Pais.class))).thenReturn(Arrays.asList(1,1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act
         batalla.realizarAtaque();
@@ -113,7 +110,7 @@ public class BatallaTests {
         //arrange
         Pais atacante = new Pais("Noruega", Arrays.asList("Suecia"), new Ejercitos(3));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act & assert
         Assertions.assertThrows(PaisNoLimitrofeException.class, batalla::realizarAtaque);
@@ -124,7 +121,7 @@ public class BatallaTests {
         //arrange
         Pais atacante = new Pais("Argentina", Arrays.asList("Brasil"), new Ejercitos(1));
 
-        IBatalla batalla = new Batalla(atacante, defensor, dado);
+        Batalla batalla = new Batalla(atacante, defensor, dado);
 
         //act & assert
         Assertions.assertThrows(CantidadEjercitosInsuficienteException.class, batalla::realizarAtaque);

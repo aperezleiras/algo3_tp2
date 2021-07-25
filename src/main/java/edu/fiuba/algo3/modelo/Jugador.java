@@ -20,11 +20,11 @@ public class Jugador {
     List<Pais> paises; //todo cambiar a atributos privados??
     List<CartaPais> cartas;
     boolean habilitadoLevantarCarta;
-    private int cantidadCanjes;
-    private int ejercitosGeneralesDisponibles;
-    private final HashMap<Continente, Integer> ejercitosPorContinenteDisponibles;
+    private DepositoEjercitos deposito;
+    private GestorCanjes gestorCanjes;
+    private List<Objetivo> objetivos;
 
-    public Jugador(int unColor) {
+    Jugador(int unColor, DepositoEjercitos deposito) {
         color = unColor;
 
         Random rand = new Random();
@@ -33,9 +33,10 @@ public class Jugador {
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
         habilitadoLevantarCarta = false;
-        cantidadCanjes = 0;
-        ejercitosGeneralesDisponibles = 0;
-        ejercitosPorContinenteDisponibles = new HashMap<>();
+        this.deposito = deposito;
+        objetivos = new ArrayList<>();
+        gestorCanjes = new GestorCanjes();
+        objetivos.add(new Objetivo());
     }
 
     //<editor-fold desc="Pais">
@@ -67,48 +68,27 @@ public class Jugador {
 
     //<editor-fold desc="Ejercitos">
 
-    public int obtenerEjercitosGeneralesDisponibles() {
-        return ejercitosGeneralesDisponibles;
+    public void actualizarEjercitosDisponibles() {
+        deposito.actualizarEjercitosDisponibles(this);
     }
 
     public void agregarEjercitosGenerales(int cantidad) {
-        ejercitosGeneralesDisponibles += cantidad;
+        deposito.agregarEjercitosGenerales(cantidad);
     }
 
-    public void quitarEjercitosGenerales(int cantidad) {
-        ejercitosGeneralesDisponibles -= cantidad;
+    // Se podria necesitar para la UI (mostrarle al jugador cuantos ejercitos disponibles tiene)
+    public int obtenerEjercitosGeneralesDisponibles() {
+        return deposito.obtenerEjercitosGenerales();
     }
 
-    public void agregarEjercitosPorContinente(Continente continente, int cantidad) {
-        this.ejercitosPorContinenteDisponibles.put(continente, cantidad);
-    }
-
-    public void quitarEjercitosPorContinente(Continente continente, int cantidad) {
-        int cantidadActualizada = ejercitosPorContinenteDisponibles.get(continente) - cantidad;
-        ejercitosPorContinenteDisponibles.put(continente, cantidadActualizada);
-    }
-
-    public boolean tieneEjercitosGenerales() {
-        return ejercitosGeneralesDisponibles != 0;
-    }
-
-    public boolean tieneEjercitosEnContinente(Continente continente) {
-        return ejercitosPorContinenteDisponibles.get(continente) != 0;
-    }
-
-    public void validarCantidad(int cantidad) {
-        if (ejercitosGeneralesDisponibles < cantidad)
-            throw new CantidadEjercitosInsuficienteException();
-    }
-
-    public void validarCantidad(Continente continente, int cantidad) {
-        if (ejercitosPorContinenteDisponibles.get(continente) < cantidad)
-            throw new CantidadEjercitosInsuficienteException();
+    // Se podria necesitar para la UI (mostrarle al jugador cuantos ejercitos disponibles tiene)
+    public int obtenerEjercitosDisponiblesEnContinente(Continente continente) {
+        return deposito.obtenerEjercitosContinente(continente);
     }
 
     public void colocarEjercitos(Pais unPais, int cantidad) {
         if (!paisMePertenece(unPais)) throw new PaisNoMePerteneceException();
-        unPais.agregarEjercitos(cantidad);
+        deposito.agregarEjercitosAPais(unPais, cantidad);
     }
 
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {
@@ -146,35 +126,21 @@ public class Jugador {
     }
 
     public void canjearCartas(List<CartaPais> cartas, MazoCartasPais mazo) {
-        Canje canje = new Canje(cartas, this);
-        canje.efectuarCanje(mazo);
-        cantidadCanjes++;
+        gestorCanjes.canjearCartas(this, cartas, mazo);
     }
 
-    public void obtenerEjercitosPorCanje() {
-        int cantidadEjercitos;
-        switch (cantidadCanjes) {
-            case 0:
-                cantidadEjercitos = 3;
-                break;
-            case 1:
-                cantidadEjercitos = 7;
-                break;
-            case 2:
-                cantidadEjercitos = 10;
-                break;
-            default:
-                cantidadEjercitos = (cantidadCanjes) * 5;
-        }
-        agregarEjercitosGenerales(cantidadEjercitos);
-    }
+    //</editor-fold>
 
     public Paint getColor() { // AUXILIAR
         return auxColor;
     }
 
+    public void conquistoPais() {
+        habilitadoLevantarCarta = true;
+    }
 
-    //</editor-fold>
-
+    public boolean haGanado() {
+        return objetivos.stream().anyMatch(o -> o.cumplido(this));
+    }
 }
 

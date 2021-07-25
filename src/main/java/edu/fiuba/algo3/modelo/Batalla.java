@@ -5,12 +5,10 @@ import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 
 import java.util.List;
 
-public class Batalla implements IBatalla{
+public class Batalla {
 
     private Pais atacante;
-
     private Pais defensor;
-
     private IDado dado;
 
     public Batalla(Pais atacante, Pais defensor, IDado dado) {
@@ -19,7 +17,6 @@ public class Batalla implements IBatalla{
         this.dado = dado;
     }
 
-    @Override
     public void realizarAtaque() {
         validarAtaque();
 

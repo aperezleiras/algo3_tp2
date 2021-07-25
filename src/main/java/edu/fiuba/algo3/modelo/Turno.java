@@ -8,7 +8,7 @@ public class Turno {
     public Turno() {
 
     }
-
+/*
     public void rondaAtacar(Jugador atacante, Jugador defensor, MazoCartasPais mazo) {
         atacante.habilitadoLevantarCarta = false;
         boolean fin = false;
@@ -22,9 +22,20 @@ public class Turno {
             //todo: consultar al usuario, hardcodeado por el momento
             fin = true;
         }
+
+        Pais paisAtacante = solicitarPais(atacante, "Argentina");
+        Pais paisDefensor = solicitarPais(defensor, "Brasil");
+
+        atacante.atacarPaisDesde(paisAtacante, paisDefensor);
+
+        paisDefensor = solicitarPais(defensor, "Chile");
+
+        atacante.atacarPaisDesde(paisAtacante, paisDefensor);
+
         if (atacante.habilitadoLevantarCarta) {
             atacante.levantarCartaPais(mazo);
         }
+
     }
 
     public void realizarCanje(Jugador jugador, MazoCartasPais mazo) {
@@ -45,15 +56,8 @@ public class Turno {
         }
     }
 
-    public void actualizarEjercitosDisponibles(Jugador jugador, HashMap<String, Continente> continentes) {
-        // Ejercitos generales
-        int cantidadEjercitosGeneral = jugador.obtenerCantidadPaises() / 2;
-        jugador.agregarEjercitosGenerales(cantidadEjercitosGeneral);
-
-        // Ejercitos por continente
-        for (Continente continente : continentes.values()) {
-            jugador.agregarEjercitosPorContinente(continente, continente.obtenerEjercitosExtra(jugador));
-        }
+    public void actualizarEjercitosDisponibles(Jugador jugador) {
+        jugador.actualizarEjercitosDisponibles();
     }
 
     public void agregarEjercitosSegunCartas(Jugador jugador) {
@@ -63,7 +67,8 @@ public class Turno {
         }
     }
 
-    public void agregarEjercitosGenerales(Jugador jugador) {
+    //todo: no diferenciar entre colocacion de ejercitos generales y continentales, esa logica se hace en Deposito
+    public void colocarEjercitosGenerales(Jugador jugador) {
         while (jugador.tieneEjercitosGenerales()) {
             //todo: obtener input del usuario
             Pais pais = solicitarPais(jugador, "Argentina");
@@ -74,7 +79,8 @@ public class Turno {
         }
     }
 
-    public void agregarEjercitosPorContinente(Jugador jugador, HashMap<String, Continente> continentes) {
+    //todo: no diferenciar entre colocacion de ejercitos generales y continentales, esa logica se hace en Deposito
+    public void colocarEjercitosPorContinente(Jugador jugador, HashMap<String, Continente> continentes) {
         for (Continente continente : continentes.values()) {
             while (jugador.tieneEjercitosEnContinente(continente)) {
                 //todo: obtener input del usuario
@@ -90,5 +96,5 @@ public class Turno {
     private Pais solicitarPais(Jugador jugador, String nombrePais) {
         //TODO: integrar con ui mas tarde
         return jugador.buscarPais(nombrePais);
-    }
+    }*/
 }

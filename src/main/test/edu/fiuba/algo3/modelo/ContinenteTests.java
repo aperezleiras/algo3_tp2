@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ContinenteTests {
         paises = crearPaises();
         ejercitosEsperados = 10;
         continente = crearContinente(paises, ejercitosEsperados);
-        jugador = new Jugador(0);
+        jugador = new Jugador(0, new DepositoEjercitos(new ArrayList<>(Arrays.asList(continente))));
     }
 
     @Test

@@ -13,7 +13,7 @@ public class MazoCartasPaisTests {
 
     private MazoCartasPais mazo;
 
-    private Jugador jugador1 = new Jugador(1);
+    private Jugador jugador1 = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
 
     private CartaPais cartaArgentina;
     private CartaPais cartaBrasil;

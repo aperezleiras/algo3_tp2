@@ -22,24 +22,67 @@ public class CanjeTests {
 
     @BeforeEach
     public void setUp() {
+
         argentina = new Pais("Argentina", Arrays.asList("Brasil", "Chile"), new Ejercitos(1));
-
         chile = new Pais("Chile", Arrays.asList("Argentina"), new Ejercitos(1));
-
         brasil = new Pais("brasil", Arrays.asList("Argentina"), new Ejercitos(1));
 
-        jugador = new Jugador(1);
+        Continente sudamerica = new Continente("America del Sur");
+        sudamerica.agregarPais(argentina);
+        sudamerica.agregarPais(brasil);
+        sudamerica.agregarPais(chile);
+
+        jugador = new Jugador(1, new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica))));
+    }
+
+
+    @Test
+    public void siUnJugadorSolicitaUnCanjeConCartasQueNoPoseeSeLanzaCartaNoMePerteneceException() {
+        CartaPais carta1 = new CartaPais(argentina, Simbolo.BARCO);
+        CartaPais carta2 = new CartaPais(brasil, Simbolo.BARCO);
+        CartaPais carta3 = new CartaPais(chile, Simbolo.BARCO);
+
+        ArrayList<CartaPais> cartas = new ArrayList<>(Arrays.asList(carta1, carta2, carta3));
+        MazoCartasPais mazo = new MazoCartasPais(new ArrayList<>());
+
+        assertThrows(CartaNoMePerteneceException.class,
+                ()->{
+                    jugador.canjearCartas(cartas, mazo);
+                });
+    }
+
+
+    @Test
+    public void DosIgualesUnaDistintaNoSonCanjeables() {
+        ArrayList<CartaPais> cartas = new ArrayList<>(
+                Arrays.asList(
+                        new CartaPais(argentina, Simbolo.BARCO),
+                        new CartaPais(brasil, Simbolo.BARCO),
+                        new CartaPais(chile, Simbolo.GLOBO)
+                )
+        );
+
+        MazoCartasPais mazo = new MazoCartasPais(cartas);
+        Canje canje = new Canje(cartas, jugador);
+
+        assertFalse(canje.cartasSonCanjeables());
     }
 
     @Test
     public void CanjeConCartasQueNoSonCanjeableSeLanzaCartasNoCanjeablesException() {
-        List<CartaPais> cartas = generarCartas(Arrays.asList(Simbolo.BARCO, Simbolo.BARCO, Simbolo.CAÑON));
-
-
+        ArrayList<CartaPais> cartas = new ArrayList<>(
+                Arrays.asList(
+                        new CartaPais(argentina, Simbolo.BARCO),
+                        new CartaPais(brasil, Simbolo.BARCO),
+                        new CartaPais(chile, Simbolo.GLOBO)
+                )
+        );
         MazoCartasPais mazo = new MazoCartasPais(cartas);
+        jugador.levantarCartaPais(mazo);
+        jugador.levantarCartaPais(mazo);
+        jugador.levantarCartaPais(mazo);
 
-        Canje canje = new Canje(cartas, jugador);
-
+        Canje canje = new Canje(jugador.cartas, jugador);
         assertThrows(CartasNoCanjeablesException.class, () -> canje.efectuarCanje(mazo));
     }
 

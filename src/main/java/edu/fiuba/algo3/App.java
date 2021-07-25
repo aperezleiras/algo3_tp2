@@ -15,7 +15,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load((getClass().getResource("/App.fxml")));
+        Parent root = FXMLLoader.load((getClass().getResource("/StartScreen.fxml")));
         stage.setTitle("TEG");
 
         stage.setScene(new Scene(root));

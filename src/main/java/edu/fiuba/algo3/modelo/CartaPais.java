@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.exception.*;
+import edu.fiuba.algo3.exception.CartaNoMePerteneceException;
+import edu.fiuba.algo3.exception.CartaYaActivadaException;
+import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
+
 //todo: incorporar cambios de ejercitos
 public class CartaPais {
     private boolean activada;

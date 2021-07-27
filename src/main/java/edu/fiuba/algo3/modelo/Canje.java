@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.exception.*;
+import edu.fiuba.algo3.exception.CartaNoMePerteneceException;
+import edu.fiuba.algo3.exception.CartasNoCanjeablesException;
 
-import java.util.*;
+import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 

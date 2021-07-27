@@ -1,13 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
 import edu.fiuba.algo3.exception.PaisInvalidoException;
 import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class Jugador {

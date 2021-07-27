@@ -1,14 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class Turno {
 
-    public Turno() {
-
-    }
-/*
+    /*
     public void rondaAtacar(Jugador atacante, Jugador defensor, MazoCartasPais mazo) {
         atacante.habilitadoLevantarCarta = false;
         boolean fin = false;

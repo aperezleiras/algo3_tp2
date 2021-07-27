@@ -2,7 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.exception.MazoVacioException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MazoCartasPais {
     public ArrayList<CartaPais> cartas;

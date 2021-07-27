@@ -11,9 +11,9 @@ import java.util.List;
 
 public class Jugador {
 
-    String color;
-    List<Pais> paises; //todo cambiar a atributos privados??
-    List<CartaPais> cartas;
+    private String color;
+    private List<Pais> paises; //todo cambiar a atributos privados??
+    private List<CartaPais> cartas;
     boolean habilitadoLevantarCarta;
     private DepositoEjercitos deposito;
     private GestorCanjes gestorCanjes;
@@ -137,6 +137,10 @@ public class Jugador {
 
     public boolean haGanado() {
         return objetivos.stream().anyMatch(o -> o.cumplido(this));
+    }
+
+    public List<Pais> getPaises() {
+        return paises;
     }
 }
 

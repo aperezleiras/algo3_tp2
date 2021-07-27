@@ -4,12 +4,14 @@ import edu.fiuba.algo3.exception.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class CanjeTests {
 
@@ -54,15 +56,12 @@ public class CanjeTests {
 
     @Test
     public void DosIgualesUnaDistintaNoSonCanjeables() {
-        ArrayList<CartaPais> cartas = new ArrayList<>(
-                Arrays.asList(
-                        new CartaPais(argentina, Simbolo.BARCO),
-                        new CartaPais(brasil, Simbolo.BARCO),
-                        new CartaPais(chile, Simbolo.GLOBO)
-                )
-        );
+        List<Simbolo>  simbolos = Arrays.asList(Simbolo.BARCO, Simbolo.BARCO, Simbolo.GLOBO);
+        List<CartaPais> cartas =generarCartas(simbolos);
 
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
+        Jugador jugador = mock(Jugador.class);
+        when(jugador.cartaMePertenece(any(CartaPais.class))).thenReturn(true);
+
         Canje canje = new Canje(cartas, jugador);
 
         assertFalse(canje.cartasSonCanjeables());
@@ -70,20 +69,15 @@ public class CanjeTests {
 
     @Test
     public void CanjeConCartasQueNoSonCanjeableSeLanzaCartasNoCanjeablesException() {
-        ArrayList<CartaPais> cartas = new ArrayList<>(
-                Arrays.asList(
-                        new CartaPais(argentina, Simbolo.BARCO),
-                        new CartaPais(brasil, Simbolo.BARCO),
-                        new CartaPais(chile, Simbolo.GLOBO)
-                )
-        );
-        MazoCartasPais mazo = new MazoCartasPais(cartas);
-        jugador.levantarCartaPais(mazo);
-        jugador.levantarCartaPais(mazo);
-        jugador.levantarCartaPais(mazo);
+        List<Simbolo>  simbolos = Arrays.asList(Simbolo.BARCO, Simbolo.BARCO, Simbolo.GLOBO);
+        List<CartaPais> cartas =generarCartas(simbolos);
 
-        Canje canje = new Canje(jugador.cartas, jugador);
-        assertThrows(CartasNoCanjeablesException.class, () -> canje.efectuarCanje(mazo));
+        Jugador jugador = mock(Jugador.class);
+        when(jugador.cartaMePertenece(any(CartaPais.class))).thenReturn(true);
+
+        Canje canje = new Canje(cartas, jugador);
+
+        assertThrows(CartasNoCanjeablesException.class, () -> canje.efectuarCanje(null));
     }
 
     @Test
@@ -121,6 +115,7 @@ public class CanjeTests {
         //assert
         Assertions.assertTrue(canjeables);
     }
+
 
     @Test
     public void todasDistintasConUnComodinSonCanjeables() {

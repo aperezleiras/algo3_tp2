@@ -66,6 +66,6 @@ public class JuegoTests {
         jugador1 = juego.getJugador(1);
         jugador2 = juego.getJugador(2);
 
-        jugador1.paises.forEach(pais -> assertFalse(jugador2.paises.contains(pais)));
+        jugador1.getPaises().forEach(pais -> assertFalse(jugador2.getPaises().contains(pais)));
     }
 }

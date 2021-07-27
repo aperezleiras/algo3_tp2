@@ -4,11 +4,12 @@ import edu.fiuba.algo3.exception.MazoVacioException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class MazoCartasPais {
-    public ArrayList<CartaPais> cartas;
+    public List<CartaPais> cartas;
 
-    public MazoCartasPais(ArrayList<CartaPais> cartas) {
+    public MazoCartasPais(List<CartaPais> cartas) {
         this.cartas = cartas;
     }
 

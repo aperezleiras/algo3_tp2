@@ -22,10 +22,7 @@ public class Jugador {
     private List<String> colores = Arrays.asList("#0000FF", "#cc3311", "#ee7733", "#009988", "#ee3377", "#000000");
 
     Jugador(int unColor, DepositoEjercitos deposito) {
-
         color = colores.get(unColor);
-
-
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
         habilitadoLevantarCarta = false;

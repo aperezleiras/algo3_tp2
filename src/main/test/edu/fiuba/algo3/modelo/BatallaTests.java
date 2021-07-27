@@ -19,7 +19,7 @@ public class BatallaTests {
     private IDado dado;
     private Pais atacante;
     private Pais defensor;
-
+    private ObservadorPais observadorPais;
     @BeforeEach
     public void setUp(){
 
@@ -30,6 +30,7 @@ public class BatallaTests {
 
         atacante = new Pais("Argentina", Arrays.asList("Brasil"), ejercitosArgentina);
         defensor = new Pais("Brasil", Arrays.asList("Argentina"), ejercitosBrasil);
+
     }
 
     @Test

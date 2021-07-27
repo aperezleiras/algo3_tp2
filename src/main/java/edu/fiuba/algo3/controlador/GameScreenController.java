@@ -61,9 +61,7 @@ public class GameScreenController implements Initializable {
         juego = new Juego(nombresJugadores.size()); // Ahora mismo Juego() recibe la cantidad, pero habria que pasarle los nombres
         jugadores = juego.getJugadores();
         paises = juego.getPaises();
-        mapBotonesPaises.forEach((paisNombre, botonPais) -> {
-             actualizarBotonPais(paisNombre, botonPais);
-        });
+        mapBotonesPaises.forEach(this::actualizarBotonPais);
     }
 
     private void actualizarBotonPais(String paisNombre, Button botonPais){

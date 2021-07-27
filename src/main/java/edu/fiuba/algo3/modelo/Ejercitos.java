@@ -5,6 +5,7 @@ import edu.fiuba.algo3.exception.CantidadATransferirInvalidaException;
 
 public class Ejercitos {
 
+
     private int cantidad;
 
     public Ejercitos(int unaCantidad) {

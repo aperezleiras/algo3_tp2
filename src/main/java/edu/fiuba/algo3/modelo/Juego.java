@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import javafx.scene.control.Button;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -11,26 +13,29 @@ public class Juego {
     private HashMap<String, Pais> paises = new HashMap<>();
     private MazoCartasPais mazoCartasPais = new MazoCartasPais(new ArrayList<>());
 
+
     public Juego(int cantidadJugadores) throws FileNotFoundException {
+
 
         cargarPaises(paises, continentes);
         cargarCartas(paises, mazoCartasPais);
 
         ArrayList<Continente> listaContinentes = new ArrayList<>(continentes.values());
-        for (int i = 0; i < cantidadJugadores; i ++)
+        for (int i = 0; i < cantidadJugadores; i ++) {
             jugadores.add(new Jugador(i, new DepositoEjercitos(listaContinentes)));
+        }
 
-        asignarPaises(new ArrayList<>(paises.values()));
     }
 
-    void asignarPaises(List<Pais> listaPaises) {
+    public void asignarPaises() {
+        ArrayList<Pais> listaPaises = new ArrayList<>(paises.values());
         Collections.shuffle(listaPaises);
         for (int i = 0; i < listaPaises.size(); i++) {
             jugadores.get(i % jugadores.size()).asignarPais(listaPaises.get(i));
         }
     }
 
-    public static void cargarPaises(HashMap<String, Pais> paises , HashMap<String, Continente> continentes) throws FileNotFoundException {
+    public void cargarPaises(HashMap<String, Pais> paises , HashMap<String, Continente> continentes) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("textfiles/Fronteras.csv"));
         scan.nextLine();
 
@@ -45,7 +50,8 @@ public class Juego {
             }
 
             List<String> limitrofes = Arrays.asList((parametros[1]).split(","));
-            Pais pais = new Pais(nombrePais, limitrofes, new Ejercitos(5));
+            Pais pais = new Pais(nombrePais, limitrofes, new Ejercitos(1));
+
             paises.put(nombrePais, pais);
             continentes.get(nombreContinente).agregarPais(pais);
         }

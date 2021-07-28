@@ -17,4 +17,12 @@ public class ObjetivoCompuesto implements IObjetivo {
     public boolean esValidoPara(Jugador jugador) {
         return objetivos.stream().allMatch(o -> o.esValidoPara(jugador));
     }
+
+    public String getTexto() {
+        String txt = "";
+        for (IObjetivo obj : objetivos) {
+            txt += obj.getTexto();
+        }
+        return txt;
+    }
 }

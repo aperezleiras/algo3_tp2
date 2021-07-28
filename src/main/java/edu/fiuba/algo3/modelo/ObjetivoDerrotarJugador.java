@@ -15,4 +15,8 @@ public class ObjetivoDerrotarJugador implements IObjetivo {
     public boolean esValidoPara(Jugador jugador) {
         return (jugador != this.jugador);
     }
+
+    public String getTexto() {
+        return "Derrotar a " + jugador.getNombre() + ". ";
+    }
 }

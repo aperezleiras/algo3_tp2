@@ -15,4 +15,8 @@ public class ObjetivoOcupacionContinente implements IObjetivo {
     public boolean esValidoPara(Jugador jugador) {
         return true;
     }
+
+    public String getTexto() {
+        return "Ocupar " + continente.getNombre() + ". ";
+    }
 }

@@ -45,6 +45,16 @@ public class Jugador {
         return nombre;
     }
 
+    public String getTextoObjetivo() {
+        String txt = "";
+        for (int i = 0; i < objetivos.size(); i ++) {
+            txt += objetivos.get(i).getTexto();
+            if (i < objetivos.size() - 1)
+                txt += "Alternativamente: \n";
+        }
+        return txt;
+    }
+
     //<editor-fold desc="Pais">
 
     public List<Pais> getPaises() {

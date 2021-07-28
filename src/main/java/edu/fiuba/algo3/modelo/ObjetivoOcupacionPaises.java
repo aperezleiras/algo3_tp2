@@ -15,4 +15,8 @@ public class ObjetivoOcupacionPaises implements IObjetivo {
     public boolean esValidoPara(Jugador jugador) {
         return true;
     }
+
+    public String getTexto() {
+        return "Ocupar " + cantidad + " paises. ";
+    }
 }

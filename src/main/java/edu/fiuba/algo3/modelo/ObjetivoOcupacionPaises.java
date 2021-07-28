@@ -11,4 +11,8 @@ public class ObjetivoOcupacionPaises implements IObjetivo {
     public boolean cumplido(Jugador jugador) {
         return (jugador.obtenerCantidadPaises() >= cantidad);
     }
+
+    public boolean esValidoPara(Jugador jugador) {
+        return true;
+    }
 }

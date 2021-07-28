@@ -18,4 +18,8 @@ public class ObjetivoOcupacionParcialContinente implements IObjetivo {
         }
         return ocupados >= cantidad;
     }
+
+    public boolean esValidoPara(Jugador jugador) {
+        return true;
+    }
 }

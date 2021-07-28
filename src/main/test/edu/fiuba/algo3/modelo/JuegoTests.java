@@ -90,4 +90,21 @@ public class JuegoTests {
 
         jugador1.getPaises().forEach(pais -> assertFalse(jugador2.getPaises().contains(pais)));
     }
+
+    @Test
+    public void unJuegoDe4JugadoresTieneUnObjetivoUnicoMasQueUnJuegoDe3Jugadores() throws FileNotFoundException {
+        nombres.add("Pablo");
+        nombres.add("Agustin");
+        nombres.add("Franco");
+        Juego juego1 = new Juego(nombres);
+        nombres.add("Ariadna");
+        Juego juego2 = new Juego(nombres);
+        juego1.crearObjetivosParticulares();
+        juego2.crearObjetivosParticulares();
+
+        int cantidadObjetivos1 = juego1.getCantidadObjetivos();
+        int cantidadObjetivos2 = juego2.getCantidadObjetivos();
+
+        assertEquals(cantidadObjetivos2 - cantidadObjetivos1, 1);
+    }
 }

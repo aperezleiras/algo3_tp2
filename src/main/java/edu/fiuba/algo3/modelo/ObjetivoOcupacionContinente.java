@@ -11,4 +11,8 @@ public class ObjetivoOcupacionContinente implements IObjetivo {
     public boolean cumplido(Jugador jugador) {
         return (continente.completo(jugador));
     }
+
+    public boolean esValidoPara(Jugador jugador) {
+        return true;
+    }
 }

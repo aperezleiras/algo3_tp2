@@ -13,4 +13,8 @@ public class ObjetivoCompuesto implements IObjetivo {
     public boolean cumplido(Jugador jugador) {
         return objetivos.stream().allMatch(o -> o.cumplido(jugador));
     }
+
+    public boolean esValidoPara(Jugador jugador) {
+        return objetivos.stream().allMatch(o -> o.esValidoPara(jugador));
+    }
 }

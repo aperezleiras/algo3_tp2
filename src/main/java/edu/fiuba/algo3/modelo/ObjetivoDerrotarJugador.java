@@ -11,4 +11,8 @@ public class ObjetivoDerrotarJugador implements IObjetivo {
     public boolean cumplido(Jugador jugador) {
         return jugador.derrotoA(this.jugador);
     }
+
+    public boolean esValidoPara(Jugador jugador) {
+        return (jugador != this.jugador);
+    }
 }

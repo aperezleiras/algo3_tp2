@@ -138,7 +138,7 @@ public class GameScreenController implements Initializable {
         });
 
         juego.asignarPaises();
-        juego.crearObjetivosParticulares();
+        juego.cargarObjetivos();
         juego.asignarObjetivos();
 
         labelTurno.setText(turno.obtenerJugadorActual().getNombre());

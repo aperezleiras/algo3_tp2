@@ -99,12 +99,20 @@ public class JuegoTests {
         Juego juego1 = new Juego(nombres);
         nombres.add("Ariadna");
         Juego juego2 = new Juego(nombres);
-        juego1.crearObjetivosParticulares();
-        juego2.crearObjetivosParticulares();
+        juego1.cargarObjetivos();
+        juego2.cargarObjetivos();
 
         int cantidadObjetivos1 = juego1.getCantidadObjetivos();
         int cantidadObjetivos2 = juego2.getCantidadObjetivos();
 
         assertEquals(cantidadObjetivos2 - cantidadObjetivos1, 1);
+    }
+
+    @Test
+    public void test() throws FileNotFoundException {
+        nombres.add("Pablo");
+        nombres.add("Agustin");
+        Juego juego = new Juego(nombres);
+        juego.cargarObjetivos();
     }
 }

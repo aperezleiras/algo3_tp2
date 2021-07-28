@@ -55,7 +55,7 @@ public class GameScreenController implements Initializable {
     public HashMap<String, Button> mapBotonesPaises = new HashMap<>();
     public Turno turno;
 
-    int i2 = 0;
+    int i2 = 0; // AUX
 
 
     @Override
@@ -72,34 +72,17 @@ public class GameScreenController implements Initializable {
         });
     }
 
-    public void avanzar(){
-        switch (turno.obtenerFase()){
-            case ATACAR:
-                turno.finalizarAtaque(juego.getMazoCartasPais());
-                break;
-            case COLOCAR:
-                turno.finalizarColocacion();
-                break;
-            case REAGRUPAR:
-                turno.finalizarReagrupe();
-        }
-        switch (turno.obtenerFase()){
-            case ATACAR:
-                groupTransferir.setVisible(false);
-                groupAtacar.setVisible(true);
-                groupColocar.setVisible(false);
-                break;
-            case COLOCAR:
-                groupColocar.setVisible(true);
-                groupTransferir.setVisible(false);
-                break;
-            case REAGRUPAR:
-                groupTransferir.setVisible(true);
-                groupAtacar.setVisible(false);
-        }
-        labelTurno.setText(turno.obtenerJugadorActual().getNombre());
-        labelFase.setText("Fase: " + turno.obtenerFase().toString());
-        botonJugadorActual.setStyle("-fx-background-color: " + turno.obtenerJugadorActual().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
+
+    public void finalizarColocacion(){
+        turno.finalizarColocacion();
+    }
+
+    public void finalizarAtaque(){
+        turno.finalizarAtaque(juego.getMazoCartasPais());
+    }
+
+    public void finalizarReagrupe(){
+        turno.finalizarReagrupe();
     }
 
 
@@ -133,6 +116,7 @@ public class GameScreenController implements Initializable {
         paises = juego.getPaises();
         jugadores = juego.getJugadores();
         turno = new Turno(jugadores);
+        turno.asignarObservador(new ObservadorTurno(groupTransferir, groupAtacar, groupColocar, groupCanjear, labelTurno, labelFase, botonJugadorActual));
         paises.forEach( (nombre, pais) ->  {
             pais.asignarObservador(new ObservadorPais(mapBotonesPaises.get(nombre)));
         });
@@ -141,7 +125,7 @@ public class GameScreenController implements Initializable {
         juego.cargarObjetivos();
         juego.asignarObjetivos();
 
-        labelTurno.setText(turno.obtenerJugadorActual().getNombre());
+        labelTurno.setText("Turno de: " + turno.obtenerJugadorActual().getNombre());
         labelFase.setText("Fase " + turno.obtenerFase().toString());
         botonJugadorActual.setStyle("-fx-background-color: " + turno.obtenerJugadorActual().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
     }

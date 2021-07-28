@@ -1,12 +1,14 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Turno {
+public class Turno implements IObserbable {
 
     private final List<Jugador> jugadores;
     private Jugador jugadorActual;
     private Fase fase;
+    private final ArrayList<ObservadorTurno> observadores = new ArrayList<>();
 
     public Turno(List<Jugador> jugadores) {
         this.jugadores = jugadores;
@@ -30,6 +32,7 @@ public class Turno {
             jugadorActual.levantarCartaPais(mazo);
         }
         fase = Fase.REAGRUPAR;
+        actualizarObservadores();
     }
 
     public void rondaReagrupar(Pais paisOrigen, Pais paisDestino, int cantidad) {
@@ -44,6 +47,7 @@ public class Turno {
             fase = Fase.ATACAR;
         }
         siguienteJugador();
+        actualizarObservadores();
     }
 
     public void realizarCanje(List<CartaPais> cartas, MazoCartasPais mazo) {
@@ -68,6 +72,7 @@ public class Turno {
             fase = Fase.ATACAR;
         }
         siguienteJugador();
+        actualizarObservadores();
     }
 
     public Fase obtenerFase() {
@@ -80,5 +85,16 @@ public class Turno {
 
     private boolean chequearObjetivo() {
         return true; // todo
+    }
+
+
+    public void asignarObservador(ObservadorTurno observador) {
+        observador.asignarTurno(this);
+        observadores.add(observador);
+    }
+
+    @Override
+    public void actualizarObservadores() {
+        observadores.forEach(observadorTurno -> observadorTurno.actualizar());
     }
 }

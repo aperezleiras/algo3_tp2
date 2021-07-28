@@ -4,15 +4,11 @@ import javafx.scene.control.Button;
 
 public class ObservadorPais implements IObservador {
 
-    Pais pais;
-    Button botonPais;
+    private Pais pais;
+    private Button botonPais;
 
     public ObservadorPais(Button unBotonPais){
         botonPais = unBotonPais;
-    }
-
-    public void asignarPais(Pais pais){
-        this.pais = pais;
     }
 
     public void actualizar(){
@@ -20,4 +16,7 @@ public class ObservadorPais implements IObservador {
         botonPais.setText(String.valueOf(pais.getEjercitos().getCantidad()));
     }
 
+    public void asignarPais(Pais pais) {
+        this.pais = pais;
+    }
 }

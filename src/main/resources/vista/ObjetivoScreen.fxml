@@ -15,7 +15,7 @@
             <Font name="Times New Roman" size="32.0" />
          </font>
       </Label>
-      <Label layoutX="53.0" layoutY="77.0" prefHeight="273.0" prefWidth="494.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dolor velit, rutrum eget mattis ac, posuere sit amet quam. Phasellus sagittis ultricies justo, ut rutrum ex euismod ac. Curabitur eu orci ante. Nulla quis nulla odio. Duis at ligula urna. Vestibulum id tortor vitae tortor sollicitudin consectetur ac eu purus. In efficitur diam gravida tortor euismod feugiat." textAlignment="CENTER" textFill="#d8b370" wrapText="true">
+      <Label fx:id="labelObjetivo" layoutX="53.0" layoutY="77.0" prefHeight="273.0" prefWidth="494.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dolor velit, rutrum eget mattis ac, posuere sit amet quam. Phasellus sagittis ultricies justo, ut rutrum ex euismod ac. Curabitur eu orci ante. Nulla quis nulla odio. Duis at ligula urna. Vestibulum id tortor vitae tortor sollicitudin consectetur ac eu purus. In efficitur diam gravida tortor euismod feugiat." textAlignment="CENTER" textFill="#d8b370" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>

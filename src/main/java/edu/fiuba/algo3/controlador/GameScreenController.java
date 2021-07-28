@@ -28,7 +28,6 @@ import java.util.ResourceBundle;
 public class GameScreenController implements Initializable {
 
     @FXML
-    public Button botonAvanzarFase;
     public Group groupTransferir;
     public Group groupAtacar;
     public Group groupColocar;
@@ -47,6 +46,8 @@ public class GameScreenController implements Initializable {
     public Label labelTurno;
     public Label labelFase;
     public Button botonJugadorActual;
+
+
 
     public Juego juego;
     public ArrayList<Jugador> jugadores;
@@ -128,6 +129,7 @@ public class GameScreenController implements Initializable {
 
     public void iniciarPartida(ArrayList<String> nombresJugadores) throws FileNotFoundException {
         juego = new Juego(nombresJugadores); // Ahora mismo Juego() recibe la cantidad, pero habria que pasarle los nombres
+
         paises = juego.getPaises();
         jugadores = juego.getJugadores();
         turno = new Turno(jugadores);
@@ -136,14 +138,19 @@ public class GameScreenController implements Initializable {
         });
 
         juego.asignarPaises();
+        juego.crearObjetivosParticulares();
+        juego.asignarObjetivos();
+
         labelTurno.setText(turno.obtenerJugadorActual().getNombre());
         labelFase.setText("Fase " + turno.obtenerFase().toString());
         botonJugadorActual.setStyle("-fx-background-color: " + turno.obtenerJugadorActual().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
     }
 
     public void verObjetivo() throws IOException {
-        Parent root = FXMLLoader.load((getClass().getResource("/vista/ObjetivoScreen.fxml")));
-        // todo: Acá habría que sacar del jugador actual el texto de la misión
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("/vista/ObjetivoScreen.fxml")));
+        Parent root = loader.load();
+        ObjetivoScreenController objetivoScreenController = loader.getController();
+        objetivoScreenController.setearTexto(turno.obtenerJugadorActual().getTextoObjetivo());
         Stage objetivoStage = new Stage();
 
         objetivoStage.initModality(Modality.APPLICATION_MODAL);
@@ -151,13 +158,14 @@ public class GameScreenController implements Initializable {
 
         objetivoStage.setScene(new Scene(root));
         objetivoStage.setResizable(false);
+
         objetivoStage.show();
     }
 
     public void atacar(){
         if(!textPaisDestinoAtacar.getText().isEmpty() || !textPaisOrigenAtacar.getText().isEmpty()){
             try {
-                turno.obtenerJugadorActual().atacarPaisDesde(paises.get(textPaisOrigenAtacar.getText()),paises.get(textPaisDestinoAtacar.getText()));
+                turno.rondaAtacar(paises.get(textPaisOrigenAtacar.getText()),paises.get(textPaisDestinoAtacar.getText()));
             } catch (CantidadEjercitosInsuficienteException e){
                 labelErrorAtacar.setText("Cantidad de ejércitos insuficiente.");
             } catch (PaisInvalidoException e){

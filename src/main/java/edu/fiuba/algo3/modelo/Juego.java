@@ -154,8 +154,10 @@ public class Juego {
                 obj = objetivos.get(rand.nextInt(objetivos.size()));
                 objetivoValido = obj.esValidoPara(jugador);
             }
+
             jugador.asignarObjetivo(obj);
             jugador.asignarObjetivo(new ObjetivoOcupacionPaises(30));
+            objetivoValido = false;
         }
     }
 

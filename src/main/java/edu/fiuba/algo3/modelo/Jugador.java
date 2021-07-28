@@ -17,8 +17,10 @@ public class Jugador {
     boolean habilitadoLevantarCarta;
     private DepositoEjercitos deposito;
     private GestorCanjes gestorCanjes;
-    private List<Objetivo> objetivos;
+    private List<IObjetivo> objetivos;
     private String nombre;
+
+    private List<Jugador> jugadoresDerrotados;
 
     private List<String> colores = Arrays.asList("#0000FF", "#cc3311", "#ee7733", "#009988", "#ee3377", "#000000");
 
@@ -31,7 +33,8 @@ public class Jugador {
         this.deposito = deposito;
         objetivos = new ArrayList<>();
         gestorCanjes = new GestorCanjes();
-        objetivos.add(new Objetivo());
+
+        jugadoresDerrotados = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -97,11 +100,19 @@ public class Jugador {
         paisOrigen.transferirEjercitos(paisDestino, cantidad);
     }
 
-    public void atacarPaisDesde(Pais miPais, Pais paisEnemigo){
+    public boolean atacarPaisDesde(Pais miPais, Pais paisEnemigo){
         if (!paisMePertenece(miPais) || paisMePertenece(paisEnemigo)) throw new PaisInvalidoException();
 
+        Jugador enemigo = paisEnemigo.getJugador();     //
+
         Batalla batalla = new Batalla(miPais, paisEnemigo, new Dado());
-        batalla.realizarAtaque(); }
+        batalla.realizarAtaque();
+
+        if (enemigo.obtenerCantidadPaises() == 0)       //
+            jugadoresDerrotados.add(enemigo);           // TODO: Tal vez mover todo esto a Batalla
+
+        return haGanado();
+    }
 
     //</editor-fold>
 
@@ -143,8 +154,13 @@ public class Jugador {
         habilitadoLevantarCarta = true;
     }
 
+    public boolean derrotoA(Jugador jugador) {
+        return (jugadoresDerrotados.contains(jugador));
+    }
+
     public boolean haGanado() {
-        return objetivos.stream().anyMatch(o -> o.cumplido(this));
+        //return objetivos.stream().anyMatch(o -> o.cumplido(this));
+        return false;
     }
 
     public List<Pais> getPaises() {

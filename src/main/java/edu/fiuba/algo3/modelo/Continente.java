@@ -34,7 +34,7 @@ public class Continente {
         return paises.contains(pais);
     }
 
-    private void asignarEjercitosExtraSegunContinente() {    ////////////////////////
+    private void asignarEjercitosExtraSegunContinente() {
         switch (nombre) {
             case "Asia": cantidadEjercitosExtra = 7; break;
             case "Europa": cantidadEjercitosExtra = 5; break;

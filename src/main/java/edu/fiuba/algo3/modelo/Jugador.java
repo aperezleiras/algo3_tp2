@@ -37,11 +37,20 @@ public class Jugador {
         jugadoresDerrotados = new ArrayList<>();
     }
 
+    public String getColor() { // AUXILIAR
+        return color;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     //<editor-fold desc="Pais">
+
+    public List<Pais> getPaises() {
+        return paises;
+    }
+
     public void asignarPais(Pais unPais) {
         unPais.asignarJugador(this);
         paises.add(unPais);
@@ -49,6 +58,10 @@ public class Jugador {
 
     public void asignarPais(List<Pais> paises){
         this.paises.addAll(paises);
+    }
+
+    public void quitarPais(Pais unPais) {
+        paises.remove(unPais);
     }
 
     public boolean paisMePertenece(Pais unPais) {
@@ -103,13 +116,8 @@ public class Jugador {
     public boolean atacarPaisDesde(Pais miPais, Pais paisEnemigo){
         if (!paisMePertenece(miPais) || paisMePertenece(paisEnemigo)) throw new PaisInvalidoException();
 
-        Jugador enemigo = paisEnemigo.getJugador();     //
-
         Batalla batalla = new Batalla(miPais, paisEnemigo, new Dado());
         batalla.realizarAtaque();
-
-        if (enemigo.obtenerCantidadPaises() == 0)       //
-            jugadoresDerrotados.add(enemigo);           // TODO: Tal vez mover todo esto a Batalla
 
         return haGanado();
     }
@@ -140,33 +148,33 @@ public class Jugador {
         gestorCanjes.canjearCartas(this, cartas, mazo);
     }
 
+    public void conquistoPaisDe(Jugador jugador) {
+        habilitadoLevantarCarta = true;
+
+        if (jugador.obtenerCantidadPaises() == 0)
+            jugadoresDerrotados.add(jugador);
+    }
+
     public boolean estaHabilitadoLevantarCarta() {
         return habilitadoLevantarCarta;
     }
 
     //</editor-fold>
 
-    public String getColor() { // AUXILIAR
-        return color;
-    }
-
-    public void conquistoPais() {
-        habilitadoLevantarCarta = true;
-    }
+    //<editor-fold desc="Objetivos">
 
     public boolean derrotoA(Jugador jugador) {
         return (jugadoresDerrotados.contains(jugador));
     }
 
+    public void asignarObjetivo(IObjetivo obj) {
+        objetivos.add(obj);
+    }
+
     public boolean haGanado() {
-        //return objetivos.stream().anyMatch(o -> o.cumplido(this));
-        return false;
+        return objetivos.stream().anyMatch(o -> o.cumplido(this));
     }
 
-    public List<Pais> getPaises() {
-        return paises;
-    }
-
-
+    //</editor-fold>
 }
 

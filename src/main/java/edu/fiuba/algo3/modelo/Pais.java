@@ -81,11 +81,12 @@ public class Pais implements IObserbable { //todo: crear interfaz de pais
         return jugador;
     }
 
-    public void conquistar(Pais defensor) {
-        defensor.asignarJugador(jugador);
-        jugador.asignarPais(defensor);
-        transferirEjercitos(defensor,1);
-        jugador.conquistoPais();
+    public void conquistar(Pais paisDefensor) {
+        (paisDefensor.getJugador()).quitarPais(paisDefensor);
+        jugador.conquistoPaisDe(paisDefensor.getJugador());
+
+        jugador.asignarPais(paisDefensor);
+        transferirEjercitos(paisDefensor,1);
         actualizarObservadores();
     }
 

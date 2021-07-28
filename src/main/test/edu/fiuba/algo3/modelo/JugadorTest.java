@@ -94,8 +94,6 @@ public class JugadorTest {
         assertEquals(4, argentina.cantidadEjercitos());
     }
 
-    // todo: tira excepcion en turno ahora
-    //  Queda mas simple lanzandola en deposito y que se vaya elevando, para no tener que validar desde tan arriba (desde turno o jugador) posiblemente rompiendo encapusulamiento
     @Test
     public void intentarColocarMasEjercitosQueLosDisponiblesLanzaCantidadEjercitosInsuficienteException() {
         jugador1.asignarPais(argentina);
@@ -421,6 +419,38 @@ public class JugadorTest {
                 new CartaPais(chile, Simbolo.BARCO)));
     }
     //</editor-fold>
+    //</editor-fold>
+
+    //<editor-fold desc="Objetivos">
+
+    @Test
+    public void unJugadorConquistaUnoDeLosPaisesEnemigosPeroNoLoDerrota() {
+        jugador1.asignarPais(argentina);
+        jugador2.asignarPais(brasil);
+        jugador2.asignarPais(chile);
+
+        jugador1.agregarEjercitosGenerales(2);
+        jugador1.colocarEjercitos(argentina, 2);
+        argentina.conquistar(brasil);
+
+        boolean derrotoAJugador = jugador1.derrotoA(jugador2);
+        assertFalse(derrotoAJugador);
+    }
+
+    @Test
+    public void unJugadorConquistaElUltimoPaisEnemigoYLoDerrota() {
+        jugador1.asignarPais(argentina);
+        jugador2.asignarPais(brasil);
+        jugador2.asignarPais(chile);
+
+        jugador1.agregarEjercitosGenerales(2);
+        jugador1.colocarEjercitos(argentina, 2);
+        argentina.conquistar(brasil);
+        argentina.conquistar(chile);
+
+        boolean derrotoAJugador = jugador1.derrotoA(jugador2);
+        assertTrue(derrotoAJugador);
+    }
 
     //</editor-fold>
 

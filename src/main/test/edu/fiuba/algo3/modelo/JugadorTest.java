@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.exception.*;
-import javafx.scene.control.Button;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -152,7 +151,7 @@ public class JugadorTest {
         jugador1.asignarPais(argentina);
         jugador1.asignarPais(brasil);
 
-        assertTrue(argentina.cantidadEjercitos() == 1);
+        assertEquals(1, argentina.cantidadEjercitos());
         assertThrows(CantidadATransferirInvalidaException.class,
                 () -> jugador1.transferirEjercitosDesde(argentina, brasil, 1));
     }
@@ -163,7 +162,7 @@ public class JugadorTest {
         jugador1.asignarPais(brasil);
         argentina.agregarEjercitos(1);
 
-        assertTrue(argentina.cantidadEjercitos() == 2);
+        assertEquals(2, argentina.cantidadEjercitos());
         assertThrows(CantidadATransferirInvalidaException.class,
                 () -> jugador1.transferirEjercitosDesde(argentina, brasil, 2));
     }

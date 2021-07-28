@@ -11,6 +11,7 @@ public class Turno {
     public Turno(List<Jugador> jugadores) {
         this.jugadores = jugadores;
         jugadorActual = jugadores.get(0);
+        fase = Fase.COLOCAR;
 
     }
 

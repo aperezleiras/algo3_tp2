@@ -294,7 +294,7 @@
                <children>
                   <Group layoutX="13.5" layoutY="13.0">
                      <children>
-                        <Button fx:id="botonAvanzarFase" layoutX="29.5" layoutY="1.0" mnemonicParsing="false" onAction="#avanzarFase" prefHeight="54.0" prefWidth="186.0" style="-fx-background-color: #665541; -fx-border-color: black; -fx-border-insets: -1;" text="Avanzar fase" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Button layoutX="29.5" layoutY="1.0" mnemonicParsing="false" onAction="#avanzar" prefHeight="54.0" prefWidth="186.0" style="-fx-background-color: #665541; -fx-border-color: black; -fx-border-insets: -1;" text="Avanzar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
                               <Font name="Times New Roman" size="28.0" />
                            </font>
@@ -305,7 +305,7 @@
                         <Line endX="260.0" endY="80.0" layoutX="-16.0" layoutY="-7.0" startX="17.0" startY="80.0" stroke="#0000005f" />
                      </children>
                   </Group>
-                  <Group fx:id="groupColocar" layoutX="39.0" layoutY="108.0">
+                  <Group fx:id="groupColocar" accessibleText="COLOCAR" layoutX="31.0" layoutY="108.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="125.0" prefWidth="195.0" style="-fx-background-color: #4a3338;">
                            <children>
@@ -314,59 +314,63 @@
                                     <Font size="19.0" />
                                  </font>
                               </Label>
-                              <Label prefHeight="28.0" prefWidth="208.0" text="Generales: 0" textFill="#d8b370">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="28.0" prefWidth="204.0" text="Europa: 0" textFill="#d8b370">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="28.0" prefWidth="204.0" text="Asia: 0" textFill="#d8b370">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="28.0" prefWidth="204.0" text="Africa: 0" textFill="#d8b370">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="28.0" prefWidth="204.0" text="America del sur: 0" textFill="#d8b370">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="28.0" prefWidth="204.0" text="America del norte: 0" textFill="#d8b370">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="28.0" prefWidth="204.0" text="Oceania: 0" textFill="#d8b370">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
+                              <Group fx:id="groupCantidadesDisponibles">
+                                 <children>
+                                    <Label prefHeight="28.0" prefWidth="208.0" text="Generales: 0" textFill="#d8b370">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="28.0" prefHeight="28.0" prefWidth="204.0" text="Europa: 0" textFill="#d8b370">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="56.0" prefHeight="28.0" prefWidth="204.0" text="Asia: 0" textFill="#d8b370">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="84.0" prefHeight="28.0" prefWidth="204.0" text="Africa: 0" textFill="#d8b370">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="112.0" prefHeight="28.0" prefWidth="204.0" text="America del sur: 0" textFill="#d8b370">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="140.0" prefHeight="28.0" prefWidth="204.0" text="America del norte: 0" textFill="#d8b370">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutY="168.0" prefHeight="28.0" prefWidth="204.0" text="Oceania: 0" textFill="#d8b370">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Group>
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <Label layoutX="36.0" layoutY="262.0" text="Pais seleccionado" textFill="#d8b370">
+                        <Label layoutX="41.0" layoutY="262.0" text="Pais seleccionado" textFill="#d8b370">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="textPaisColocar" editable="false" layoutX="23.0" layoutY="299.0" />
-                        <Slider fx:id="sliderCantidadColocar" layoutX="28.0" layoutY="362.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" onMouseReleased="#actualizarCantidadColocar" snapToTicks="true" />
-                        <Label fx:id="labelCantidadColocar" layoutX="58.0" layoutY="337.0" text="Cantidad: 0" textFill="#d8b370">
+                        <TextField fx:id="textPaisColocar" editable="false" layoutX="28.0" layoutY="299.0" />
+                        <Slider fx:id="sliderCantidadColocar" layoutX="33.0" layoutY="362.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" onMouseReleased="#actualizarCantidadColocar" snapToTicks="true" />
+                        <Label fx:id="labelCantidadColocar" layoutX="63.0" layoutY="337.0" text="Cantidad: 0" textFill="#d8b370">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="52.0" layoutY="391.0" mnemonicParsing="false" onAction="#colocarEjercitos" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: #665541; -fx-border-color: black; -fx-border-insets: -1;" text="Colocar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Button layoutX="57.0" layoutY="391.0" mnemonicParsing="false" onAction="#colocarEjercitos" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: #665541; -fx-border-color: black; -fx-border-insets: -1;" text="Colocar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
                               <Font name="Times New Roman" size="20.0" />
                            </font>
@@ -376,7 +380,7 @@
                         </Button>
                      </children>
                   </Group>
-                  <Group fx:id="groupAtacar" layoutX="52.0" layoutY="165.0" visible="false">
+                  <Group fx:id="groupAtacar" accessibleText="ATACAR" layoutX="52.0" layoutY="165.0" visible="false">
                      <children>
                         <Button layoutX="35.0" layoutY="179.0" mnemonicParsing="false" onAction="#atacar" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #665541; -fx-border-color: black; -fx-border-insets: -1;" text="Atacar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
@@ -404,21 +408,41 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
+                        <Label fx:id="labelErrorAtacar" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="226.0" prefHeight="64.0" prefWidth="152.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Group>
-                  <Group fx:id="groupTransferir" layoutX="57.0" layoutY="135.0" visible="false">
+                  <Group fx:id="groupTransferir" accessibleText="TRANSFERIR" layoutX="57.0" layoutY="135.0" visible="false">
                      <children>
-                        <Button layoutX="22.0" layoutY="170.0" mnemonicParsing="false" text="Transferir ejercitos" />
-                        <Label layoutX="14.0" layoutY="6.0" text="Cantidad a transferir:" textFill="WHITE" />
-                        <Slider fx:id="sliderCantidadTransferir" layoutX="4.0" layoutY="30.0" />
+                        <Slider fx:id="sliderCantidadTransferir" layoutX="4.0" layoutY="30.0" max="10.0" onMouseReleased="#actualizarCantidadTransferir" />
                         <TextField fx:id="textPaisOrigenTransferir" editable="false" layoutX="5.0" layoutY="80.0" />
-                        <Label layoutX="45.0" layoutY="53.0" text="Pais origen" textFill="WHITE" />
-                        <Label layoutX="45.0" layoutY="113.0" text="Pais destino" textFill="WHITE" />
+                        <Label layoutX="40.0" layoutY="46.0" text="Pais origen" textFill="#d8b370">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <Label layoutX="37.0" layoutY="108.0" text="Pais destino" textFill="#d8b370">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
                         <TextField fx:id="textPaisDestinoTransferir" editable="false" layoutX="5.0" layoutY="137.0" />
-                        <Label fx:id="labelCantidadTransferir" layoutX="129.0" layoutY="6.0" text="0" textFill="WHITE" />
+                        <Label fx:id="labelCantidadTransferir" layoutX="39.0" layoutY="5.0" text="Cantidad: 0" textFill="#d8b370">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                        <Button layoutX="20.0" layoutY="182.0" mnemonicParsing="false" onAction="#transferirEjercitos" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: #665541; -fx-border-color: black; -fx-border-insets: -1;" text="Transferir" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </Group>
-                  <Group fx:id="groupCanjear" layoutX="62.0" layoutY="280.0" visible="false">
+                  <Group fx:id="groupCanjear" accessibleText="CANJEAR" layoutX="62.0" layoutY="280.0" visible="false">
                      <children>
                         <Button contentDisplay="RIGHT" layoutX="1.0" layoutY="31.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="137.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-insets: -1;" text="Pais" textAlignment="CENTER" wrapText="true">
                            <font>
@@ -488,12 +512,19 @@
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label layoutX="9.5" layoutY="716.0" text="Fase:" textFill="#d8b370">
+                        <Label fx:id="labelTurno" contentDisplay="RIGHT" layoutX="106.5" layoutY="684.0" maxWidth="145.0" prefHeight="32.0" prefWidth="145.0" text="Jugador" textFill="#d8b370">
                            <font>
                               <Font size="22.0" />
                            </font>
+                           <graphic>
+                              <Button fx:id="botonJugadorActual" accessibleText="Sumatra" mnemonicParsing="false" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </graphic>
                         </Label>
-                        <Label fx:id="labelTurno" layoutX="115.5" layoutY="684.0" text="Jugador" textFill="#d8b370">
+                        <Label fx:id="labelFase" layoutX="9.5" layoutY="716.0" text="Fase:" textFill="#d8b370">
                            <font>
                               <Font size="22.0" />
                            </font>

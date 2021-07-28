@@ -32,8 +32,8 @@ public class JugadorTest {
         DepositoEjercitos depo1 = new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica)));
         DepositoEjercitos depo2 = new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica)));
 
-        jugador1 = new Jugador(1, depo1);
-        jugador2 = new Jugador(2, depo2);
+        jugador1 = new Jugador(1, depo1, "Pablo");
+        jugador2 = new Jugador(2, depo2, "Agustin");
     }
 
     //<editor-fold desc="Paises">

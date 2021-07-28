@@ -18,10 +18,12 @@ public class Jugador {
     private DepositoEjercitos deposito;
     private GestorCanjes gestorCanjes;
     private List<Objetivo> objetivos;
+    private String nombre;
 
     private List<String> colores = Arrays.asList("#0000FF", "#cc3311", "#ee7733", "#009988", "#ee3377", "#000000");
 
-    Jugador(int unColor, DepositoEjercitos deposito) {
+    Jugador(int unColor, DepositoEjercitos deposito, String nombre) {
+        this.nombre = nombre;
         color = colores.get(unColor);
         paises = new ArrayList<>();
         cartas = new ArrayList<>();
@@ -30,6 +32,10 @@ public class Jugador {
         objetivos = new ArrayList<>();
         gestorCanjes = new GestorCanjes();
         objetivos.add(new Objetivo());
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     //<editor-fold desc="Pais">

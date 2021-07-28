@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import javafx.scene.control.Button;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -14,15 +12,15 @@ public class Juego {
     private MazoCartasPais mazoCartasPais = new MazoCartasPais(new ArrayList<>());
 
 
-    public Juego(int cantidadJugadores) throws FileNotFoundException {
+    public Juego(ArrayList<String> nombresJugadores) throws FileNotFoundException {
 
 
         cargarPaises(paises, continentes);
         cargarCartas(paises, mazoCartasPais);
 
         ArrayList<Continente> listaContinentes = new ArrayList<>(continentes.values());
-        for (int i = 0; i < cantidadJugadores; i ++) {
-            jugadores.add(new Jugador(i, new DepositoEjercitos(listaContinentes)));
+        for (int i = 0; i < nombresJugadores.size(); i ++) {
+            jugadores.add(new Jugador(i, new DepositoEjercitos(listaContinentes), nombresJugadores.get(i)));
         }
 
     }
@@ -87,6 +85,7 @@ public class Juego {
 
     public ArrayList<Jugador> getJugadores() { return jugadores;}
 
-
-
+    public MazoCartasPais getMazoCartasPais() {
+        return mazoCartasPais;
+    }
 }

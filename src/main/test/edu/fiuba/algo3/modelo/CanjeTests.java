@@ -1,16 +1,17 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.exception.*;
+import edu.fiuba.algo3.exception.CartaNoMePerteneceException;
+import edu.fiuba.algo3.exception.CartasNoCanjeablesException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class CanjeTests {
@@ -34,7 +35,7 @@ public class CanjeTests {
         sudamerica.agregarPais(brasil);
         sudamerica.agregarPais(chile);
 
-        jugador = new Jugador(1, new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica))));
+        jugador = new Jugador(1, new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica))),"");
     }
 
 

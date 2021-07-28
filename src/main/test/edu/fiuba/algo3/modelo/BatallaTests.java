@@ -36,8 +36,8 @@ public class BatallaTests {
     @Test
     public void PaisConquistaAOtroYCambiaJugador() {
         //arrange
-        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()));
-        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
+        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()),"");
+        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()),"");
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 
@@ -57,8 +57,8 @@ public class BatallaTests {
     @Test
     public void PaisConquistaAOtroYSeTransfierenEjercitos() {
         //arrange
-        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()));
-        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
+        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()),"");
+        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()),"");
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 

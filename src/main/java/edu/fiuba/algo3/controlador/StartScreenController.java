@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StartScreenController {
 
@@ -43,6 +44,7 @@ public class StartScreenController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/GameScreen.fxml"));
             Parent root = loader.load();
             GameScreenController gameScreenController = loader.getController();
+            Collections.shuffle(jugadores);
             gameScreenController.iniciarPartida(jugadores);
 
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

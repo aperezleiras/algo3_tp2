@@ -12,7 +12,7 @@ import java.util.List;
 public class Jugador {
 
     private String color;
-    private List<Pais> paises; //todo cambiar a atributos privados??
+    private List<Pais> paises;
     private List<CartaPais> cartas;
     boolean habilitadoLevantarCarta;
     private DepositoEjercitos deposito;
@@ -103,6 +103,7 @@ public class Jugador {
 
     public void levantarCartaPais(MazoCartasPais mazo) {
         cartas.add(mazo.levantarCarta());
+        habilitadoLevantarCarta = false;
     }
 
     public boolean cartaMePertenece(CartaPais unaCarta) {
@@ -122,6 +123,10 @@ public class Jugador {
         gestorCanjes.canjearCartas(this, cartas, mazo);
     }
 
+    public boolean estaHabilitadoLevantarCarta() {
+        return habilitadoLevantarCarta;
+    }
+
     //</editor-fold>
 
     public String getColor() { // AUXILIAR
@@ -139,5 +144,7 @@ public class Jugador {
     public List<Pais> getPaises() {
         return paises;
     }
+
+
 }
 

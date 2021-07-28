@@ -4,12 +4,13 @@ import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class DepositoEjercitos {
 
     private int ejercitosGenerales;
-    HashMap<Continente, Integer> ejercitosPorContinente;
-    ArrayList<Continente> continentes;
+    private HashMap<Continente, Integer> ejercitosPorContinente;
+    private List<Continente> continentes;
 
     public DepositoEjercitos(ArrayList<Continente> continentes) {
         ejercitosGenerales = 0;

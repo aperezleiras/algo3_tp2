@@ -1,94 +1,83 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.List;
+
 public class Turno {
 
-    /*
-    public void rondaAtacar(Jugador atacante, Jugador defensor, MazoCartasPais mazo) {
-        atacante.habilitadoLevantarCarta = false;
-        boolean fin = false;
+    private final List<Jugador> jugadores;
+    private Jugador jugadorActual;
+    private Fase fase;
 
-        while(!fin) {
-            //paises hardcodeados por el momento
-            Pais paisAtacante = solicitarPais(atacante, "Argentina");
-            Pais paisDefensor = solicitarPais(defensor, "Brasil");
+    public Turno(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+        jugadorActual = jugadores.get(0);
 
-            atacante.atacarPaisDesde(paisAtacante, paisDefensor);
-            //todo: consultar al usuario, hardcodeado por el momento
-            fin = true;
+    }
+
+    private void siguienteJugador() {
+        int indice = jugadores.indexOf(jugadorActual);
+        int indiceSiguiente = (indice+1 == jugadores.size()) ? 0 : indice+1;
+        jugadorActual = jugadores.get(indiceSiguiente);
+    }
+
+    public void rondaAtacar(Pais paisAtacante, Pais paisDefensor) {
+        jugadorActual.atacarPaisDesde(paisAtacante, paisDefensor);
+    }
+
+    public void finalizarAtaque(MazoCartasPais mazo) {
+        if (jugadorActual.estaHabilitadoLevantarCarta()) {
+            jugadorActual.levantarCartaPais(mazo);
         }
+        fase = Fase.REAGRUPAR;
+    }
 
-        Pais paisAtacante = solicitarPais(atacante, "Argentina");
-        Pais paisDefensor = solicitarPais(defensor, "Brasil");
+    public void rondaReagrupar(Pais paisOrigen, Pais paisDestino, int cantidad) {
+            jugadorActual.transferirEjercitosDesde(paisOrigen, paisDestino, cantidad);
+    }
 
-        atacante.atacarPaisDesde(paisAtacante, paisDefensor);
-
-        paisDefensor = solicitarPais(defensor, "Chile");
-
-        atacante.atacarPaisDesde(paisAtacante, paisDefensor);
-
-        if (atacante.habilitadoLevantarCarta) {
-            atacante.levantarCartaPais(mazo);
+    public void finalizarReagrupe() {
+        // Si es el ultimo jugador
+        if (jugadores.indexOf(jugadorActual) == jugadores.size()-1) {
+            fase = Fase.COLOCAR;
+        } else {
+            fase = Fase.ATACAR;
         }
-
+        siguienteJugador();
     }
 
-    public void realizarCanje(Jugador jugador, MazoCartasPais mazo) {
-        //todo: obtener seleccion de cartas del usuario
-        jugador.canjearCartas(new ArrayList<>(), mazo);
+    public void realizarCanje(List<CartaPais> cartas, MazoCartasPais mazo) {
+        jugadorActual.canjearCartas(cartas, mazo);
     }
 
-    public void rondaReagrupar(Jugador jugador) {
-        boolean fin = false;
-        while (!fin) {
-            Pais paisOrigen = solicitarPais(jugador, "Argentina");
-            Pais paisDestino = solicitarPais(jugador, "Brasil");
-            //todo: solicitar cantidad al usuario
-            int cantidad = 2;
-            jugador.transferirEjercitosDesde(paisOrigen, paisDestino, cantidad);
-            //todo: consultar al usuario, hardcodeade por le momento
-            fin = true;
+    public void actualizarEjercitosDisponibles() {
+        jugadorActual.actualizarEjercitosDisponibles();
+    }
+
+    public void agregarEjercitosSegunCarta(CartaPais carta) {
+        carta.serActivadaPor(jugadorActual);
+    }
+
+    public void colocarEjercito(Pais pais, int cantidad) {
+        jugadorActual.colocarEjercitos(pais, cantidad);
+    }
+
+    public void finalizarColocacion() {
+        // Si es el ultimo jugador
+        if (jugadores.indexOf(jugadorActual) == jugadores.size()-1) {
+            fase = Fase.ATACAR;
         }
+        siguienteJugador();
     }
 
-    public void actualizarEjercitosDisponibles(Jugador jugador) {
-        jugador.actualizarEjercitosDisponibles();
+    public Fase obtenerFase() {
+        return fase;
     }
 
-    public void agregarEjercitosSegunCartas(Jugador jugador) {
-        for (CartaPais carta : jugador.cartas) {
-            //todo: obtener input del usuario: Desea activar la carta?
-            carta.serActivadaPor(jugador);
-        }
+    public Jugador obtenerJugadorActual() {
+        return jugadorActual;
     }
 
-    //todo: no diferenciar entre colocacion de ejercitos generales y continentales, esa logica se hace en Deposito
-    public void colocarEjercitosGenerales(Jugador jugador) {
-        while (jugador.tieneEjercitosGenerales()) {
-            //todo: obtener input del usuario
-            Pais pais = solicitarPais(jugador, "Argentina");
-            int cantidad = 2;
-            jugador.validarCantidad(cantidad);
-            jugador.colocarEjercitos(pais, cantidad);
-            jugador.quitarEjercitosGenerales(cantidad); //viola tell dont ask pero como diferencio entre ejercitosGenerales y Continentales?
-        }
+    private boolean chequearObjetivo() {
+        return true; // todo
     }
-
-    //todo: no diferenciar entre colocacion de ejercitos generales y continentales, esa logica se hace en Deposito
-    public void colocarEjercitosPorContinente(Jugador jugador, HashMap<String, Continente> continentes) {
-        for (Continente continente : continentes.values()) {
-            while (jugador.tieneEjercitosEnContinente(continente)) {
-                //todo: obtener input del usuario
-                Pais pais = solicitarPais(jugador, "Argentina");
-                int cantidad = 2;
-                jugador.validarCantidad(continente, cantidad);
-                jugador.colocarEjercitos(pais, cantidad);
-                jugador.quitarEjercitosPorContinente(continente, cantidad); //viola tell dont ask pero como diferencio entre ejercitosGenerales y Continentales?
-            }
-        }
-    }
-
-    private Pais solicitarPais(Jugador jugador, String nombrePais) {
-        //TODO: integrar con ui mas tarde
-        return jugador.buscarPais(nombrePais);
-    }*/
 }

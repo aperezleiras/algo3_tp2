@@ -20,6 +20,8 @@ public class CartaPais {
         return simbolo;
     }
 
+    public Pais getPais() {return pais;}
+
     public void serActivadaPor(Jugador jugador) {
         if (!perteneceA(jugador)) throw new CartaNoMePerteneceException();
         if (activada) throw new CartaYaActivadaException();

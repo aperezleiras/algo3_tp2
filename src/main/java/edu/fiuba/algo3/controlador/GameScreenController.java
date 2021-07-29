@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameScreenController implements Initializable {
@@ -51,6 +53,8 @@ public class GameScreenController implements Initializable {
     public Group groupEjercitosDisponibles;
     public Button botonSeleccionarPaisOrigenReagrupe;
     public Button botonSeleccionarPaisDestinoReagrupe;
+    public Group groupTarjetasPais;
+
 
     public Juego juego;
     public ArrayList<Jugador> jugadores;
@@ -58,7 +62,7 @@ public class GameScreenController implements Initializable {
     public HashMap<String, Button> mapBotonesPaises = new HashMap<>();
     public Turno turno;
     private boolean reagrupeSeleccionarOrigen = true;
-
+    private List<CartaPais> cartas;
 
 
 
@@ -89,12 +93,15 @@ public class GameScreenController implements Initializable {
         turno.finalizarReagrupe();
     }
 
+    public void finalizarCanjes(){
+        turno.finalizarCanjes();
+    }
 
     public void seleccionarPais(ActionEvent event){
 
         String nombrePais = ((Button)event.getSource()).getAccessibleText();
         Pais pais = paises.get(nombrePais);
-        switch (turno.obtenerFase()){
+        switch (turno.obtenerFase()){ //esto probablemente puede ir a un observador
             case COLOCAR:
                 if(turno.obtenerJugadorActual().paisMePertenece(pais)){
                     textPaisColocar.setText(nombrePais);
@@ -120,7 +127,7 @@ public class GameScreenController implements Initializable {
 
         paises = juego.getPaises();
         jugadores = juego.getJugadores();
-        jugadores.forEach(jugador -> jugador.asignarObservador(new ObservadorJugador(groupEjercitosDisponibles)));
+        jugadores.forEach(jugador -> jugador.asignarObservador(new ObservadorJugador(groupEjercitosDisponibles, groupTarjetasPais)));
         turno = new Turno(jugadores);
         turno.obtenerJugadorActual().actualizarObservadores();
         turno.asignarObservador(new ObservadorTurno(groupTransferir, groupAtacar, groupColocar, groupCanjear, labelTurno, labelFase, botonJugadorActual));
@@ -133,7 +140,7 @@ public class GameScreenController implements Initializable {
         juego.asignarObjetivos();
 
         labelTurno.setText("Turno de: " + turno.obtenerJugadorActual().getNombre());
-        labelFase.setText("Fase " + turno.obtenerFase().toString());
+        labelFase.setText("Fase: " + turno.obtenerFase().toString());
         botonJugadorActual.setStyle("-fx-background-color: " + turno.obtenerJugadorActual().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
     }
 
@@ -181,8 +188,14 @@ public class GameScreenController implements Initializable {
         }
     }
 
+    public void seleccionarTarjeta(ActionEvent event){
+        Button boton = ((Button)event.getSource());
+        boton.setEffect(new SepiaTone());
+        //implementar
+    }
+
     public void transferirEjercitos(){
-        turno.obtenerJugadorActual().transferirEjercitosDesde(paises.get(textPaisOrigenTransferir.getText()),paises.get(textPaisDestinoTransferir.getText()), (int) sliderCantidadTransferir.getValue());
+        turno.rondaReagrupar(paises.get(textPaisOrigenTransferir.getText()),paises.get(textPaisDestinoTransferir.getText()), (int) sliderCantidadTransferir.getValue());
     }
 
     public void actualizarCantidadColocar(){

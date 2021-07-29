@@ -207,6 +207,10 @@ public class Jugador {
         return deposito.obtenerTotalEjercitos();
     }
 
+    public List<CartaPais> getCartas() {
+        return cartas;
+    }
+
     //</editor-fold>
 }
 

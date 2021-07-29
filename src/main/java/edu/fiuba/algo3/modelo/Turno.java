@@ -9,11 +9,13 @@ public class Turno implements IObserbable {
     private Jugador jugadorActual;
     private Fase fase;
     private final ArrayList<ObservadorTurno> observadores = new ArrayList<>();
+    private boolean primerosCincoColocados = false;
+    private boolean inicial = true; //AUXILIAR, representa la fase de colocacion inicial
 
     public Turno(List<Jugador> jugadores) {
         this.jugadores = jugadores;
-        jugadores.forEach(jugador -> jugador.agregarEjercitosGenerales(5));
         jugadorActual = jugadores.get(0);
+        jugadores.forEach(jugador -> jugador.agregarEjercitosGenerales(5));
         fase = Fase.COLOCAR;
     }
 
@@ -21,7 +23,7 @@ public class Turno implements IObserbable {
         int indice = jugadores.indexOf(jugadorActual);
         int indiceSiguiente = (indice+1 == jugadores.size()) ? 0 : indice+1;
         jugadorActual = jugadores.get(indiceSiguiente);
-        if(fase == fase.COLOCAR) {jugadorActual.actualizarObservadores();}
+        if(fase == fase.COLOCAR || fase == fase.CANJEAR) {jugadorActual.actualizarObservadores();}
     }
 
     public void rondaAtacar(Pais paisAtacante, Pais paisDefensor) {
@@ -43,12 +45,17 @@ public class Turno implements IObserbable {
     public void finalizarReagrupe() {
         // Si es el ultimo jugador
         if (jugadores.indexOf(jugadorActual) == jugadores.size()-1) {
-            fase = Fase.COLOCAR;
+            fase = Fase.CANJEAR;
         } else {
             fase = Fase.ATACAR;
         }
         jugadorActual.actualizarEjercitosDisponibles();
         siguienteJugador();
+        actualizarObservadores();
+    }
+
+    public void finalizarCanjes(){
+        fase = fase.COLOCAR;
         actualizarObservadores();
     }
 
@@ -71,8 +78,14 @@ public class Turno implements IObserbable {
     public void finalizarColocacion() {
         // Si es el ultimo jugador
         if (jugadores.indexOf(jugadorActual) == jugadores.size()-1) {
-            fase = Fase.ATACAR;
-        }
+            if(!primerosCincoColocados) {
+                jugadores.forEach(jugador -> jugador.agregarEjercitosGenerales(3));
+                primerosCincoColocados = true;
+            } else {
+                inicial = false;
+                fase = Fase.ATACAR;
+            }
+        } else if(!inicial) { fase = fase.CANJEAR;}
         siguienteJugador();
         actualizarObservadores();
     }
@@ -99,4 +112,5 @@ public class Turno implements IObserbable {
     public void actualizarObservadores() {
         observadores.forEach(observadorTurno -> observadorTurno.actualizar());
     }
+
 }

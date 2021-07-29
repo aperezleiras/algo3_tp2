@@ -41,10 +41,16 @@ public class ObservadorTurno implements IObservador{
             case COLOCAR:
                 groupColocar.setVisible(true);
                 groupTransferir.setVisible(false);
+                groupCanjear.setVisible(false);
                 break;
             case REAGRUPAR:
                 groupTransferir.setVisible(true);
                 groupAtacar.setVisible(false);
+                break;
+            case CANJEAR:
+                groupCanjear.setVisible(true);
+                groupTransferir.setVisible(false);
+                groupColocar.setVisible(false);
         }
         labelTurno.setText("Turno de: " + turno.obtenerJugadorActual().getNombre());
         labelFase.setText("Fase: " + turno.obtenerFase().toString());

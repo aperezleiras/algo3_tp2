@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -47,16 +49,17 @@ public class GameScreenController implements Initializable {
     public Label labelFase;
     public Button botonJugadorActual;
     public Group groupEjercitosDisponibles;
-
-
+    public Button botonSeleccionarPaisOrigenReagrupe;
+    public Button botonSeleccionarPaisDestinoReagrupe;
 
     public Juego juego;
     public ArrayList<Jugador> jugadores;
     public HashMap<String, Pais> paises;
     public HashMap<String, Button> mapBotonesPaises = new HashMap<>();
     public Turno turno;
+    private boolean reagrupeSeleccionarOrigen = true;
 
-    int i2 = 0; // AUX
+
 
 
     @Override
@@ -105,10 +108,8 @@ public class GameScreenController implements Initializable {
                 break;
             case REAGRUPAR:
                 if(turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))){
-                    if(i2 %2 == 0){ //AUXILIAR
-                        textPaisOrigenTransferir.setText(nombrePais);
-                    } else {textPaisDestinoTransferir.setText(nombrePais);}
-                    i2++; //AUXILIAR
+                    if(reagrupeSeleccionarOrigen) textPaisOrigenTransferir.setText(nombrePais);
+                    else textPaisDestinoTransferir.setText(nombrePais);
                 }
                 break;
         }
@@ -145,7 +146,7 @@ public class GameScreenController implements Initializable {
 
         objetivoStage.initModality(Modality.APPLICATION_MODAL);
         objetivoStage.setTitle("Ver objetivo");
-
+        objetivoStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/icono.png")));
         objetivoStage.setScene(new Scene(root));
         objetivoStage.setResizable(false);
 
@@ -175,6 +176,8 @@ public class GameScreenController implements Initializable {
             Pais pais = paises.get(textPaisColocar.getText());
             int cantidad = (int) sliderCantidadColocar.getValue();
             turno.colocarEjercito(pais, cantidad);
+            sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos());
+            actualizarCantidadColocar();
         }
     }
 
@@ -198,6 +201,18 @@ public class GameScreenController implements Initializable {
         } else {
             labelCantidadTransferir.setText("Cantidad: " + String.valueOf((int) sliderCantidadTransferir.getValue()));
         }
+    }
+
+    public void seleccionarPaisOrigenReagrupe(){
+        botonSeleccionarPaisDestinoReagrupe.setEffect(null);
+        botonSeleccionarPaisOrigenReagrupe.setEffect(new Glow());
+        reagrupeSeleccionarOrigen = true;
+    }
+
+    public void seleccionarPaisDestinoReagrupe(){
+        botonSeleccionarPaisOrigenReagrupe.setEffect(null);
+        botonSeleccionarPaisDestinoReagrupe.setEffect(new Glow());
+        reagrupeSeleccionarOrigen = false;
     }
 
 }

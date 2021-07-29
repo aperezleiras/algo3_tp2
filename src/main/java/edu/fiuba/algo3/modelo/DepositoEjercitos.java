@@ -42,6 +42,8 @@ public class DepositoEjercitos {
         return ejercitosPorContinente.get(continente);
     }
 
+    public HashMap<Continente, Integer> getEjercitosPorContinente(){ return ejercitosPorContinente;}
+
     public void agregarEjercitosGenerales(int cantidad) {
         ejercitosGenerales += cantidad;
     }
@@ -81,5 +83,16 @@ public class DepositoEjercitos {
         // Caso 3: No hay ejercitos suficientes
         else
             throw new CantidadEjercitosInsuficienteException();
+    }
+
+    public int obtenerTotalEjercitos() {
+        int resultado = 0;
+        resultado += ejercitosGenerales;
+
+        for (int cantidad : ejercitosPorContinente.values()) {
+            resultado += cantidad;
+        }
+
+        return resultado;
     }
 }

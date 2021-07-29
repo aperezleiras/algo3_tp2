@@ -310,7 +310,7 @@
                                     <Font size="19.0" />
                                  </font>
                               </Label>
-                              <Group fx:id="groupCantidadesDisponibles">
+                              <Group fx:id="groupEjercitosDisponibles">
                                  <children>
                                     <Label prefHeight="28.0" prefWidth="208.0" text="Generales: 0" textFill="#d8b370">
                                        <font>

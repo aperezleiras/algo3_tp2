@@ -46,6 +46,7 @@ public class GameScreenController implements Initializable {
     public Label labelTurno;
     public Label labelFase;
     public Button botonJugadorActual;
+    public Group groupEjercitosDisponibles;
 
 
 
@@ -89,25 +90,28 @@ public class GameScreenController implements Initializable {
     public void seleccionarPais(ActionEvent event){
 
         String nombrePais = ((Button)event.getSource()).getAccessibleText();
-        if(turno.obtenerFase() == Fase.COLOCAR){
-            if(turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))){
-                textPaisColocar.setText(nombrePais); // hacer que busque a ver si selecciono un pais suyo o no
-                sliderCantidadColocar.setMax(10); // el máximo tiene que ser la cantidad disponible  a colocar del jugador
-            }
-        } else if(turno.obtenerFase() == Fase.ATACAR){
-            if(turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))){
-                textPaisOrigenAtacar.setText(nombrePais);
-            } else {textPaisDestinoAtacar.setText(nombrePais);}
-        } else if (turno.obtenerFase() == Fase.REAGRUPAR){
-            if(turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))){
-                if(i2 %2 == 0){
-                    textPaisOrigenTransferir.setText(nombrePais);
-                } else {textPaisDestinoTransferir.setText(nombrePais);}
-                i2++; //AUXILIAR
-            }
+        Pais pais = paises.get(nombrePais);
+        switch (turno.obtenerFase()){
+            case COLOCAR:
+                if(turno.obtenerJugadorActual().paisMePertenece(pais)){
+                    textPaisColocar.setText(nombrePais);
+                    sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos()); //Si quiero que muestre la mayor cantidad posible, hay que cambiar un par de cosas
+                }
+                break;
+            case ATACAR:
+                if(turno.obtenerJugadorActual().paisMePertenece(pais)){
+                    textPaisOrigenAtacar.setText(nombrePais);
+                } else {textPaisDestinoAtacar.setText(nombrePais);}
+                break;
+            case REAGRUPAR:
+                if(turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))){
+                    if(i2 %2 == 0){ //AUXILIAR
+                        textPaisOrigenTransferir.setText(nombrePais);
+                    } else {textPaisDestinoTransferir.setText(nombrePais);}
+                    i2++; //AUXILIAR
+                }
+                break;
         }
-
-
     }
 
     public void iniciarPartida(ArrayList<String> nombresJugadores) throws FileNotFoundException {
@@ -115,7 +119,9 @@ public class GameScreenController implements Initializable {
 
         paises = juego.getPaises();
         jugadores = juego.getJugadores();
+        jugadores.forEach(jugador -> jugador.asignarObservador(new ObservadorJugador(groupEjercitosDisponibles)));
         turno = new Turno(jugadores);
+        turno.obtenerJugadorActual().actualizarObservadores();
         turno.asignarObservador(new ObservadorTurno(groupTransferir, groupAtacar, groupColocar, groupCanjear, labelTurno, labelFase, botonJugadorActual));
         paises.forEach( (nombre, pais) ->  {
             pais.asignarObservador(new ObservadorPais(mapBotonesPaises.get(nombre)));
@@ -168,8 +174,7 @@ public class GameScreenController implements Initializable {
         } else {
             Pais pais = paises.get(textPaisColocar.getText());
             int cantidad = (int) sliderCantidadColocar.getValue();
-            pais.agregarEjercitos(cantidad);
-            //pais.getJugador().colocarEjercitos(pais, cantidad); // probablemento esto saque de 'jugadorActual' mas que del pais
+            turno.colocarEjercito(pais, cantidad);
         }
     }
 

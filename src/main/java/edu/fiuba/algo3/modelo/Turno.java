@@ -12,15 +12,16 @@ public class Turno implements IObserbable {
 
     public Turno(List<Jugador> jugadores) {
         this.jugadores = jugadores;
+        jugadores.forEach(jugador -> jugador.agregarEjercitosGenerales(5));
         jugadorActual = jugadores.get(0);
         fase = Fase.COLOCAR;
-
     }
 
     private void siguienteJugador() {
         int indice = jugadores.indexOf(jugadorActual);
         int indiceSiguiente = (indice+1 == jugadores.size()) ? 0 : indice+1;
         jugadorActual = jugadores.get(indiceSiguiente);
+        if(fase == fase.COLOCAR) {jugadorActual.actualizarObservadores();}
     }
 
     public void rondaAtacar(Pais paisAtacante, Pais paisDefensor) {
@@ -46,6 +47,7 @@ public class Turno implements IObserbable {
         } else {
             fase = Fase.ATACAR;
         }
+        jugadorActual.actualizarEjercitosDisponibles();
         siguienteJugador();
         actualizarObservadores();
     }

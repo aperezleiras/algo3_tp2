@@ -6,6 +6,7 @@ import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -21,10 +22,12 @@ public class Jugador {
     private String nombre;
 
     private List<Jugador> jugadoresDerrotados;
+    private List<ObservadorJugador> observadores;
 
     private List<String> colores = Arrays.asList("#0000FF", "#cc3311", "#ee7733", "#009988", "#ee3377", "#000000");
 
     Jugador(int unColor, DepositoEjercitos deposito, String nombre) {
+
         this.nombre = nombre;
         color = colores.get(unColor);
         paises = new ArrayList<>();
@@ -35,6 +38,7 @@ public class Jugador {
         gestorCanjes = new GestorCanjes();
 
         jugadoresDerrotados = new ArrayList<>();
+        observadores = new ArrayList<>();
     }
 
     public String getColor() { // AUXILIAR
@@ -111,9 +115,12 @@ public class Jugador {
         return deposito.obtenerEjercitosContinente(continente);
     }
 
+    public HashMap<Continente, Integer> getEjercitosPorContinente(){ return deposito.getEjercitosPorContinente();}
+
     public void colocarEjercitos(Pais unPais, int cantidad) {
         if (!paisMePertenece(unPais)) throw new PaisNoMePerteneceException();
         deposito.agregarEjercitosAPais(unPais, cantidad);
+        actualizarObservadores();
     }
 
     public void transferirEjercitosDesde(Pais paisOrigen, Pais paisDestino, int cantidad) {
@@ -183,6 +190,21 @@ public class Jugador {
 
     public boolean haGanado() {
         return objetivos.stream().anyMatch(o -> o.cumplido(this));
+    }
+
+    public void asignarObservador(ObservadorJugador observadorJugador) {
+        observadorJugador.asignarJugador(this);
+        observadores.add(observadorJugador);
+    }
+
+    public void actualizarObservadores(){
+        observadores.forEach(observador -> {
+            observador.actualizar();
+        });
+    }
+
+    public int obtenerTotalEjercitos() {
+        return deposito.obtenerTotalEjercitos();
     }
 
     //</editor-fold>

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
 import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
+import edu.fiuba.algo3.vista.ObservadorPais;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

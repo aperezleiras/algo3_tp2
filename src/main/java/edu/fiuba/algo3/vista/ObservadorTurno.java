@@ -1,18 +1,18 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Batalla;
+import edu.fiuba.algo3.modelo.IObservador;
+import edu.fiuba.algo3.modelo.Turno;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObservadorTurno implements IObservador{
+public class ObservadorTurno implements IObservador {
 
     private final Group groupTransferir;
     private final Group groupAtacar;

@@ -1,5 +1,7 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.IObservador;
+import edu.fiuba.algo3.modelo.Pais;
 import javafx.scene.control.Button;
 
 public class ObservadorPais implements IObservador {

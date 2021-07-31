@@ -1,5 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.CartaPais;
+import edu.fiuba.algo3.modelo.IObservador;
+import edu.fiuba.algo3.modelo.Jugador;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

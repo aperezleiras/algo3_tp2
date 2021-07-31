@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.exception.PaisInvalidoException;
 import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 import edu.fiuba.algo3.exception.PaisNoMePerteneceException;
+import edu.fiuba.algo3.vista.ObservadorJugador;
 
 import java.util.ArrayList;
 import java.util.Arrays;

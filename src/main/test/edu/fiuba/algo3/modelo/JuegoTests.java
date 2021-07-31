@@ -1,20 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
 import javafx.scene.control.Button;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import org.mockito.Mockito;
 
 public class JuegoTests {
 
@@ -23,11 +16,16 @@ public class JuegoTests {
     private Jugador jugador3;
     private Jugador jugador4;
     HashMap<String, Button> mapBotones;
+    ArrayList<String> nombres = new ArrayList<>();
 
 
     @Test
     public void JuegoCon2JugadoresCadaUnoTiene25Paises() throws FileNotFoundException {
-        Juego juego = new Juego(2);
+
+        nombres.add("Pablo");
+        nombres.add("Agustin");
+
+        Juego juego = new Juego(nombres);
         HashMap<String, Pais> paises = juego.getPaises();
         juego.asignarPaises();
         jugador1 = juego.getJugador(1);
@@ -39,7 +37,12 @@ public class JuegoTests {
 
     @Test
     public void JuegoCon3JugadoresCadaUnoTiene16o17Paises() throws FileNotFoundException {
-        Juego juego = new Juego(3);
+
+        nombres.add("Pablo");
+        nombres.add("Agustin");
+        nombres.add("Ariadna");
+
+        Juego juego = new Juego(nombres);
         HashMap<String, Pais> paises = juego.getPaises();
         juego.asignarPaises();
         jugador1 = juego.getJugador(1);
@@ -53,7 +56,13 @@ public class JuegoTests {
 
     @Test
     public void JuegoCon4JugadoresCadaUnoTiene12o13Paises() throws FileNotFoundException {
-        Juego juego = new Juego(4);
+
+        nombres.add("Pablo");
+        nombres.add("Agustin");
+        nombres.add("Ariadna");
+        nombres.add("Franco");
+
+        Juego juego = new Juego(nombres);
         juego.asignarPaises();
 
         jugador1 = juego.getJugador(1);
@@ -70,12 +79,40 @@ public class JuegoTests {
 
     @Test
     public void LosPaisesNoSeRepitenEntreJugadores() throws FileNotFoundException {
-        Juego juego = new Juego(2);
+        nombres.add("Pablo");
+        nombres.add("Agustin");
+
+        Juego juego = new Juego(nombres);
 
         juego.asignarPaises();
         jugador1 = juego.getJugador(1);
         jugador2 = juego.getJugador(2);
 
         jugador1.getPaises().forEach(pais -> assertFalse(jugador2.getPaises().contains(pais)));
+    }
+
+    @Test
+    public void unJuegoDe4JugadoresTieneUnObjetivoUnicoMasQueUnJuegoDe3Jugadores() throws FileNotFoundException {
+        nombres.add("Pablo");
+        nombres.add("Agustin");
+        nombres.add("Franco");
+        Juego juego1 = new Juego(nombres);
+        nombres.add("Ariadna");
+        Juego juego2 = new Juego(nombres);
+        juego1.cargarObjetivos();
+        juego2.cargarObjetivos();
+
+        int cantidadObjetivos1 = juego1.getCantidadObjetivos();
+        int cantidadObjetivos2 = juego2.getCantidadObjetivos();
+
+        assertEquals(cantidadObjetivos2 - cantidadObjetivos1, 1);
+    }
+
+    @Test
+    public void test() throws FileNotFoundException {
+        nombres.add("Pablo");
+        nombres.add("Agustin");
+        Juego juego = new Juego(nombres);
+        juego.cargarObjetivos();
     }
 }

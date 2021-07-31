@@ -42,8 +42,8 @@ public class CartaPaisTests {
         depo1 = new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica)));
         depo2 = new DepositoEjercitos(new ArrayList<>(Arrays.asList(sudamerica)));
 
-        jugador1 = new Jugador(1, depo1);
-        jugador2 = new Jugador(2, depo2);
+        jugador1 = new Jugador(1, depo1, "");
+        jugador2 = new Jugador(2, depo2, "");
         jugador1.asignarPais(argentina);
         jugador1.asignarPais(chile);
         jugador2.asignarPais(brasil);

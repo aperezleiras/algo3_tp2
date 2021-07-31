@@ -1,32 +1,39 @@
 package edu.fiuba.algo3.controlador;
 
+import edu.fiuba.algo3.exception.CantidadATransferirInvalidaException;
+import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
+import edu.fiuba.algo3.exception.PaisInvalidoException;
+import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.vista.ObservadorJugador;
+import edu.fiuba.algo3.vista.ObservadorPais;
+import edu.fiuba.algo3.vista.ObservadorTurno;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.SepiaTone;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GameScreenController implements Initializable {
 
     @FXML
-    public Button botonAvanzarFase;
     public Group groupTransferir;
     public Group groupAtacar;
     public Group groupColocar;
@@ -41,16 +48,37 @@ public class GameScreenController implements Initializable {
     public TextField textPaisOrigenTransferir;
     public TextField textPaisOrigenAtacar;
     public TextField textPaisDestinoAtacar;
+    public Label labelErrorAtacar;
+    public Label labelErrorTransferir;
+    public Label labelTurno;
+    public Label labelFase;
+    public Button botonJugadorActual;
+    public Group groupEjercitosDisponibles;
+    public Button botonSeleccionarPaisOrigenReagrupe;
+    public Button botonSeleccionarPaisDestinoReagrupe;
+    public Group groupTarjetasPais;
+
+    public ImageView dadoAtacante1;
+    public ImageView dadoAtacante2;
+    public ImageView dadoAtacante3;
+    public ImageView dadoDefensor1;
+    public ImageView dadoDefensor2;
+    public ImageView dadoDefensor3;
+
 
     public Juego juego;
     public ArrayList<Jugador> jugadores;
     public HashMap<String, Pais> paises;
     public HashMap<String, Button> mapBotonesPaises = new HashMap<>();
+    public Turno turno;
+    private boolean reagrupeSeleccionarOrigen = true;
+    private List<CartaPais> cartas;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cargarBotonesPaises();
+
     }
 
     private void cargarBotonesPaises() {
@@ -61,65 +89,157 @@ public class GameScreenController implements Initializable {
         });
     }
 
-    public void avanzarFase(){
 
+    public void finalizarColocacion(){
+        turno.finalizarColocacion();
+    }
+
+    public void finalizarAtaque(){
+        turno.finalizarAtaque(juego.getMazoCartasPais());
+    }
+
+    public void finalizarReagrupe(){
+        turno.finalizarReagrupe();
+    }
+
+    public void finalizarCanjes(){
+        turno.finalizarCanjes();
     }
 
     public void seleccionarPais(ActionEvent event){
-        String nombrePais = ((Button)event.getSource()).getAccessibleText();
-        textPaisColocar.setText(nombrePais); // hacer que busque a ver si selecciono un pais suyo o no
-        sliderCantidadColocar.setMax(10); // el máximo tiene que ser la cantidad disponible  a colocar del jugador
 
+        String nombrePais = ((Button)event.getSource()).getAccessibleText();
+        Pais pais = paises.get(nombrePais);
+        switch (turno.obtenerFase()){ //esto probablemente puede ir a un observador
+            case COLOCAR:
+                if (turno.obtenerJugadorActual().paisMePertenece(pais)) {
+                    textPaisColocar.setText(nombrePais);
+                    sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos()); //Si quiero que muestre la mayor cantidad posible, hay que cambiar un par de cosas
+                }
+                break;
+            case ATACAR:
+                if (turno.obtenerJugadorActual().paisMePertenece(pais))
+                    textPaisOrigenAtacar.setText(nombrePais);
+                else
+                    textPaisDestinoAtacar.setText(nombrePais);
+                break;
+            case REAGRUPAR:
+                if (turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))) {
+                    if (reagrupeSeleccionarOrigen) textPaisOrigenTransferir.setText(nombrePais);
+                    else textPaisDestinoTransferir.setText(nombrePais);
+                }
+                break;
+        }
     }
 
     public void iniciarPartida(ArrayList<String> nombresJugadores) throws FileNotFoundException {
-        juego = new Juego(nombresJugadores.size()); // Ahora mismo Juego() recibe la cantidad, pero habria que pasarle los nombres
+        juego = new Juego(nombresJugadores); // Ahora mismo Juego() recibe la cantidad, pero habria que pasarle los nombres
+
         paises = juego.getPaises();
         jugadores = juego.getJugadores();
-
+        jugadores.forEach(jugador -> jugador.asignarObservador(new ObservadorJugador(groupEjercitosDisponibles, groupTarjetasPais)));
+        turno = new Turno(jugadores);
+        turno.obtenerJugadorActual().actualizarObservadores();
+        ArrayList<ImageView> imageViewDados = new ArrayList<>(Arrays.asList(dadoAtacante1, dadoAtacante2, dadoAtacante3, dadoDefensor1, dadoDefensor2, dadoDefensor3));
+        turno.asignarObservador(new ObservadorTurno(groupTransferir, groupAtacar, groupColocar, groupCanjear, labelTurno, labelFase, botonJugadorActual, imageViewDados));
         paises.forEach( (nombre, pais) ->  {
             pais.asignarObservador(new ObservadorPais(mapBotonesPaises.get(nombre)));
         });
 
         juego.asignarPaises();
+        juego.cargarObjetivos();
+        juego.asignarObjetivos();
+
+        labelTurno.setText("Turno de: " + turno.obtenerJugadorActual().getNombre());
+        labelFase.setText("Fase: " + turno.obtenerFase().toString());
+        botonJugadorActual.setStyle("-fx-background-color: " + turno.obtenerJugadorActual().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
     }
 
     public void verObjetivo() throws IOException {
-        Parent root = FXMLLoader.load((getClass().getResource("/vista/ObjetivoScreen.fxml")));
-        // todo: Acá habría que sacar del jugador actual el texto de la misión
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("/vista/ObjetivoScreen.fxml")));
+        Parent root = loader.load();
+        ObjetivoScreenController objetivoScreenController = loader.getController();
+        objetivoScreenController.setearTexto(turno.obtenerJugadorActual().getTextoObjetivo());
         Stage objetivoStage = new Stage();
 
         objetivoStage.initModality(Modality.APPLICATION_MODAL);
         objetivoStage.setTitle("Ver objetivo");
-
+        objetivoStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/icono.png")));
         objetivoStage.setScene(new Scene(root));
         objetivoStage.setResizable(false);
+
         objetivoStage.show();
     }
 
     public void atacar(){
-
+        if(!textPaisDestinoAtacar.getText().isEmpty() || !textPaisOrigenAtacar.getText().isEmpty()){
+            try {
+                turno.rondaAtacar(paises.get(textPaisOrigenAtacar.getText()),paises.get(textPaisDestinoAtacar.getText()));
+            } catch (CantidadEjercitosInsuficienteException e){
+                labelErrorAtacar.setText("Cantidad de ejércitos insuficiente");
+            } catch (PaisInvalidoException e){
+                labelErrorAtacar.setText("País invalido");
+            } catch (PaisNoLimitrofeException e){
+                labelErrorAtacar.setText("Los países no son limítrofes");
+            }
+        }
     }
 
     public void colocarEjercitos(){
         String nombrePais = textPaisColocar.getText();
-        if (nombrePais.isEmpty()){
+
+        if (nombrePais.isEmpty())
             return;
-        } else {
-            Pais pais = paises.get(textPaisColocar.getText());
-            int cantidad = (int) sliderCantidadColocar.getValue();
-            pais.agregarEjercitos(cantidad);
-            //pais.getJugador().colocarEjercitos(pais, cantidad); // probablemento esto saque de 'jugadorActual' mas que del pais
+
+        Pais pais = paises.get(textPaisColocar.getText());
+        int cantidad = (int) sliderCantidadColocar.getValue();
+        turno.colocarEjercito(pais, cantidad);
+        sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos());
+        actualizarCantidadColocar();
+    }
+
+    public void seleccionarTarjeta(ActionEvent event){
+        Button boton = ((Button)event.getSource());
+        boton.setEffect(new SepiaTone());
+        //implementar
+    }
+
+    public void transferirEjercitos(){
+        try {
+            turno.rondaReagrupar(paises.get(textPaisOrigenTransferir.getText()),paises.get(textPaisDestinoTransferir.getText()), (int) sliderCantidadTransferir.getValue());
+        } catch (CantidadATransferirInvalidaException e) {
+            labelErrorTransferir.setText("Cantidad de ejércitos insuficiente");
         }
     }
 
     public void actualizarCantidadColocar(){
         String nombrePais = textPaisColocar.getText();
-        if (nombrePais.isEmpty()){
+
+        if (nombrePais.isEmpty())
             return;
-        } else {
-            labelCantidadColocar.setText("Cantidad: " + String.valueOf((int) sliderCantidadColocar.getValue()));
-        }
+
+        labelCantidadColocar.setText("Cantidad: " + String.valueOf((int) sliderCantidadColocar.getValue()));
+    }
+
+    public void actualizarCantidadTransferir(){
+        String nombrePais = textPaisOrigenTransferir.getText();
+
+        if (nombrePais.isEmpty())
+            return;
+
+        labelCantidadTransferir.setText("Cantidad: " + String.valueOf((int) sliderCantidadTransferir.getValue()));
+    }
+
+    public void seleccionarPaisOrigenReagrupe(){
+        botonSeleccionarPaisDestinoReagrupe.setEffect(null);
+        botonSeleccionarPaisOrigenReagrupe.setEffect(new Glow());
+        reagrupeSeleccionarOrigen = true;
+    }
+
+    public void seleccionarPaisDestinoReagrupe(){
+        botonSeleccionarPaisOrigenReagrupe.setEffect(null);
+        botonSeleccionarPaisDestinoReagrupe.setEffect(new Glow());
+        reagrupeSeleccionarOrigen = false;
     }
 
 }

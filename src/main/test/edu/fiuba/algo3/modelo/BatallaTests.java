@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
 import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
+import edu.fiuba.algo3.vista.ObservadorPais;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,8 +37,8 @@ public class BatallaTests {
     @Test
     public void PaisConquistaAOtroYCambiaJugador() {
         //arrange
-        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()));
-        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
+        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()),"");
+        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()),"");
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 
@@ -57,8 +58,8 @@ public class BatallaTests {
     @Test
     public void PaisConquistaAOtroYSeTransfierenEjercitos() {
         //arrange
-        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()));
-        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()));
+        Jugador elDibu = new Jugador(0, new DepositoEjercitos(new ArrayList<>()),"");
+        Jugador neyPasto = new Jugador(1, new DepositoEjercitos(new ArrayList<>()),"");
         atacante.asignarJugador(elDibu);
         defensor.asignarJugador(neyPasto);
 

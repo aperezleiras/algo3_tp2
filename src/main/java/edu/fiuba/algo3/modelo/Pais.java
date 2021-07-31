@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import edu.fiuba.algo3.vista.ObservadorPais;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +54,12 @@ public class Pais implements IObserbable { //todo: crear interfaz de pais
         actualizarObservadores();
     }
 
+
+    public void asignarObservador(ObservadorPais observador) {
+        observador.asignarPais(this);
+        observadores.add(observador);
+    }
+
     public void actualizarObservadores(){
         observadores.forEach(observador -> {
             observador.actualizar();
@@ -81,17 +86,13 @@ public class Pais implements IObserbable { //todo: crear interfaz de pais
         return jugador;
     }
 
-    public void conquistar(Pais defensor) {
-        defensor.asignarJugador(jugador);
-        jugador.asignarPais(defensor);
-        transferirEjercitos(defensor,1);
-        jugador.conquistoPais();
-        actualizarObservadores();
-    }
+    public void conquistar(Pais paisDefensor) {
+        (paisDefensor.getJugador()).quitarPais(paisDefensor);
+        jugador.conquistoPaisDe(paisDefensor.getJugador());
 
-    public void asignarObservador(ObservadorPais observador) {
-        observador.asignarPais(this);
-        observadores.add(observador);
+        jugador.asignarPais(paisDefensor);
+        transferirEjercitos(paisDefensor,1);
+        actualizarObservadores();
     }
 }
 

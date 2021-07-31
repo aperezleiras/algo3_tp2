@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import javafx.scene.control.Button;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -12,17 +10,18 @@ public class Juego {
     private HashMap<String, Continente> continentes = new HashMap<>();
     private HashMap<String, Pais> paises = new HashMap<>();
     private MazoCartasPais mazoCartasPais = new MazoCartasPais(new ArrayList<>());
+    private ArrayList<IObjetivo> objetivos = new ArrayList<>();
 
 
-    public Juego(int cantidadJugadores) throws FileNotFoundException {
+    public Juego(ArrayList<String> nombresJugadores) throws FileNotFoundException {
 
 
         cargarPaises(paises, continentes);
         cargarCartas(paises, mazoCartasPais);
 
         ArrayList<Continente> listaContinentes = new ArrayList<>(continentes.values());
-        for (int i = 0; i < cantidadJugadores; i ++) {
-            jugadores.add(new Jugador(i, new DepositoEjercitos(listaContinentes)));
+        for (int i = 0; i < nombresJugadores.size(); i ++) {
+            jugadores.add(new Jugador(i, new DepositoEjercitos(listaContinentes), nombresJugadores.get(i)));
         }
 
     }
@@ -32,6 +31,34 @@ public class Juego {
         Collections.shuffle(listaPaises);
         for (int i = 0; i < listaPaises.size(); i++) {
             jugadores.get(i % jugadores.size()).asignarPais(listaPaises.get(i));
+        }
+    }
+
+    public void cargarObjetivos() throws FileNotFoundException {
+        // Objetivos de Ocupacion
+        Scanner scan = new Scanner(new File("textfiles/Objetivos.csv"));
+        String nombreContinente, cantidadObjetivo;
+
+        while (scan.hasNextLine()) {
+            ArrayList<IObjetivo> objetivosComponente = new ArrayList<>();
+
+            String[] objetivosStr = (scan.nextLine()).split(";");
+            for (String objetivo : objetivosStr) {
+                nombreContinente = objetivo.split(",")[0];
+                cantidadObjetivo = objetivo.split(",")[1];
+                if (cantidadObjetivo.equals("entero"))
+                    objetivosComponente.add(new ObjetivoOcupacionContinente(continentes.get(nombreContinente)));
+                else
+                    objetivosComponente.add(new ObjetivoOcupacionParcialContinente(continentes.get(nombreContinente), Integer.parseInt(cantidadObjetivo)));
+            }
+            objetivos.add(new ObjetivoCompuesto(objetivosComponente));
+        }
+
+        // Objetivos de Derrotar Jugadores
+        IObjetivo objJugador;
+        for (Jugador jugador : jugadores) {
+            objJugador = new ObjetivoDerrotarJugador(jugador);
+            objetivos.add(objJugador);
         }
     }
 
@@ -73,6 +100,32 @@ public class Juego {
         mazo.mezclar();
     }
 
+    public int getCantidadObjetivos() {
+        return objetivos.size();
+    }
+
+
+    public void actualizarObjetivosDerrotarJugador() {
+        //todo: cuando un jugador es derrotado los objetivos que involucraban su derrota se tienen que actualizar para cada jugador
+    }
+
+    public void asignarObjetivos() {
+        Random rand = new Random();
+        IObjetivo obj = null;
+        boolean objetivoValido = false;
+
+        for (Jugador jugador : jugadores) {
+            while (!objetivoValido) {
+                obj = objetivos.get(rand.nextInt(objetivos.size()));
+                objetivoValido = obj.esValidoPara(jugador);
+            }
+
+            jugador.asignarObjetivo(obj);
+            jugador.asignarObjetivo(new ObjetivoOcupacionPaises(30));
+            objetivoValido = false;
+        }
+    }
+
     public HashMap<String, Pais> getPaises() {
         return paises;
     }
@@ -87,6 +140,7 @@ public class Juego {
 
     public ArrayList<Jugador> getJugadores() { return jugadores;}
 
-
-
+    public MazoCartasPais getMazoCartasPais() {
+        return mazoCartasPais;
+    }
 }

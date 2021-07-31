@@ -8,10 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StartScreenController {
 
@@ -38,16 +40,19 @@ public class StartScreenController {
         if(!textJugador5.getText().isEmpty()) jugadores.add(textJugador5.getText());
         if(!textJugador6.getText().isEmpty()) jugadores.add(textJugador6.getText());
 
-        if(jugadores.size()<2) labelError.setText("Ingrese una cantidad de jugadores mayor a 1");
+        if (jugadores.size()<2) labelError.setText("Ingrese una cantidad de jugadores mayor a 1");
         else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/GameScreen.fxml"));
             Parent root = loader.load();
             GameScreenController gameScreenController = loader.getController();
+            Collections.shuffle(jugadores);
             gameScreenController.iniciarPartida(jugadores);
 
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.setTitle("T.E.G.");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/icono.png")));
             stage.show();
         }
     }

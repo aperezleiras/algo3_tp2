@@ -1,0 +1,8 @@
+Africa,entero;America del Norte,5;Europa,4
+America del Sur,entero;Europa,7
+Asia,entero;America del Sur,2
+Europa,entero;Asia,4;America del Sur,2
+America del Norte,entero;Oceania,2;Asia,4
+Oceania,2;Africa,2;America del Sur,2;Europa,3;America del Norte,4;Asia,3
+Oceania,entero;America del Norte,entero;Europa,2
+America del Sur,entero;Africa,entero;America del Norte,5

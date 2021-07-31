@@ -60,14 +60,14 @@ public class TurnoTests {
     }
 
     @Test
-    public void finalizarReagrupeCambiaAFaseColocarSiEsUltimoJugador() {
+    public void finalizarReagrupeCambiaAFaseCanjearSiEsUltimoJugador() {
         Jugador jugador1 = Mockito.mock(Jugador.class);
 
         Turno turno = new Turno(new ArrayList<>(Arrays.asList(jugador1)));
 
         turno.finalizarReagrupe();
 
-        assertEquals(Fase.COLOCAR, turno.obtenerFase());
+        assertEquals(Fase.CANJEAR, turno.obtenerFase());
     }
 
     @Test
@@ -88,7 +88,8 @@ public class TurnoTests {
 
         Turno turno = new Turno(new ArrayList<>(Arrays.asList(jugador1)));
 
-        turno.finalizarColocacion();
+        turno.finalizarColocacion(); // colocacion 5 ejercitos
+        turno.finalizarColocacion(); // colocacion 3 ejercitos
 
         assertEquals(Fase.ATACAR, turno.obtenerFase());
     }

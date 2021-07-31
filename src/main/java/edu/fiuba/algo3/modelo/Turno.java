@@ -14,6 +14,7 @@ public class Turno implements IObserbable {
     private final ArrayList<ObservadorTurno> observadores = new ArrayList<>();
     private boolean primerosCincoColocados = false;
     private boolean inicial = true; //AUXILIAR, representa la fase de colocacion inicial
+    private boolean hayGanador = false;
 
     public Turno(List<Jugador> jugadores) {
         this.jugadores = jugadores;
@@ -30,10 +31,14 @@ public class Turno implements IObserbable {
             jugadorActual.actualizarObservadores();
     }
 
+    public boolean hayGanador() {
+        return hayGanador;
+    }
+
     public void rondaAtacar(Pais paisAtacante, Pais paisDefensor) {
         ultimaBatalla = jugadorActual.atacarPaisDesde(paisAtacante, paisDefensor);
-        if (jugadorActual.haGanado());
-
+        if (jugadorActual.haGanado())
+            hayGanador = true;
         actualizarObservadores();
     }
 

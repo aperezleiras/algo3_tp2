@@ -527,6 +527,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
+                        <Label fx:id="labelErrorTransferir" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="532.0" prefHeight="49.0" prefWidth="141.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Group>
                   <Group fx:id="groupCanjear" layoutX="38.0" layoutY="9.0" visible="false">

@@ -79,6 +79,12 @@ public class ObservadorTurno implements IObservador {
         labelTurno.setText("Turno de: " + turno.obtenerJugadorActual().getNombre());
         labelFase.setText("Fase: " + turno.obtenerFase().toString());
         botonJugadorActual.setStyle("-fx-background-color: " + turno.obtenerJugadorActual().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
+
+        if (turno.hayGanador()) {
+            String ganador = turno.obtenerJugadorActual().getNombre();
+            //todo Terminar el juego
+        }
+
     }
 
     public void actualizarDados() {

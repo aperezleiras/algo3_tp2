@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controlador;
 
+import edu.fiuba.algo3.exception.CantidadATransferirInvalidaException;
 import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
 import edu.fiuba.algo3.exception.PaisInvalidoException;
 import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
@@ -48,6 +49,7 @@ public class GameScreenController implements Initializable {
     public TextField textPaisOrigenAtacar;
     public TextField textPaisDestinoAtacar;
     public Label labelErrorAtacar;
+    public Label labelErrorTransferir;
     public Label labelTurno;
     public Label labelFase;
     public Button botonJugadorActual;
@@ -71,7 +73,6 @@ public class GameScreenController implements Initializable {
     public Turno turno;
     private boolean reagrupeSeleccionarOrigen = true;
     private List<CartaPais> cartas;
-
 
 
     @Override
@@ -175,13 +176,12 @@ public class GameScreenController implements Initializable {
             try {
                 turno.rondaAtacar(paises.get(textPaisOrigenAtacar.getText()),paises.get(textPaisDestinoAtacar.getText()));
             } catch (CantidadEjercitosInsuficienteException e){
-                labelErrorAtacar.setText("Cantidad de ejércitos insuficiente.");
+                labelErrorAtacar.setText("Cantidad de ejércitos insuficiente");
             } catch (PaisInvalidoException e){
                 labelErrorAtacar.setText("País invalido");
             } catch (PaisNoLimitrofeException e){
                 labelErrorAtacar.setText("Los países no son limítrofes");
             }
-
         }
     }
 
@@ -205,7 +205,11 @@ public class GameScreenController implements Initializable {
     }
 
     public void transferirEjercitos(){
-        turno.rondaReagrupar(paises.get(textPaisOrigenTransferir.getText()),paises.get(textPaisDestinoTransferir.getText()), (int) sliderCantidadTransferir.getValue());
+        try {
+            turno.rondaReagrupar(paises.get(textPaisOrigenTransferir.getText()),paises.get(textPaisDestinoTransferir.getText()), (int) sliderCantidadTransferir.getValue());
+        } catch (CantidadATransferirInvalidaException e) {
+            labelErrorTransferir.setText("Cantidad de ejércitos insuficiente");
+        }
     }
 
     public void actualizarCantidadColocar(){

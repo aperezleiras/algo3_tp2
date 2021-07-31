@@ -40,7 +40,7 @@ public class StartScreenController {
         if(!textJugador5.getText().isEmpty()) jugadores.add(textJugador5.getText());
         if(!textJugador6.getText().isEmpty()) jugadores.add(textJugador6.getText());
 
-        if(jugadores.size()<2) labelError.setText("Ingrese una cantidad de jugadores mayor a 1");
+        if (jugadores.size()<2) labelError.setText("Ingrese una cantidad de jugadores mayor a 1");
         else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/GameScreen.fxml"));
             Parent root = loader.load();

@@ -130,13 +130,13 @@ public class Jugador {
         paisOrigen.transferirEjercitos(paisDestino, cantidad);
     }
 
-    public boolean atacarPaisDesde(Pais miPais, Pais paisEnemigo){
+    public Batalla atacarPaisDesde(Pais miPais, Pais paisEnemigo){
         if (!paisMePertenece(miPais) || paisMePertenece(paisEnemigo)) throw new PaisInvalidoException();
 
         Batalla batalla = new Batalla(miPais, paisEnemigo, new Dado());
         batalla.realizarAtaque();
 
-        return haGanado();
+        return batalla;
     }
 
     //</editor-fold>

@@ -18,16 +18,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GameScreenController implements Initializable {
 
@@ -54,6 +52,13 @@ public class GameScreenController implements Initializable {
     public Button botonSeleccionarPaisOrigenReagrupe;
     public Button botonSeleccionarPaisDestinoReagrupe;
     public Group groupTarjetasPais;
+
+    public ImageView dadoAtacante1;
+    public ImageView dadoAtacante2;
+    public ImageView dadoAtacante3;
+    public ImageView dadoDefensor1;
+    public ImageView dadoDefensor2;
+    public ImageView dadoDefensor3;
 
 
     public Juego juego;
@@ -103,19 +108,20 @@ public class GameScreenController implements Initializable {
         Pais pais = paises.get(nombrePais);
         switch (turno.obtenerFase()){ //esto probablemente puede ir a un observador
             case COLOCAR:
-                if(turno.obtenerJugadorActual().paisMePertenece(pais)){
+                if (turno.obtenerJugadorActual().paisMePertenece(pais)) {
                     textPaisColocar.setText(nombrePais);
                     sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos()); //Si quiero que muestre la mayor cantidad posible, hay que cambiar un par de cosas
                 }
                 break;
             case ATACAR:
-                if(turno.obtenerJugadorActual().paisMePertenece(pais)){
+                if (turno.obtenerJugadorActual().paisMePertenece(pais))
                     textPaisOrigenAtacar.setText(nombrePais);
-                } else {textPaisDestinoAtacar.setText(nombrePais);}
+                else
+                    textPaisDestinoAtacar.setText(nombrePais);
                 break;
             case REAGRUPAR:
-                if(turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))){
-                    if(reagrupeSeleccionarOrigen) textPaisOrigenTransferir.setText(nombrePais);
+                if (turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))) {
+                    if (reagrupeSeleccionarOrigen) textPaisOrigenTransferir.setText(nombrePais);
                     else textPaisDestinoTransferir.setText(nombrePais);
                 }
                 break;
@@ -130,7 +136,8 @@ public class GameScreenController implements Initializable {
         jugadores.forEach(jugador -> jugador.asignarObservador(new ObservadorJugador(groupEjercitosDisponibles, groupTarjetasPais)));
         turno = new Turno(jugadores);
         turno.obtenerJugadorActual().actualizarObservadores();
-        turno.asignarObservador(new ObservadorTurno(groupTransferir, groupAtacar, groupColocar, groupCanjear, labelTurno, labelFase, botonJugadorActual));
+        ArrayList<ImageView> imageViewDados = new ArrayList<>(Arrays.asList(dadoAtacante1, dadoAtacante2, dadoAtacante3, dadoDefensor1, dadoDefensor2, dadoDefensor3));
+        turno.asignarObservador(new ObservadorTurno(groupTransferir, groupAtacar, groupColocar, groupCanjear, labelTurno, labelFase, botonJugadorActual, imageViewDados));
         paises.forEach( (nombre, pais) ->  {
             pais.asignarObservador(new ObservadorPais(mapBotonesPaises.get(nombre)));
         });
@@ -177,15 +184,15 @@ public class GameScreenController implements Initializable {
 
     public void colocarEjercitos(){
         String nombrePais = textPaisColocar.getText();
-        if (nombrePais.isEmpty()){
+
+        if (nombrePais.isEmpty())
             return;
-        } else {
-            Pais pais = paises.get(textPaisColocar.getText());
-            int cantidad = (int) sliderCantidadColocar.getValue();
-            turno.colocarEjercito(pais, cantidad);
-            sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos());
-            actualizarCantidadColocar();
-        }
+
+        Pais pais = paises.get(textPaisColocar.getText());
+        int cantidad = (int) sliderCantidadColocar.getValue();
+        turno.colocarEjercito(pais, cantidad);
+        sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos());
+        actualizarCantidadColocar();
     }
 
     public void seleccionarTarjeta(ActionEvent event){
@@ -200,20 +207,20 @@ public class GameScreenController implements Initializable {
 
     public void actualizarCantidadColocar(){
         String nombrePais = textPaisColocar.getText();
-        if (nombrePais.isEmpty()){
+
+        if (nombrePais.isEmpty())
             return;
-        } else {
-            labelCantidadColocar.setText("Cantidad: " + String.valueOf((int) sliderCantidadColocar.getValue()));
-        }
+
+        labelCantidadColocar.setText("Cantidad: " + String.valueOf((int) sliderCantidadColocar.getValue()));
     }
 
     public void actualizarCantidadTransferir(){
         String nombrePais = textPaisOrigenTransferir.getText();
-        if (nombrePais.isEmpty()){
+
+        if (nombrePais.isEmpty())
             return;
-        } else {
-            labelCantidadTransferir.setText("Cantidad: " + String.valueOf((int) sliderCantidadTransferir.getValue()));
-        }
+
+        labelCantidadTransferir.setText("Cantidad: " + String.valueOf((int) sliderCantidadTransferir.getValue()));
     }
 
     public void seleccionarPaisOrigenReagrupe(){

@@ -7,6 +7,7 @@ public class Turno implements IObserbable {
 
     private final List<Jugador> jugadores;
     private Jugador jugadorActual;
+    private Batalla ultimaBatalla;
     private Fase fase;
     private final ArrayList<ObservadorTurno> observadores = new ArrayList<>();
     private boolean primerosCincoColocados = false;
@@ -23,17 +24,20 @@ public class Turno implements IObserbable {
         int indice = jugadores.indexOf(jugadorActual);
         int indiceSiguiente = (indice+1 == jugadores.size()) ? 0 : indice+1;
         jugadorActual = jugadores.get(indiceSiguiente);
-        if(fase == fase.COLOCAR || fase == fase.CANJEAR) {jugadorActual.actualizarObservadores();}
+        if (fase == fase.COLOCAR || fase == fase.CANJEAR)
+            jugadorActual.actualizarObservadores();
     }
 
     public void rondaAtacar(Pais paisAtacante, Pais paisDefensor) {
-        jugadorActual.atacarPaisDesde(paisAtacante, paisDefensor);
+        ultimaBatalla = jugadorActual.atacarPaisDesde(paisAtacante, paisDefensor);
+        if (jugadorActual.haGanado());
+
+        actualizarObservadores();
     }
 
     public void finalizarAtaque(MazoCartasPais mazo) {
-        if (jugadorActual.estaHabilitadoLevantarCarta()) {
+        if (jugadorActual.estaHabilitadoLevantarCarta())
             jugadorActual.levantarCartaPais(mazo);
-        }
         fase = Fase.REAGRUPAR;
         actualizarObservadores();
     }
@@ -96,6 +100,10 @@ public class Turno implements IObserbable {
 
     public Jugador obtenerJugadorActual() {
         return jugadorActual;
+    }
+
+    public Batalla obtenerUltimaBatalla() {
+        return ultimaBatalla;
     }
 
     private boolean chequearObjetivo() {

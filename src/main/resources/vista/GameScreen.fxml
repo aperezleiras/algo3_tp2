@@ -388,7 +388,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Pane layoutX="5.0" layoutY="132.0" prefHeight="360.0" prefWidth="176.0" style="-fx-background-color: #4a3338;">
+                        <Pane layoutX="5.0" layoutY="95.0" prefHeight="485.0" prefWidth="176.0" style="-fx-background-color: #4a3338;">
                            <children>
                               <Button layoutX="48.0" layoutY="217.0" mnemonicParsing="false" onAction="#atacar" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #665541; -fx-border-color: black; -fx-border-insets: -1;" text="Atacar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
@@ -416,11 +416,41 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelErrorAtacar" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="278.0" prefHeight="64.0" prefWidth="152.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                              <Label fx:id="labelErrorAtacar" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="268.0" prefHeight="64.0" prefWidth="152.0" textAlignment="CENTER" textFill="RED" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="labelCantidadAtacar1" layoutX="11.0" layoutY="335.0" text="Atacante:" textFill="#d8b370">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER" layoutX="12.0" layoutY="360.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="151.0" spacing="5.0">
+                                 <children>
+                                    <ImageView fx:id="dadoAtacante1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="dadoAtacante2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="dadoAtacante3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </HBox>
+                              <Label fx:id="labelCantidadAtacar11" layoutX="10.0" layoutY="404.0" text="Defensor:" textFill="#d8b370">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER" layoutX="13.0" layoutY="427.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="151.0" spacing="5.0">
+                                 <children>
+                                    <ImageView fx:id="dadoDefensor1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="dadoDefensor2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="dadoDefensor3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </HBox>
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

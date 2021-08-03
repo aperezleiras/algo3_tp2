@@ -26,6 +26,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -57,6 +59,8 @@ public class GameScreenController implements Initializable {
     public Button botonSeleccionarPaisOrigenReagrupe;
     public Button botonSeleccionarPaisDestinoReagrupe;
     public Group groupTarjetasPais;
+    public Label labelErrorColocar;
+
 
     public ImageView dadoAtacante1;
     public ImageView dadoAtacante2;
@@ -91,6 +95,9 @@ public class GameScreenController implements Initializable {
 
 
     public void finalizarColocacion(){
+        labelErrorColocar.setText("");
+        textPaisColocar.setText("");
+        sliderCantidadColocar.setMax(0);
         turno.finalizarColocacion();
     }
 
@@ -186,6 +193,7 @@ public class GameScreenController implements Initializable {
     }
 
     public void colocarEjercitos(){
+        labelErrorColocar.setText(" ");
         String nombrePais = textPaisColocar.getText();
 
         if (nombrePais.isEmpty())
@@ -193,9 +201,14 @@ public class GameScreenController implements Initializable {
 
         Pais pais = paises.get(textPaisColocar.getText());
         int cantidad = (int) sliderCantidadColocar.getValue();
-        turno.colocarEjercito(pais, cantidad);
-        sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos());
-        actualizarCantidadColocar();
+        try {
+            turno.colocarEjercito(pais, cantidad);
+            sliderCantidadColocar.setMax(turno.obtenerJugadorActual().obtenerTotalEjercitos());
+            actualizarCantidadColocar();
+        } catch (CantidadEjercitosInsuficienteException e){
+            labelErrorColocar.setText("Cantidad de ejércitos insuficiente.");
+        }
+
     }
 
     public void seleccionarTarjeta(ActionEvent event){

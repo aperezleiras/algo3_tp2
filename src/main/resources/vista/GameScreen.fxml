@@ -376,7 +376,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Label fx:id="labelErrorColocar" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="542.0" prefHeight="39.0" prefWidth="152.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                        <Label fx:id="labelErrorColocar" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="537.0" prefHeight="47.0" prefWidth="149.0" textAlignment="CENTER" textFill="RED" wrapText="true">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>

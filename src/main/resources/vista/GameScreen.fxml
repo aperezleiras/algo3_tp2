@@ -415,12 +415,12 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelErrorAtacar" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="268.0" prefHeight="64.0" prefWidth="152.0" textAlignment="CENTER" textFill="RED" wrapText="true">
+                              <Label fx:id="labelErrorAtacar" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="243.0" maxWidth="129.0" prefHeight="67.0" prefWidth="129.0" textAlignment="CENTER" textFill="RED" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelCantidadAtacar1" layoutX="11.0" layoutY="335.0" text="Atacante:" textFill="#d8b370">
+                              <Label layoutX="11.0" layoutY="335.0" text="Atacante:" textFill="#d8b370">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -435,7 +435,7 @@
                                     <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                  </padding>
                               </HBox>
-                              <Label fx:id="labelCantidadAtacar11" layoutX="10.0" layoutY="404.0" text="Defensor:" textFill="#d8b370">
+                              <Label layoutX="10.0" layoutY="404.0" text="Defensor:" textFill="#d8b370">
                                  <font>
                                     <Font size="16.0" />
                                  </font>

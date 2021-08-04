@@ -95,17 +95,23 @@ public class GameScreenController implements Initializable {
 
 
     public void finalizarColocacion(){
-        labelErrorColocar.setText("");
+        labelErrorColocar.setText(" ");
         textPaisColocar.setText("");
         sliderCantidadColocar.setMax(0);
         turno.finalizarColocacion();
     }
 
     public void finalizarAtaque(){
+        labelErrorAtacar.setText(" ");
+        textPaisDestinoAtacar.setText("");
+        textPaisOrigenAtacar.setText("");
         turno.finalizarAtaque(juego.getMazoCartasPais());
     }
 
     public void finalizarReagrupe(){
+        labelErrorTransferir.setText(" ");
+        textPaisOrigenTransferir.setText("");
+        textPaisDestinoTransferir.setText(" ");
         turno.finalizarReagrupe();
     }
 
@@ -132,15 +138,19 @@ public class GameScreenController implements Initializable {
                 break;
             case REAGRUPAR:
                 if (turno.obtenerJugadorActual().paisMePertenece(paises.get(nombrePais))) {
-                    if (reagrupeSeleccionarOrigen) textPaisOrigenTransferir.setText(nombrePais);
-                    else textPaisDestinoTransferir.setText(nombrePais);
+                    if (reagrupeSeleccionarOrigen) {
+                        sliderCantidadTransferir.setMax(paises.get(nombrePais).cantidadEjercitos()-1);
+                        textPaisOrigenTransferir.setText(nombrePais);
+                    } else {
+                        textPaisDestinoTransferir.setText(nombrePais);
+                    }
                 }
                 break;
         }
     }
 
     public void iniciarPartida(ArrayList<String> nombresJugadores) throws FileNotFoundException {
-        juego = new Juego(nombresJugadores); // Ahora mismo Juego() recibe la cantidad, pero habria que pasarle los nombres
+        juego = new Juego(nombresJugadores);
 
         paises = juego.getPaises();
         jugadores = juego.getJugadores();
@@ -179,6 +189,7 @@ public class GameScreenController implements Initializable {
     }
 
     public void atacar(){
+        labelErrorAtacar.setText(" ");
         if(!textPaisDestinoAtacar.getText().isEmpty() || !textPaisOrigenAtacar.getText().isEmpty()){
             try {
                 turno.rondaAtacar(paises.get(textPaisOrigenAtacar.getText()),paises.get(textPaisDestinoAtacar.getText()));
@@ -218,10 +229,14 @@ public class GameScreenController implements Initializable {
     }
 
     public void transferirEjercitos(){
+        labelErrorTransferir.setText(" ");
         try {
             turno.rondaReagrupar(paises.get(textPaisOrigenTransferir.getText()),paises.get(textPaisDestinoTransferir.getText()), (int) sliderCantidadTransferir.getValue());
+            sliderCantidadTransferir.setMax(paises.get(textPaisOrigenTransferir.getText()).cantidadEjercitos()-1);
         } catch (CantidadATransferirInvalidaException e) {
             labelErrorTransferir.setText("Cantidad de ejércitos insuficiente");
+        } catch (PaisNoLimitrofeException e){
+            labelErrorTransferir.setText("Los países no son limítrofes");
         }
     }
 

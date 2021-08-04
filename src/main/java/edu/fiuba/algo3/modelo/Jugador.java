@@ -164,6 +164,7 @@ public class Jugador {
 
     public void canjearCartas(List<CartaPais> cartas, MazoCartasPais mazo) {
         gestorCanjes.canjearCartas(this, cartas, mazo);
+        actualizarObservadores();
     }
 
     public void conquistoPaisDe(Jugador jugador) {

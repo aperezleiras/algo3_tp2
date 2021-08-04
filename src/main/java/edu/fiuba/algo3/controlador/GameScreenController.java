@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.exception.CantidadATransferirInvalidaException;
-import edu.fiuba.algo3.exception.CantidadEjercitosInsuficienteException;
-import edu.fiuba.algo3.exception.PaisInvalidoException;
-import edu.fiuba.algo3.exception.PaisNoLimitrofeException;
+import edu.fiuba.algo3.exception.*;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.vista.ObservadorJugador;
 import edu.fiuba.algo3.vista.ObservadorPais;
@@ -60,7 +57,9 @@ public class GameScreenController implements Initializable {
     public Button botonSeleccionarPaisDestinoReagrupe;
     public Group groupTarjetasPais;
     public Label labelErrorColocar;
-
+    public Button botonCanjear;
+    public Button botonActivarCarta;
+    public Label labelErrorCanjear;
 
     public ImageView dadoAtacante1;
     public ImageView dadoAtacante2;
@@ -76,7 +75,8 @@ public class GameScreenController implements Initializable {
     public HashMap<String, Button> mapBotonesPaises = new HashMap<>();
     public Turno turno;
     private boolean reagrupeSeleccionarOrigen = true;
-    private List<CartaPais> cartas;
+    private HashMap<String, CartaPais> cartas = new HashMap<>();
+    private ArrayList<CartaPais> cartasSeleccionadas = new ArrayList<>();
 
 
     @Override
@@ -92,7 +92,6 @@ public class GameScreenController implements Initializable {
             mapBotonesPaises.put(nombrePais,botonPais);
         });
     }
-
 
     public void finalizarColocacion(){
         labelErrorColocar.setText(" ");
@@ -117,6 +116,12 @@ public class GameScreenController implements Initializable {
     }
 
     public void finalizarCanjes(){
+        botonCanjear.setDisable(true);
+        cartasSeleccionadas.clear();
+        groupTarjetasPais.getChildren().forEach(boton -> {
+            boton.setEffect(null);
+        });
+        labelErrorCanjear.setText(" ");
         turno.finalizarCanjes();
     }
 
@@ -155,6 +160,11 @@ public class GameScreenController implements Initializable {
 
         paises = juego.getPaises();
         jugadores = juego.getJugadores();
+        MazoCartasPais mazoCartas = juego.getMazoCartasPais();
+        List<CartaPais> listaCartas = mazoCartas.getCartas();
+        listaCartas.forEach(cartaPais -> {
+            cartas.put(cartaPais.getPais().getNombre(),cartaPais);
+        });
         jugadores.forEach(jugador -> jugador.asignarObservador(new ObservadorJugador(groupEjercitosDisponibles, groupTarjetasPais)));
         turno = new Turno(jugadores);
         turno.obtenerJugadorActual().actualizarObservadores();
@@ -167,7 +177,14 @@ public class GameScreenController implements Initializable {
         juego.asignarPaises();
         juego.cargarObjetivos();
         juego.asignarObjetivos();
+        jugadores.forEach(jugador -> {
+            jugador.levantarCartaPais(mazoCartas);
+            jugador.levantarCartaPais(mazoCartas);
+            jugador.levantarCartaPais(mazoCartas);
+            jugador.levantarCartaPais(mazoCartas);
+            jugador.levantarCartaPais(mazoCartas);
 
+        });
         labelTurno.setText("Turno de: " + turno.obtenerJugadorActual().getNombre());
         labelFase.setText("Fase: " + turno.obtenerFase().toString());
         botonJugadorActual.setStyle("-fx-background-color: " + turno.obtenerJugadorActual().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
@@ -225,8 +242,46 @@ public class GameScreenController implements Initializable {
 
     public void seleccionarTarjeta(ActionEvent event){
         Button boton = ((Button)event.getSource());
-        boton.setEffect(new SepiaTone());
-        //implementar
+        CartaPais carta = cartas.get(boton.getText());
+
+        if(cartasSeleccionadas.contains(carta)){
+            cartasSeleccionadas.remove(carta);
+            boton.setEffect(null);
+            botonCanjear.setDisable(true);
+        } else if(cartasSeleccionadas.size() < 3){
+                boton.setEffect(new SepiaTone());
+                cartasSeleccionadas.add(carta);
+        }
+        if (cartasSeleccionadas.size() == 1) botonActivarCarta.setDisable(false);
+        else if(cartasSeleccionadas.size() == 3) botonCanjear.setDisable(false);
+        else {
+            botonActivarCarta.setDisable(true);
+            botonCanjear.setDisable(true);
+        }
+
+    }
+
+    public void realizarCanje(){
+        try{
+            turno.realizarCanje(cartasSeleccionadas, juego.getMazoCartasPais());
+            groupTarjetasPais.getChildren().forEach(boton -> {
+                boton.setEffect(null);
+            });
+            cartasSeleccionadas.clear();
+            botonCanjear.setDisable(true);
+        } catch (CartasNoCanjeablesException e){
+            labelErrorCanjear.setText("Las cartas seleccionadas no son canjeables.");
+        }
+    }
+
+    public void activarCarta(){
+        try{turno.agregarEjercitosSegunCarta(cartasSeleccionadas.get(0));
+        } catch (CartaYaActivadaException e){
+            labelErrorCanjear.setText("Carta ya fue activada.");
+        } catch (PaisNoMePerteneceException e){
+            labelErrorCanjear.setText("País no le pertenece.");
+        }
+
     }
 
     public void transferirEjercitos(){

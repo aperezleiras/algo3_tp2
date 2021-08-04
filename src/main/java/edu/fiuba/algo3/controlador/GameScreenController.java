@@ -112,6 +112,7 @@ public class GameScreenController implements Initializable {
         labelErrorTransferir.setText(" ");
         textPaisOrigenTransferir.setText("");
         textPaisDestinoTransferir.setText(" ");
+        labelCantidadTransferir.setText("Cantidad: 0");
         turno.finalizarReagrupe();
     }
 
@@ -194,11 +195,11 @@ public class GameScreenController implements Initializable {
             try {
                 turno.rondaAtacar(paises.get(textPaisOrigenAtacar.getText()),paises.get(textPaisDestinoAtacar.getText()));
             } catch (CantidadEjercitosInsuficienteException e){
-                labelErrorAtacar.setText("Cantidad de ejércitos insuficiente");
+                labelErrorAtacar.setText("Cantidad de ejércitos insuficiente.");
             } catch (PaisInvalidoException e){
-                labelErrorAtacar.setText("País invalido");
+                labelErrorAtacar.setText("País invalido.");
             } catch (PaisNoLimitrofeException e){
-                labelErrorAtacar.setText("Los países no son limítrofes");
+                labelErrorAtacar.setText("Los países no son limítrofes.");
             }
         }
     }
@@ -233,10 +234,11 @@ public class GameScreenController implements Initializable {
         try {
             turno.rondaReagrupar(paises.get(textPaisOrigenTransferir.getText()),paises.get(textPaisDestinoTransferir.getText()), (int) sliderCantidadTransferir.getValue());
             sliderCantidadTransferir.setMax(paises.get(textPaisOrigenTransferir.getText()).cantidadEjercitos()-1);
+            labelCantidadTransferir.setText("Cantidad: " + String.valueOf((int) sliderCantidadTransferir.getValue()));
         } catch (CantidadATransferirInvalidaException e) {
-            labelErrorTransferir.setText("Cantidad de ejércitos insuficiente");
+            labelErrorTransferir.setText("Cantidad de ejércitos insuficiente.");
         } catch (PaisNoLimitrofeException e){
-            labelErrorTransferir.setText("Los países no son limítrofes");
+            labelErrorTransferir.setText("Combinación de paises inválida.");
         }
     }
 

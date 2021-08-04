@@ -177,14 +177,6 @@ public class GameScreenController implements Initializable {
         juego.asignarPaises();
         juego.cargarObjetivos();
         juego.asignarObjetivos();
-        jugadores.forEach(jugador -> {
-            jugador.levantarCartaPais(mazoCartas);
-            jugador.levantarCartaPais(mazoCartas);
-            jugador.levantarCartaPais(mazoCartas);
-            jugador.levantarCartaPais(mazoCartas);
-            jugador.levantarCartaPais(mazoCartas);
-
-        });
         labelTurno.setText("Turno de: " + turno.obtenerJugadorActual().getNombre());
         labelFase.setText("Fase: " + turno.obtenerFase().toString());
         botonJugadorActual.setStyle("-fx-background-color: " + turno.obtenerJugadorActual().getColor() + "; -fx-background-radius: 100; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;");
@@ -258,7 +250,6 @@ public class GameScreenController implements Initializable {
             botonActivarCarta.setDisable(true);
             botonCanjear.setDisable(true);
         }
-
     }
 
     public void realizarCanje(){

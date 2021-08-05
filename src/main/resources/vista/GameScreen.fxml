@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -290,6 +291,39 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Group>
+                  <Button contentDisplay="CENTER" graphicTextGap="1.0" layoutX="487.0" layoutY="60.0" mnemonicParsing="false" onAction="#silenciarSonidos" prefHeight="46.0" prefWidth="50.0" style="-fx-background-color: #b99a78; -fx-border-color: black; -fx-border-insets: -1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1.5;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/sound_symbol.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button contentDisplay="CENTER" graphicTextGap="1.0" layoutX="548.0" layoutY="60.0" mnemonicParsing="false" onAction="#silenciarMusica" prefHeight="46.0" prefWidth="50.0" style="-fx-background-color: #b99a78; -fx-border-color: black; -fx-border-insets: -1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1.5;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/music_symbol.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </Button>
                </children>
             </Group>
             <AnchorPane prefHeight="774.0" prefWidth="268.0">

@@ -1,14 +1,23 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controlador.EndScreenController;
+import edu.fiuba.algo3.controlador.ObjetivoScreenController;
 import edu.fiuba.algo3.modelo.Batalla;
 import edu.fiuba.algo3.modelo.IObservador;
 import edu.fiuba.algo3.modelo.Turno;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,9 +91,33 @@ public class ObservadorTurno implements IObservador {
 
         if (turno.hayGanador()) {
             String ganador = turno.obtenerJugadorActual().getNombre();
-            //todo Terminar el juego
+            try {
+                terminarJuego(ganador);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
+    }
+
+    public void terminarJuego(String ganador) throws IOException {
+        Stage stage = (Stage) botonJugadorActual.getScene().getWindow();
+        stage.close();
+
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("/vista/EndScreen.fxml")));
+        Parent root = loader.load();
+        EndScreenController endScreenController = loader.getController();
+        endScreenController.setearGanador(ganador);
+
+        Stage endStage = new Stage();
+
+        endStage.initModality(Modality.APPLICATION_MODAL);
+        endStage.setTitle("Fin del juego");
+        endStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/icono.png")));
+        endStage.setScene(new Scene(root));
+        endStage.setResizable(false);
+
+        endStage.show();
     }
 
     public void actualizarDados() {

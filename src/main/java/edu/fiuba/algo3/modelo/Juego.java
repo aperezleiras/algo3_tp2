@@ -104,11 +104,6 @@ public class Juego {
         return objetivos.size();
     }
 
-
-    public void actualizarObjetivosDerrotarJugador() {
-        //todo: cuando un jugador es derrotado los objetivos que involucraban su derrota se tienen que actualizar para cada jugador
-    }
-
     public void asignarObjetivos() {
         Random rand = new Random();
         IObjetivo obj = null;

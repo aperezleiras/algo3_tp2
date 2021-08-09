@@ -60,7 +60,7 @@ public class Pais implements IObserbable { //todo: crear interfaz de pais
         observadores.add(observador);
     }
 
-    public void actualizarObservadores(){
+    public void actualizarObservadores(){ //posible clase abstracta
         observadores.forEach(observador -> {
             observador.actualizar();
         });

@@ -32,4 +32,8 @@ public class MazoCartasPais {
     public void agregarCarta(CartaPais carta) {
         cartas.add(0, carta);
     }
+
+    public List<CartaPais> getCartas() {
+        return cartas;
+    }
 }

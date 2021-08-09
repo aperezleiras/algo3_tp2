@@ -106,15 +106,11 @@ public class Jugador {
         deposito.agregarEjercitosGenerales(cantidad);
     }
 
-    // Se podria necesitar para la UI (mostrarle al jugador cuantos ejercitos disponibles tiene)
+
     public int obtenerEjercitosGeneralesDisponibles() {
         return deposito.obtenerEjercitosGenerales();
     }
 
-    // Se podria necesitar para la UI (mostrarle al jugador cuantos ejercitos disponibles tiene)
-    public int obtenerEjercitosDisponiblesEnContinente(Continente continente) {
-        return deposito.obtenerEjercitosContinente(continente);
-    }
 
     public HashMap<Continente, Integer> getEjercitosPorContinente(){ return deposito.getEjercitosPorContinente();}
 
@@ -145,8 +141,10 @@ public class Jugador {
     //<editor-fold desc="Cartas">
 
     public void levantarCartaPais(MazoCartasPais mazo) {
-        cartas.add(mazo.levantarCarta());
-        habilitadoLevantarCarta = false;
+        if (cartas.size() < 5){
+            cartas.add(mazo.levantarCarta());
+            habilitadoLevantarCarta = false;
+        }
     }
 
     public boolean cartaMePertenece(CartaPais unaCarta) {
@@ -164,6 +162,7 @@ public class Jugador {
 
     public void canjearCartas(List<CartaPais> cartas, MazoCartasPais mazo) {
         gestorCanjes.canjearCartas(this, cartas, mazo);
+        actualizarObservadores();
     }
 
     public void conquistoPaisDe(Jugador jugador) {

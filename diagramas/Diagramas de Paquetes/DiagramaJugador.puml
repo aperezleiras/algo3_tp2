@@ -1,0 +1,14 @@
+@startuml
+
+package Modelo{
+    package Jugador{
+        class Jugador
+        class GestorDeCanjes
+        class DepositoEjercitos
+    }
+}
+
+Jugador --> GestorDeCanjes
+Jugador --> DepositoEjercitos
+
+@enduml

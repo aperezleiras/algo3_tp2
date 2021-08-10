@@ -1,0 +1,31 @@
+@startuml
+package Vista {}
+package Controller {}
+package Modelo {
+    package Paises{}
+
+    class Juego
+    package Objetivo{}
+    package Jugador{}
+    package Carta{}
+
+}
+
+
+Vista -> Controller
+Controller --> Modelo
+Controller ---> Juego
+Vista <-up-- Modelo
+
+
+Juego --> Jugador
+Juego -> Objetivo
+Jugador --> Paises
+Objetivo --> Paises
+Carta <-right- Jugador
+Jugador -left-> Objetivo
+
+Juego -> Carta
+Carta --> Paises
+
+@enduml

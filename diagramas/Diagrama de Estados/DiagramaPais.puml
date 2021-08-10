@@ -1,0 +1,22 @@
+@startuml
+
+[*] --> Pais: es atacado
+state Pais{
+state Jugador1{
+}
+
+
+state Ejercitos1{
+}
+
+state Ejercitos2{
+}
+
+state Jugador2{
+}
+}
+Jugador1 --> Jugador2: es conquistado
+Jugador1 --> Jugador1: gana batalla
+Ejercitos1 --> Ejercitos1: gana batalla
+Ejercitos1 --> Ejercitos2: es conquistado
+@enduml

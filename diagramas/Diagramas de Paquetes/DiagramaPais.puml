@@ -1,0 +1,16 @@
+@startuml
+package Modelo {
+    package Pais{
+        class Continente
+        class Pais
+        class Batalla
+        class Dado
+        class Ejercitos
+    }
+}
+
+Continente --> Pais
+Batalla --> Pais
+Batalla --> Dado
+Pais --> Ejercitos
+@enduml

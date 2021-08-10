@@ -1,0 +1,20 @@
+@startuml
+
+[*] --> FaseAtacar: iniciar partida
+
+state FaseAtacar {
+}
+
+state FaseReagrupar {
+}
+
+state FaseColocar {
+}
+FaseAtacar --> FaseAtacar: continua
+FaseAtacar --> FaseReagrupar: fin de ataque
+FaseReagrupar --> FaseReagrupar: continua
+FaseReagrupar --> FaseColocar: fin de reagrupar
+FaseColocar --> FaseAtacar: fin de colocacion
+
+FaseAtacar ----> [*]: fin de la partida
+@enduml

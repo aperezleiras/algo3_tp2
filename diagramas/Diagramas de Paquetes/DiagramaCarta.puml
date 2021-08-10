@@ -1,0 +1,16 @@
+@startuml
+
+package Modelo {
+    package Carta{
+        class CartaPais
+        class Canje
+        class MazoCartasPais
+        enum Simbolo
+    }
+}
+
+Canje --> MazoCartasPais
+MazoCartasPais -left-> CartaPais
+Canje --> CartaPais
+CartaPais --> Simbolo
+@enduml

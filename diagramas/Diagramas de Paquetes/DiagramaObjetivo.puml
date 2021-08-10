@@ -1,0 +1,22 @@
+@startuml
+package Modelo {
+    package Objetivo{
+        class ObjetivoCompuesto
+        class ObjetivoDerrotarJugador
+        class ObjetivoOcupacionContinente
+        class ObjetivoOcupacionPaises
+        class ObjetivoOcupacionParcialContinente
+        interface IObjetivo
+    }
+}
+
+IObjetivo <|-right.- ObjetivoDerrotarJugador
+IObjetivo <|-.- ObjetivoOcupacionContinente
+IObjetivo <|-.- ObjetivoOcupacionPaises
+IObjetivo <|-.- ObjetivoOcupacionParcialContinente
+IObjetivo <|--.left- ObjetivoCompuesto
+IObjetivo <-- ObjetivoCompuesto
+
+
+
+@enduml

@@ -51,7 +51,7 @@ public class ObservadorJugador implements IObservador {
                     case BARCO:
                         imagen.setImage(imagenBarco); // Esto se puede ahorra el switch dandola a la carta la imagen y listo
                         break;
-                    case CAÑON:
+                    case CANON:
                         imagen.setImage(imagenCanion);
                         break;
                     case GLOBO:

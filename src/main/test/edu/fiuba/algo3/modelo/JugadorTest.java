@@ -414,7 +414,7 @@ public class JugadorTest {
 
     private ArrayList<CartaPais> generarCartasNoCanjeables() {
         return new ArrayList<>(Arrays.asList(
-                new CartaPais(argentina, Simbolo.CAÑON),
+                new CartaPais(argentina, Simbolo.CANON),
                 new CartaPais(brasil, Simbolo.BARCO),
                 new CartaPais(chile, Simbolo.BARCO)));
     }

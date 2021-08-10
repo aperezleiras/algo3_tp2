@@ -84,7 +84,7 @@ public class CanjeTests {
     @Test
     public void todasDistintasSonCanjeables() {
         //arrange
-        List<Simbolo>  simbolos = Arrays.asList(Simbolo.BARCO, Simbolo.CAÑON, Simbolo.GLOBO);
+        List<Simbolo>  simbolos = Arrays.asList(Simbolo.BARCO, Simbolo.CANON, Simbolo.GLOBO);
 
         //act
         boolean canjeables = validarCanje(simbolos);
@@ -121,7 +121,7 @@ public class CanjeTests {
     @Test
     public void todasDistintasConUnComodinSonCanjeables() {
         //arrange
-        List<Simbolo>  simbolos = Arrays.asList(Simbolo.BARCO, Simbolo.COMODIN, Simbolo.CAÑON);
+        List<Simbolo>  simbolos = Arrays.asList(Simbolo.BARCO, Simbolo.COMODIN, Simbolo.CANON);
 
         //act
         boolean canjeables = validarCanje(simbolos);

@@ -121,12 +121,12 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="botonGranBretania" accessibleText="Gran Bretaña" layoutX="541.0" layoutY="154.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                        <Button fx:id="botonGranBretania" accessibleText="Gran Bretana" layoutX="541.0" layoutY="154.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="botonEspania" accessibleText="España" layoutX="509.0" layoutY="278.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
+                        <Button fx:id="botonEspania" accessibleText="Espana" layoutX="509.0" layoutY="278.0" mnemonicParsing="false" onAction="#seleccionarPais" prefHeight="31.0" prefWidth="32.0" style="-fx-background-radius: 100; -fx-background-color: red; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 100; -fx-border-insets: -1;" text="1" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

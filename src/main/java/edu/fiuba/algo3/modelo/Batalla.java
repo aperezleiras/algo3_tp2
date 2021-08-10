@@ -9,14 +9,12 @@ public class Batalla {
 
     private Pais atacante;
     private Pais defensor;
-    private IDado dado;
     private List<Integer> dadosAtacante;
     private List<Integer> dadosDefensor;
 
     public Batalla(Pais atacante, Pais defensor, IDado dado) {
         this.atacante = atacante;
         this.defensor = defensor;
-        this.dado = dado;
         this.dadosAtacante = dado.obtenerDadoAtacante(atacante);
         this.dadosDefensor = dado.obtenerDadoDefensor(defensor);
     }
